@@ -11,7 +11,7 @@ struct GridView: View {
     // que se comporta como uma View
     var body: some View {
         HStack {
-            CardView()
+            CardView(isFaceUp: true)
             CardView()
             CardView()
             CardView()
@@ -22,22 +22,36 @@ struct GridView: View {
 }
 
 struct CardView: View {
+    
+    // Define um parâmetro
+    // Se especificar o valor com {return false} não é possível passar o valor
+    // Se especificar o valor com = false será o valor padrão e passar o valor é opcional
+    // Se não especificar o valor produz um erro quando não passar
+    var isFaceUp: Bool = false
+    
     // Ao implementar uma view, deve prover uma variável body
     // que se comporta como uma View
     var body: some View /* () */{
         // View que Une várias views uma em cima da outra
         ZStack {
-            RoundedRectangle(cornerRadius: 23.0)
-            .stroke(lineWidth: 3.1415)
-            .foregroundColor(.blue)
-            
-            RoundedRectangle(cornerRadius: 23.0)
-            .fill()
-            .foregroundColor(.white)
-            
-            // View de Texto
-            Text("Hello, worrrld! 🌎")
-                .foregroundColor(.black)
+            // Define o RoundedRectangle na variável 'shape'
+            // Assim não precisa repetir toda vez
+            let shape = RoundedRectangle(cornerRadius: 23.0)
+            if isFaceUp {
+                
+                shape.stroke(lineWidth: 3.1415)
+                    .foregroundColor(.blue)
+                
+                shape.fill()
+                    .foregroundColor(.white)
+                
+                // View de Texto
+                Text("Hello, worrrld! 🌎")
+                    .foregroundColor(.black)
+            } else {
+                shape.fill()
+                    .foregroundColor(.blue)
+            }
         }
     }
 }
