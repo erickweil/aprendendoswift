@@ -7,14 +7,16 @@
 import SwiftUI
 
 struct GridView: View {
+    
+    var emojis: Array<String> = ["🌎","🪐","🌞","🌓"]
     // Ao implementar uma view, deve prover uma variável body
     // que se comporta como uma View
     var body: some View {
         HStack {
-            CardView(isFaceUp: true)
-            CardView()
-            CardView()
-            CardView()
+            CardView(txt:emojis[0])
+            CardView(txt:emojis[1])
+            CardView(txt:emojis[2])
+            CardView(txt:emojis[3])
         }
         .padding()
         .foregroundColor(.red)
@@ -28,6 +30,8 @@ struct CardView: View {
     // Se especificar o valor com = false será o valor padrão e passar o valor é opcional
     // Se não especificar o valor produz um erro quando não passar
     var raioRet: Double = 23.0
+    
+    var txt: String
     
     // Se não especificar o @State, não pode modificar
     // Guarda estados temporários da view (Tipo Estado do React)
@@ -50,7 +54,7 @@ struct CardView: View {
                     .foregroundColor(.white)
                 
                 // View de Texto
-                Text("Hello, worrrld! 🌎")
+                Text(txt)
                     .foregroundColor(.black)
             } else {
                 shape.fill()
