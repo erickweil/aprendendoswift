@@ -7,16 +7,45 @@
 import SwiftUI
 
 struct GridView: View {
-    
-    var emojis: Array<String> = ["🌎","🪐","🌞","🌓"]
+    var emojis: Array<String> = [
+        "🚗", //carro
+        "🚕", //táxi
+        "🚙", //jipe
+        "🚚", //caminhão
+        "🚛", //caminhão pesado
+        "🚜", //trator
+        "🛵", //motoneta
+        "🏍️", //moto
+        "🛴", //patinete
+        "🚲", //bicicleta
+        "🛹", //skate
+        "🛼", //patins
+        "🛺", //tuk-tuk
+        "🚌", //ônibus
+        "🚎", //bonde
+        "🚋", //trem urbano
+        "🚉", //estação de trem
+        "🛸", //nave espacial
+        "🚀", //foguete
+        "🛥️", //iate
+        "⛵", //barco a vela
+        "🛳️", //navio de cruzeiro
+        "🚤", //lancha
+        "🚢" //navio de carga
+    ]
+    var emojiCount = 6
     // Ao implementar uma view, deve prover uma variável body
     // que se comporta como uma View
     var body: some View {
-        HStack {
-            CardView(txt:emojis[0])
-            CardView(txt:emojis[1])
-            CardView(txt:emojis[2])
-            CardView(txt:emojis[3])
+        VStack {
+            let nRows = emojis.count / emojiCount
+            ForEach(0..<nRows, id: \.self, content: { row in
+                HStack {
+                    ForEach(emojis[0..<emojiCount], id: \.self, content: { emoji in
+                        CardView(txt:emoji)
+                    })
+                }
+            })
         }
         .padding()
         .foregroundColor(.red)
