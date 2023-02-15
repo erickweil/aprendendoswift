@@ -22,7 +22,7 @@ struct HelloWorld: View {
             .foregroundColor(/*@START_MENU_TOKEN@*/.green/*@END_MENU_TOKEN@*/)
             
             // View que Une várias views verticalmente
-            VStack {
+            HStack {
                 // View que exibe Imagem
                 Image(systemName: "globe")
                 .imageScale(.large)

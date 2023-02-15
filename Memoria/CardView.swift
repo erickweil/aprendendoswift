@@ -33,22 +33,54 @@ struct GridView: View {
         "🚤", //lancha
         "🚢" //navio de carga
     ]
-    var emojiCount = 6
+    @State var emojiCount = 6
     // Ao implementar uma view, deve prover uma variável body
     // que se comporta como uma View
     var body: some View {
         VStack {
-            let nRows = emojis.count / emojiCount
-            ForEach(0..<nRows, id: \.self, content: { row in
-                HStack {
+            ScrollView {
+                // Lazy VGrid vai carregar apenas as views que forem necessárias
+                LazyVGrid(columns:[GridItem(.adaptive(minimum: 75.0))]) {
                     ForEach(emojis[0..<emojiCount], id: \.self, content: { emoji in
                         CardView(txt:emoji)
                     })
                 }
-            })
+                .padding()
+                .foregroundColor(.red)
+            }
+            Spacer()
+            
+            HStack {
+                remove
+                // Cria um espaço auto-expansível entre os botões
+                Spacer()
+                add
+            }
         }
         .padding()
-        .foregroundColor(.red)
+    }
+    
+    // Jeito de separar a lógica de certa parte de uma View sem criar uma view separada
+    var add : some View {
+        Button(
+            action:{
+                if emojiCount < emojis.count {
+                    emojiCount += 1
+                }
+            },
+            label:{Image(systemName: "plus.circle.fill")}
+        )
+    }
+    
+    var remove : some View {
+        Button(
+            action:{
+                if emojiCount > 1 {
+                    emojiCount -= 1
+                }
+            },
+            label:{Image(systemName: "minus.circle.fill")}
+        )
     }
 }
 
@@ -76,11 +108,11 @@ struct CardView: View {
             let shape = RoundedRectangle(cornerRadius: raioRet)
             if isFaceUp {
                 
-                shape.stroke(lineWidth: 3.1415)
-                    .foregroundColor(.blue)
-                
                 shape.fill()
                     .foregroundColor(.white)
+                
+                shape.strokeBorder(lineWidth: 3.1415)
+                    .foregroundColor(.blue)
                 
                 // View de Texto
                 Text(txt)
@@ -90,6 +122,7 @@ struct CardView: View {
                     .foregroundColor(.blue)
             }
         }
+        .aspectRatio(2/3, contentMode: .fit)
         .onTapGesture {
             isFaceUp = !isFaceUp
         }
