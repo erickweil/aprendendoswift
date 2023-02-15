@@ -29,11 +29,15 @@ struct CardView: View {
         ZStack {
             RoundedRectangle(cornerRadius: 23.0)
             .stroke(lineWidth: 3.1415)
-            .foregroundColor(/*@START_MENU_TOKEN@*/.green/*@END_MENU_TOKEN@*/)
+            .foregroundColor(.blue)
+            
+            RoundedRectangle(cornerRadius: 23.0)
+            .fill()
+            .foregroundColor(.white)
             
             // View de Texto
-            Text("Hello, worrrld!")
-            .foregroundColor(Color.blue)
+            Text("Hello, worrrld! 🌎")
+                .foregroundColor(.black)
         }
     }
 }
@@ -42,5 +46,8 @@ struct CardView: View {
 struct CardView_Previews: PreviewProvider {
     static var previews: some View {
         GridView()
+            .preferredColorScheme(.dark)
+        GridView()
+            .preferredColorScheme(.light)
     }
 }
