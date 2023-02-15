@@ -10,7 +10,7 @@ import SwiftUI
 // Define o que irá aparecer na Tela
 // struct não são classes, não tem herança
 // servem para programação funcional
-struct ContentView: View {
+struct HelloWorld: View {
     // Ao implementar uma view, deve prover uma variável body
     // que se comporta como uma View
     var body: some View /* () */{
@@ -39,8 +39,8 @@ struct ContentView: View {
 
 
 // Configura o Preview.
-struct ContentView_Previews: PreviewProvider {
+struct HelloWorld_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        HelloWorld()
     }
 }

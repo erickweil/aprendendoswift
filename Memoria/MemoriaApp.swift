@@ -11,7 +11,8 @@ import SwiftUI
 struct MemoriaApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            //HelloWorld()
+            GridView()
         }
     }
 }
