@@ -12,6 +12,8 @@
 		A78442182996E79700058939 /* HelloWorld.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78442172996E79700058939 /* HelloWorld.swift */; };
 		A784421A2996E79800058939 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A78442192996E79800058939 /* Assets.xcassets */; };
 		A784421D2996E79800058939 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A784421C2996E79800058939 /* Preview Assets.xcassets */; };
+		A7A11B6829A95C4E009B7FD4 /* MemoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A11B6729A95C4E009B7FD4 /* MemoryModel.swift */; };
+		A7A11B6A29A95EE5009B7FD4 /* MemoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A11B6929A95EE5009B7FD4 /* MemoryViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +23,8 @@
 		A78442172996E79700058939 /* HelloWorld.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelloWorld.swift; sourceTree = "<group>"; };
 		A78442192996E79800058939 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A784421C2996E79800058939 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		A7A11B6729A95C4E009B7FD4 /* MemoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryModel.swift; sourceTree = "<group>"; };
+		A7A11B6929A95EE5009B7FD4 /* MemoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,8 @@
 				A78442152996E79700058939 /* MemoriaApp.swift */,
 				A78442172996E79700058939 /* HelloWorld.swift */,
 				A7621042299D5D1F00DA6072 /* CardView.swift */,
+				A7A11B6729A95C4E009B7FD4 /* MemoryModel.swift */,
+				A7A11B6929A95EE5009B7FD4 /* MemoryViewModel.swift */,
 				A78442192996E79800058939 /* Assets.xcassets */,
 				A784421B2996E79800058939 /* Preview Content */,
 			);
@@ -142,7 +148,9 @@
 			files = (
 				A78442182996E79700058939 /* HelloWorld.swift in Sources */,
 				A7621043299D5D1F00DA6072 /* CardView.swift in Sources */,
+				A7A11B6829A95C4E009B7FD4 /* MemoryModel.swift in Sources */,
 				A78442162996E79700058939 /* MemoriaApp.swift in Sources */,
+				A7A11B6A29A95EE5009B7FD4 /* MemoryViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

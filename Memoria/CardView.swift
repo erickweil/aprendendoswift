@@ -33,7 +33,7 @@ struct GridView: View {
         "🚤", //lancha
         "🚢" //navio de carga
     ]
-    @State var emojiCount = 6
+    @State var emojiCount = 20
     // Ao implementar uma view, deve prover uma variável body
     // que se comporta como uma View
     var body: some View {
@@ -48,39 +48,8 @@ struct GridView: View {
                 .padding()
                 .foregroundColor(.red)
             }
-            Spacer()
-            
-            HStack {
-                remove
-                // Cria um espaço auto-expansível entre os botões
-                Spacer()
-                add
-            }
         }
         .padding()
-    }
-    
-    // Jeito de separar a lógica de certa parte de uma View sem criar uma view separada
-    var add : some View {
-        Button(
-            action:{
-                if emojiCount < emojis.count {
-                    emojiCount += 1
-                }
-            },
-            label:{Image(systemName: "plus.circle.fill")}
-        )
-    }
-    
-    var remove : some View {
-        Button(
-            action:{
-                if emojiCount > 1 {
-                    emojiCount -= 1
-                }
-            },
-            label:{Image(systemName: "minus.circle.fill")}
-        )
     }
 }
 
@@ -110,7 +79,7 @@ struct CardView: View {
             shape.fill()
                 .foregroundColor(.white)
             
-            shape.strokeBorder(lineWidth: 3.1415)
+            shape.strokeBorder(lineWidth: 5)
                 .foregroundColor(.blue)
             
             // View de Texto
