@@ -1,0 +1,22 @@
+{
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug Hello",
+            "program": "${workspaceFolder:Hello}\\.build/debug/Hello",
+            "args": [],
+            "cwd": "${workspaceFolder:Hello}",
+            "preLaunchTask": "swift: Build Debug Hello"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Release Hello",
+            "program": "${workspaceFolder:Hello}\\.build/release/Hello",
+            "args": [],
+            "cwd": "${workspaceFolder:Hello}",
+            "preLaunchTask": "swift: Build Release Hello"
+        }
+    ]
+}

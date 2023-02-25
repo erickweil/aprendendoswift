@@ -1,0 +1,22 @@
+{
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug Hello (Hello)",
+            "program": "${workspaceFolder:aprendendoswift}\\Hello\\.build/debug/Hello",
+            "args": [],
+            "cwd": "${workspaceFolder:aprendendoswift}/Hello",
+            "preLaunchTask": "swift: Build Debug Hello (Hello)"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Release Hello (Hello)",
+            "program": "${workspaceFolder:aprendendoswift}\\Hello\\.build/release/Hello",
+            "args": [],
+            "cwd": "${workspaceFolder:aprendendoswift}/Hello",
+            "preLaunchTask": "swift: Build Release Hello (Hello)"
+        }
+    ]
+}
