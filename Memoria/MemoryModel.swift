@@ -17,6 +17,7 @@ struct MemoryModel<CardContent> {
         for pair in 0..<pairs {
             let content: CardContent = genCard(pair)
             cards.append(Card(content: content))
+            cards.append(Card(content: content))
         }
     }
     
