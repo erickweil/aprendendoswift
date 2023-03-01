@@ -4,7 +4,7 @@ public struct Hello {
     public enum Exemplos {
         case hello, variaveis, arrays, enums
     }
-    public static var qual = Exemplos.enums
+    public static var qual = Exemplos.arrays
 
     // PONTO DE PARTIDA
     public static func main() {

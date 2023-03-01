@@ -38,5 +38,8 @@ public struct Arrays {
         // Acesso ao dicionário, prover default para quando não encontra a chave
         print(mapafrutas["🍒", default: "Não encontrado"])
         print(mapafrutas["🍐", default: "Não encontrado"])
-    }
+
+        // Encontrar elemento no array
+        let indice = frutas.firstIndex(where: { $0.count == 3 })
+        print("Indice:",indice ?? -1," Valor:", frutas[indice ?? 0]) }
 }
