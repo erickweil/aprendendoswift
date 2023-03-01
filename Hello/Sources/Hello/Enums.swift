@@ -73,6 +73,7 @@ public struct Enums {
 
 		// O valor padrão é nil, sem precisar especificar
 		//let endereco: String? //MAS DEU ERRO???
+		let endereco: String? = nil
 
 		if nome != .none { print("Nome:\(nome!)") }
 		if sobrenome != .none { print("Sobrenome:\(sobrenome!)") }
@@ -85,5 +86,16 @@ public struct Enums {
 		} else {
 			print("Não possui telefone")
 		}
+
+		// ?? nil-coalescing operator
+		// Funciona mais ou menos igual o || do javascript
+		let txtendereco = endereco ?? "Sem Endereço"
+		print(txtendereco)
+
+		// ?. Optional Chaining
+		// Permite acessar uma propriedade só se existir o optional
+		// .count daria erro sem o ?
+		print("Número de caracteres no sobrenome:\(sobrenome?.count ?? 0)")
+				
 	}
 }
