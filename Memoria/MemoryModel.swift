@@ -16,18 +16,39 @@ struct MemoryModel<CardContent> {
         
         for pair in 0..<pairs {
             let content: CardContent = genCard(pair)
-            cards.append(Card(content: content))
-            cards.append(Card(content: content))
+            addCard(content,pair)
+            addCard(content,pair)
         }
     }
     
-    func choose(_ card: Card) {
-        
+    // mutating porque modifica o array
+    mutating func addCard(_ content:CardContent,_ pair: Int) {
+        let index = cards.count
+        cards.append(Card(id:index,pair:pair,content: content))
+    }
+    
+    func index(of: Card) -> Int {
+        return of.id
+    }
+    
+    mutating func flip(_ card: Card) {
+        let id = index(of:card)
+        cards[id].isFaceUp.toggle()
+    }
+    
+    mutating func choose(_ card: Card) {
+        flip(card)
+        print("Virou id:\(card.id) '\(card.content)'")
     }
 
-    struct Card {
-        var isFaceUp: Bool = false
+    struct Card : Identifiable{
+        var id: Int
+        var pair: Int
+        
+        var isFaceUp: Bool = true
         var isMatched: Bool = false
         var content: CardContent
+        
+        
     }
 }

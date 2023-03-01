@@ -11,9 +11,7 @@ import Foundation
     return "🚗"
 }*/
 
-class MemoryViewModel {
-    
-    
+class MemoryViewModel: ObservableObject {
     static let emojis: Array<String> = [
         "🚗","🚕","🚙",
         "🚚","🚛","🚜",
@@ -37,11 +35,16 @@ class MemoryViewModel {
         return "🚗"
     })*/
     
+    @Published
     private var model: MemoryModel<String> = createMemoryModel()
     
     var cards: Array<MemoryModel<String>.Card> {
         return model.cards
     }
     
+    // ---------------------- Intent's ----------------------
     
+    func choose(_ card : MemoryModel<String>.Card) {
+        model.choose(card)
+    }
 }

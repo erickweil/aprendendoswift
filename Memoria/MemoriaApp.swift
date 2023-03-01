@@ -9,10 +9,12 @@ import SwiftUI
 
 @main
 struct MemoriaApp: App {
+    let game = MemoryViewModel()
     var body: some Scene {
         WindowGroup {
             //HelloWorld()
-            GridView()
+            
+            GridView(viewModel:game)
         }
     }
 }

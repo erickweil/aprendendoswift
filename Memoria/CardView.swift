@@ -7,33 +7,10 @@
 import SwiftUI
 
 struct GridView: View {
-    var emojis: Array<String> = [
-        "🚗", //carro
-        "🚕", //táxi
-        "🚙", //jipe
-        "🚚", //caminhão
-        "🚛", //caminhão pesado
-        "🚜", //trator
-        "🛵", //motoneta
-        "🏍️", //moto
-        "🛴", //patinete
-        "🚲", //bicicleta
-        "🛹", //skate
-        "🛼", //patins
-        "🛺", //tuk-tuk
-        "🚌", //ônibus
-        "🚎", //bonde
-        "🚋", //trem urbano
-        "🚉", //estação de trem
-        "🛸", //nave espacial
-        "🚀", //foguete
-        "🛥️", //iate
-        "⛵", //barco a vela
-        "🛳️", //navio de cruzeiro
-        "🚤", //lancha
-        "🚢" //navio de carga
-    ]
-    @State var emojiCount = 20
+
+    @ObservedObject
+    var viewModel: MemoryViewModel
+    
     // Ao implementar uma view, deve prover uma variável body
     // que se comporta como uma View
     var body: some View {
@@ -41,8 +18,11 @@ struct GridView: View {
             ScrollView {
                 // Lazy VGrid vai carregar apenas as views que forem necessárias
                 LazyVGrid(columns:[GridItem(.adaptive(minimum: 75.0))]) {
-                    ForEach(emojis[0..<emojiCount], id: \.self, content: { emoji in
-                        CardView(txt:emoji)
+                    ForEach(viewModel.cards, content: { card in
+                        CardView(card:card)
+                        .onTapGesture {
+                            viewModel.choose(card)
+                        }
                     })
                 }
                 .padding()
@@ -61,12 +41,7 @@ struct CardView: View {
     // Se não especificar o valor produz um erro quando não passar
     var raioRet: Double = 23.0
     
-    var txt: String
-    
-    // Se não especificar o @State, não pode modificar
-    // Guarda estados temporários da view (Tipo Estado do React)
-    @State var isFaceUp: Bool = false
-    
+    var card: MemoryModel<String>.Card
     // Ao implementar uma view, deve prover uma variável body
     // que se comporta como uma View
     var body: some View /* () */{
@@ -83,28 +58,27 @@ struct CardView: View {
                 .foregroundColor(.blue)
             
             // View de Texto
-            Text(txt)
+            Text(card.content)
                 .font(.title)
                 .foregroundColor(.black)
             
-            if !isFaceUp {
+            if !card.isFaceUp {
                 shape.fill()
                     .foregroundColor(.blue)
             }
         }
         .aspectRatio(2/3, contentMode: .fit)
-        .onTapGesture {
-            isFaceUp = !isFaceUp
-        }
+        //.onTapGesture {
+            //card.isFaceUp = !card.isFaceUp
+        //}
     }
 }
 
 // Configura o Preview.
 struct CardView_Previews: PreviewProvider {
     static var previews: some View {
-        GridView()
-            .preferredColorScheme(.dark)
-        GridView()
+        let vm = MemoryViewModel()
+        GridView(viewModel:vm)
             .preferredColorScheme(.light)
     }
 }
