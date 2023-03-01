@@ -16,24 +16,34 @@ struct MemoryModel<CardContent> {
         
         for pair in 0..<pairs {
             let content: CardContent = genCard(pair)
-            addCard(content,pair)
-            addCard(content,pair)
+            addPair(content,pair)
         }
     }
     
-    // mutating porque modifica o array
-    mutating func addCard(_ content:CardContent,_ pair: Int) {
-        let index = cards.count
-        cards.append(Card(id:index,pair:pair,content: content))
+    private mutating func addPair(_ content: CardContent,_ pairIndex: Int) {
+        let a_id = addCard(content)
+        let b_id = addCard(content)
+        cards[a_id].pair = b_id
+        cards[b_id].pair = a_id
     }
     
-    func index(of: Card) -> Int {
-        return of.id
+    // mutating porque modifica o array
+    private mutating func addCard(_ content:CardContent) -> Int {
+        let index = cards.count
+        cards.append(Card(id:index,pair:-1,content: content))
+        return index
+    }
+    
+    func findPair(_ card: Card) -> Card? {
+        if card.pair <= -1 || card.pair >= cards.count {
+            return .none
+        } else {
+            return cards[card.pair]
+        }
     }
     
     mutating func flip(_ card: Card) {
-        let id = index(of:card)
-        cards[id].isFaceUp.toggle()
+        cards[card.id].isFaceUp.toggle()
     }
     
     mutating func choose(_ card: Card) {
@@ -42,8 +52,8 @@ struct MemoryModel<CardContent> {
     }
 
     struct Card : Identifiable{
-        var id: Int
-        var pair: Int
+        var id: Int // Índice da cara no array de cartas
+        var pair: Int // Índice da outra carta do par ou -1 se não tem par
         
         var isFaceUp: Bool = true
         var isMatched: Bool = false
