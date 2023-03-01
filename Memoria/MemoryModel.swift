@@ -11,11 +11,56 @@ struct MemoryModel<CardContent> {
     // private(set) impede que seja modificado de fora (readonly)
     private(set) var cards: Array<Card>
     
-    private var faceUpCardID: Int?
+    private var faceUpCardIndex: Int?
     
     mutating func choose(_ card: Card) {
-        flip(card)
-        print("Virou id:\(card.id) '\(card.content)'")
+        print("Virou id:\(card.id) faceup:\(card.isFaceUp) '\(card.content)'")
+        
+        // Fazer nada se já está para cima
+        if card.isFaceUp || card.isMatched {
+            print("\t Fazer nada porque carta está para cima")
+            return
+        }
+        
+        let index = findCardIndex(card) ?? -1
+        // Fazer nada se o index não foi encontrado
+        if index == -1 {
+            print("\t Fazer nada porque carta não foi encontrada")
+            return
+        }
+        
+        if faceUpCardIndex == .none {
+            // Se não tem nenhuma carta para cima
+            // Então esta será a única para cima agora
+            for k in 0..<cards.count {
+                if !cards[k].isMatched {
+                    cards[k].isFaceUp = false
+                }
+            }
+            flip(index)
+            faceUpCardIndex = index
+            
+            print("\t Executou flip na carta, agora essa é a carta virada")
+        } else {
+            // Se tem uma carta para cima
+            // Então tem que verificar se elas tem o mesmo conteudo
+            if cards[faceUpCardIndex!].id == cards[index].pair_id {
+                // Se tem o mesmo conteúdo então eles estão OK!
+                cards[faceUpCardIndex!].isMatched = true
+                cards[index].isMatched = true
+                print("\t Executou match!")
+            } else {
+                print("\t Não deu match...")
+            }
+            
+            flip(index)
+            
+            
+            // Independente, vai agora desmarcar a carta faceup
+            faceUpCardIndex = nil
+        }
+            
+        
     }
     
     init(pairs: Int, genCard: (Int) -> CardContent) {
@@ -72,18 +117,15 @@ struct MemoryModel<CardContent> {
         return .none
     }
     
-    mutating func flip(_ card: Card) {
-        let index = findCardIndex(card)
-        if index != .none {
-            cards[index!].isFaceUp.toggle()
-        }
+    mutating func flip(_ card_index: Int) {
+        cards[card_index].isFaceUp.toggle()
     }
 
     struct Card : Identifiable{
         var id: Int // ID da carta no array de cartas
         var pair_id: Int // ID da outra carta do par ou -1 se não tem par
         
-        var isFaceUp: Bool = true
+        var isFaceUp: Bool = false
         var isMatched: Bool = false
         var content: CardContent
     }

@@ -17,7 +17,7 @@ struct GridView: View {
         VStack {
             ScrollView {
                 // Lazy VGrid vai carregar apenas as views que forem necessárias
-                LazyVGrid(columns:[GridItem(.adaptive(minimum: 75.0))]) {
+                LazyVGrid(columns:[GridItem(.adaptive(minimum: 60.0))]) {
                     ForEach(viewModel.cards, content: { card in
                         CardView(card:card)
                         .onTapGesture {
@@ -54,8 +54,13 @@ struct CardView: View {
             shape.fill()
                 .foregroundColor(.white)
             
-            shape.strokeBorder(lineWidth: 5)
-                .foregroundColor(.blue)
+            if !card.isMatched {
+                shape.strokeBorder(lineWidth: 5)
+                    .foregroundColor(.blue)
+            } else {
+                shape.strokeBorder(lineWidth: 5)
+                    .foregroundColor(.red)
+            }
             
             // View de Texto
             Text(card.content)
