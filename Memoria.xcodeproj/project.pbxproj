@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A75B58DA29AFF3FB0075BC3D /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75B58D929AFF3FB0075BC3D /* HomeScreen.swift */; };
 		A7621043299D5D1F00DA6072 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7621042299D5D1F00DA6072 /* CardView.swift */; };
 		A78442162996E79700058939 /* MemoriaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78442152996E79700058939 /* MemoriaApp.swift */; };
 		A78442182996E79700058939 /* HelloWorld.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78442172996E79700058939 /* HelloWorld.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A75B58D929AFF3FB0075BC3D /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
 		A7621042299D5D1F00DA6072 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		A78442122996E79700058939 /* Memoria.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Memoria.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A78442152996E79700058939 /* MemoriaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoriaApp.swift; sourceTree = "<group>"; };
@@ -57,6 +59,7 @@
 		A78442142996E79700058939 /* Memoria */ = {
 			isa = PBXGroup;
 			children = (
+				A75B58D929AFF3FB0075BC3D /* HomeScreen.swift */,
 				A78442152996E79700058939 /* MemoriaApp.swift */,
 				A78442172996E79700058939 /* HelloWorld.swift */,
 				A7621042299D5D1F00DA6072 /* CardView.swift */,
@@ -148,6 +151,7 @@
 			files = (
 				A78442182996E79700058939 /* HelloWorld.swift in Sources */,
 				A7621043299D5D1F00DA6072 /* CardView.swift in Sources */,
+				A75B58DA29AFF3FB0075BC3D /* HomeScreen.swift in Sources */,
 				A7A11B6829A95C4E009B7FD4 /* MemoryModel.swift in Sources */,
 				A78442162996E79700058939 /* MemoriaApp.swift in Sources */,
 				A7A11B6A29A95EE5009B7FD4 /* MemoryViewModel.swift in Sources */,
