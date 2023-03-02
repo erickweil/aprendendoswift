@@ -19,6 +19,8 @@ struct CalculadoraView: View {
             viewResultado
             
             viewTeclado
+            
+            Spacer()
         }
         
     }
@@ -29,9 +31,11 @@ struct CalculadoraView: View {
             
             Text("2")
         }
-        .frame(maxWidth: .infinity)        
+        .font(.title)
+        .frame(width: 280,height: 60.0)
+        .padding()
         .overlay(
-            RoundedRectangle(cornerRadius: 25.0)
+            RoundedRectangle(cornerRadius: 10.0)
                 .stroke(lineWidth: 6)
                 .foregroundColor(/*@START_MENU_TOKEN@*/.green/*@END_MENU_TOKEN@*/)
         )
@@ -43,26 +47,43 @@ struct CalculadoraView: View {
         //  1   2   2
         //  .     0
         VStack {
+            
+            HStack {
+                btnNumero("%")
+                btnNumero("CE")
+                btnNumero("C")
+                btnNumero("<-")
+            }
+            HStack {
+                btnNumero("1/x")
+                btnNumero("x²")
+                btnNumero("sqr")
+                btnNumero("/")
+            }
             HStack {
                 btnNumero("7")
                 btnNumero("8")
                 btnNumero("9")
+                btnNumero("X")
             }
             HStack {
                 btnNumero("4")
                 btnNumero("5")
                 btnNumero("6")
+                btnNumero("-")
             }
             
             HStack {
                 btnNumero("1")
                 btnNumero("2")
                 btnNumero("3")
+                btnNumero("+")
             }
             HStack {
                 btnNumero(" ")
                 btnNumero(".")
                 btnNumero("0")
+                btnNumero("=")
             }
         }
     }
@@ -70,11 +91,11 @@ struct CalculadoraView: View {
     private func btnNumero(_ num:String) -> some View {
         Button(action:{},label:{Text("\(num)")})
         .foregroundColor(Color.blue)
-        .font(.largeTitle)
-        .frame(width: 60.0,height: 80.0)
+        .font(.title)
+        .frame(width: 40.0,height: 60.0)
         .padding()
         .overlay(
-            RoundedRectangle(cornerRadius: 25.0)
+            RoundedRectangle(cornerRadius: 10.0)
                 .stroke(lineWidth: 6)
                 .foregroundColor(/*@START_MENU_TOKEN@*/.green/*@END_MENU_TOKEN@*/)
         )
