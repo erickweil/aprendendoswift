@@ -10,6 +10,11 @@ import SwiftUI
 // struct não são classes, não tem herança
 // servem para programação funcional
 struct CalculadoraView: View {
+    
+    
+    @ObservedObject
+    var viewModel: CalculadoraViewModel
+    
     // Ao implementar uma view, deve prover uma variável body
     // que se comporta como uma View
     var body: some View /* () */{
@@ -27,9 +32,7 @@ struct CalculadoraView: View {
     
     var viewResultado: some View {
         HStack {
-            Text("1 + 1 = ")
-            
-            Text("2")
+            Text(viewModel.txt)
         }
         .font(.title)
         .frame(width: 280,height: 60.0)
@@ -55,16 +58,16 @@ struct CalculadoraView: View {
                 btnNumero("<-")
             }
             HStack {
-                btnNumero("1/x")
-                btnNumero("x²")
-                btnNumero("sqr")
+                btnNumero("(")
+                btnNumero(")")
+                btnNumero("^")
                 btnNumero("/")
             }
             HStack {
                 btnNumero("7")
                 btnNumero("8")
                 btnNumero("9")
-                btnNumero("X")
+                btnNumero("*")
             }
             HStack {
                 btnNumero("4")
@@ -89,7 +92,9 @@ struct CalculadoraView: View {
     }
     
     private func btnNumero(_ num:String) -> some View {
-        Button(action:{},label:{Text("\(num)")})
+        Button(action:{
+            viewModel.clickButton(num)
+        },label:{Text("\(num)")})
         .foregroundColor(Color.blue)
         .font(.title)
         .frame(width: 40.0,height: 60.0)
@@ -107,7 +112,7 @@ struct CalculadoraView: View {
 // Configura o Preview.
 struct CalculadoraView_Previews: PreviewProvider {
     static var previews: some View {
-        CalculadoraView()
+        CalculadoraView(viewModel:CalculadoraViewModel())
     }
 }
 
