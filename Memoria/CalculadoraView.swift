@@ -31,11 +31,11 @@ struct CalculadoraView: View {
     }
     
     var viewResultado: some View {
-        HStack {
-            Text(viewModel.txt)
+        VStack {
+            Text(viewModel.exprTxt).font(.footnote).opacity(0.8)
+            Text(viewModel.resultado).font(.largeTitle)
         }
-        .font(.title)
-        .frame(width: 280,height: 60.0)
+        .frame(width: 280,height: 80.0)
         .padding()
         .overlay(
             RoundedRectangle(cornerRadius: 10.0)

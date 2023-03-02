@@ -18,23 +18,82 @@ public enum ElemType {
 }
 
 struct CalculadoraModel {
-    private(set) var exprTxt: String = ""
+    
+    private(set) var exprElems: Array<ExprElem> = []
+    var exprTxt: String {
+        var retTxt = ""
+        var lastOp: Ops? = .none
+        var lastElem: ExprElem? = .none
+        for elem in exprElems {
+            var op: Ops?
+            if elem.type == ElemType.op {
+                op = (elem as! Operator).op
+            }
+            
+            if let last = lastElem {
+                if last.txt != "("
+                && lastOp != .un_add
+                && lastOp != .un_sub
+                && elem.txt != ")" {
+                    // Insere um espaço se tem um elemento antes, (e não coloca espaço nos parênteses)
+                    retTxt += " "
+                }
+            }
+            retTxt += elem.txt
+            
+            lastOp = op
+            lastElem = elem
+        }
+        
+        return retTxt
+    }
     private(set) var resultado: Double = Double.nan
+    
+    public static func test() {
+        var model = CalculadoraModel()
+        model.setExprFromTxt("1 + 2 * 3 / 4")
+        model.eval()
+        
+        print("\(model.exprTxt) = \(model.resultado)")
+    }
+    
+    mutating func clear() {
+        exprElems = []
+    }
+    
+    mutating func setExprFromTxt(_ tokenTxt: String) {
+        exprElems = ReversePolish.tokenizeExpr(tokenTxt)
+    }
+    
+    mutating func addTxt(_ tokenTxt: String) {
+        exprElems = ReversePolish.tokenizeExpr(exprTxt + tokenTxt)
+    }
+    
+    mutating func removeTxt() {
+        if let last = exprElems.last {
+            if last.txt.count <= 1 { // pq <= ???
+                removeToken()
+                return
+            } else {
+                _ = exprElems[exprElems.count-1].txt.removeLast()
+            }
+        }
+    }
+    
+    mutating func removeToken() {
+        _ = exprElems.popLast()
+    }
 
-    mutating func eval(_ _exprTxt: String) {
-        let expr: Array<ExprElem> = ReversePolish.tokenizeExpr(_exprTxt)
-
+    mutating func eval() {
         // Debug
-        ReversePolish.printExpr(expr)
+        ReversePolish.printExpr(exprElems)
 
-        let rpn_expr = ReversePolish.reversePolishExpr(expr)
+        let rpn_expr = ReversePolish.reversePolishExpr(exprElems)
 
         // Debug
         ReversePolish.printExpr(rpn_expr)
 
         let res = ReversePolish.eval(rpn_expr)
-        
-        exprTxt = _exprTxt
         
         resultado = res ?? Double.nan
         
@@ -108,7 +167,7 @@ struct CalculadoraModel {
         }
 
         public static func getAllStr() -> String {
-            return "()^%/*+-s"
+            return "()^%/*+-"
         }
     }
 
@@ -187,6 +246,24 @@ struct CalculadoraModel {
                             print("Erro, o que é \(elem.txt)?")
                             return .none
                         }
+                    } else if op.op.getNumberArgs() == 1 {
+                        let a = stack.popLast()
+                        
+                        if a == .none {
+                            print("Erro, faltou argumentos em \(op.txt)")
+                            return .none
+                        }
+                        
+                        switch(op.op)
+                        {
+                        case .un_add:
+                            stack.append(a!)
+                        case .un_sub:
+                            stack.append(-a!)
+                        default:
+                            print("Erro, o que é \(elem.txt)?")
+                            return .none
+                        }
                     } else {
                         print("Erro, o que é \(elem.txt)?")
                         return .none
@@ -260,12 +337,15 @@ struct CalculadoraModel {
         public static func reversePolishExpr(_ expr: Array<ExprElem>) -> Array<ExprElem> {
             var output = Array<ExprElem>()
             var stack = Array<Operator>()
-
+            
+            // Para identificar operadores unitários
+            var expecting = ElemType.value
             for elem in expr {
                 if elem.type == .op {
-                    let elemop = elem as! Operator
+                    var elemop = elem as! Operator
                     if elemop.op == .o_par {
                         stack.append(elemop)
+                        expecting = ElemType.value
                     } else if elemop.op == .c_par {
                         while let stackop = stack.popLast() {
                             if stackop.op == .o_par {
@@ -273,10 +353,20 @@ struct CalculadoraModel {
                             }
                             output.append(stackop)
                         }
-
+                        
+                        expecting = ElemType.op
                         // Pop '(' - Precisa mesmo???
                         //_ = stack.popLast()
                     } else {
+                        
+                        // Se é um - ou + e esperava um valor significa que é um operador unitário
+                        if elemop.op == .add && expecting == ElemType.value {
+                            elemop.op = .un_add
+                        }
+                        if elemop.op == .sub && expecting == ElemType.value {
+                            elemop.op = .un_sub
+                        }
+                        
                         let elemop_pre = elemop.op.getPrecedence()
                         while let stackop = stack.last {
                             if stackop.op == .c_par || stackop.op == .o_par {
@@ -294,9 +384,11 @@ struct CalculadoraModel {
                         }
 
                         stack.append(elemop)
+                        expecting = ElemType.value
                     }
                 } else if elem.type == .value {
                     output.append(elem)
+                    expecting = ElemType.op
                 }
             }
 

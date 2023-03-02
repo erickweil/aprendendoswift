@@ -13,8 +13,11 @@ class CalculadoraViewModel: ObservableObject {
     @Published
     private var model: CalculadoraModel = CalculadoraModel()
     
-    var txt: String {
-        return "\(model.exprTxt) = \(model.resultado)"
+    var exprTxt: String {
+        return "\(model.exprTxt) ="
+    }
+    var resultado: String {
+        return "\(model.resultado)"
     }
     
     // ---------------------- Intent's ----------------------
@@ -22,25 +25,34 @@ class CalculadoraViewModel: ObservableObject {
     func clickButton(_ btnTxt: String) {
         
         if btnTxt == "C" {
-            model.eval("")
+            model.clear()
+            model.eval()
             return
         }
         
         if btnTxt == "=" {
-            model.eval("\(model.resultado)")
+            model.setExprFromTxt("\(model.resultado)")
+            model.eval()
             return
         }
         
-        let matchNum = "0123456789."
-        
-        if matchNum.contains(btnTxt) {
-            model.eval(model.exprTxt + btnTxt)
-        } else {
-            model.eval(model.exprTxt + " " + btnTxt)
+        if btnTxt == "CE" {
+            model.removeToken()
+            model.eval()
+            return
         }
+        
+        if btnTxt == "<-" {
+            model.removeTxt()
+            model.eval()
+            return
+        }
+                
+        model.addTxt(btnTxt)
+        model.eval()
     }
     
-    func eval(_ txtExpr: String) {
-        model.eval(txtExpr)
-    }
+    //func eval(_ txtExpr: String) {
+    //    model.eval()
+    //}
 }
