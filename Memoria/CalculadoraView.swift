@@ -32,7 +32,7 @@ struct CalculadoraView: View {
     
     var viewResultado: some View {
         VStack {
-            Text(viewModel.exprTxt).font(.footnote).opacity(0.8)
+            Text(viewModel.exprTxt).font(.title).opacity(0.8)
             Text(viewModel.resultado).font(.largeTitle)
         }
         .frame(width: 280,height: 80.0)
@@ -50,59 +50,56 @@ struct CalculadoraView: View {
         //  1   2   2
         //  .     0
         VStack {
+            HStack {
+                Spacer()
+                btnNumero(.del)
+            }
+            HStack {
+                btnNumero(.c)
+                btnNumero(.par)
+                btnNumero(.mod)
+                btnNumero(.div)
+            }
+            HStack {
+                btnNumero(.n7)
+                btnNumero(.n8)
+                btnNumero(.n9)
+                btnNumero(.mul)
+            }
+            HStack {
+                btnNumero(.n4)
+                btnNumero(.n5)
+                btnNumero(.n6)
+                btnNumero(.sub)
+            }
+            HStack {
+                btnNumero(.n1)
+                btnNumero(.n2)
+                btnNumero(.n3)
+                btnNumero(.add)
+            }
             
             HStack {
-                btnNumero("%")
-                btnNumero("CE")
-                btnNumero("C")
-                btnNumero("<-")
-            }
-            HStack {
-                btnNumero("(")
-                btnNumero(")")
-                btnNumero("^")
-                btnNumero("/")
-            }
-            HStack {
-                btnNumero("7")
-                btnNumero("8")
-                btnNumero("9")
-                btnNumero("*")
-            }
-            HStack {
-                btnNumero("4")
-                btnNumero("5")
-                btnNumero("6")
-                btnNumero("-")
-            }
-            
-            HStack {
-                btnNumero("1")
-                btnNumero("2")
-                btnNumero("3")
-                btnNumero("+")
-            }
-            HStack {
-                btnNumero(" ")
-                btnNumero(".")
-                btnNumero("0")
-                btnNumero("=")
+                btnNumero(.neg)
+                btnNumero(.n0)
+                btnNumero(.dot)
+                btnNumero(.eq)
             }
         }
     }
     
-    private func btnNumero(_ num:String) -> some View {
+    private func btnNumero(_ num: CalculadoraViewModel.Botoes) -> some View {
         Button(action:{
             viewModel.clickButton(num)
-        },label:{Text("\(num)")})
-        .foregroundColor(Color.blue)
+        },label:{Text("\(num.rawValue)")})
+        .foregroundColor(Color.primary)
         .font(.title)
         .frame(width: 40.0,height: 60.0)
         .padding()
         .overlay(
             RoundedRectangle(cornerRadius: 10.0)
                 .stroke(lineWidth: 6)
-                .foregroundColor(/*@START_MENU_TOKEN@*/.green/*@END_MENU_TOKEN@*/)
+                .foregroundColor(.secondary)
         )
     }
 }

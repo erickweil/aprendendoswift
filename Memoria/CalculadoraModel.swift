@@ -7,28 +7,15 @@
 
 import Foundation
 
-public protocol ExprElem {
-    var txt: String {get set}
-    var type: ElemType {get set}
-}
-
-public enum ElemType {
-    case value
-    case op
-}
-
 struct CalculadoraModel {
     
     private(set) var exprElems: Array<ExprElem> = []
     var exprTxt: String {
         var retTxt = ""
-        var lastOp: Ops? = .none
+        var lastOp: ElemType? = .none
         var lastElem: ExprElem? = .none
         for elem in exprElems {
-            var op: Ops?
-            if elem.type == ElemType.op {
-                op = (elem as! Operator).op
-            }
+            let op = elem.type
             
             if let last = lastElem {
                 if last.txt != "("
@@ -47,6 +34,7 @@ struct CalculadoraModel {
         
         return retTxt
     }
+    private(set) var expectingValue: Bool = true
     private(set) var resultado: Double = Double.nan
     
     public static func test() {
@@ -69,10 +57,14 @@ struct CalculadoraModel {
         exprElems = ReversePolish.tokenizeExpr(exprTxt + tokenTxt)
     }
     
+    mutating func addOp(_ tokenOp: ElemType) {
+        exprElems.append(ExprElem(txt: tokenOp.toTxt(), type: tokenOp))
+    }
+    
     mutating func removeTxt() {
         if let last = exprElems.last {
             if last.txt.count <= 1 { // pq <= ???
-                removeToken()
+                _ = popToken()
                 return
             } else {
                 _ = exprElems[exprElems.count-1].txt.removeLast()
@@ -80,16 +72,32 @@ struct CalculadoraModel {
         }
     }
     
-    mutating func removeToken() {
-        _ = exprElems.popLast()
+    mutating func negateIfLastIsValue() {
+        if let last = exprElems.last, last.type == .value {
+            _ = exprElems.popLast()
+            if let lastlast = exprElems.last, lastlast.type == .un_sub {
+                _ = exprElems.popLast()
+            } else {
+                exprElems.append(ExprElem(txt: ElemType.un_sub.toTxt(), type: ElemType.un_sub))
+            }
+            
+            exprElems.append(last)
+        } else {
+            exprElems.append(ExprElem(txt: ElemType.sub.toTxt(), type: ElemType.sub))
+        }
+    }
+    
+    mutating func popToken() -> ExprElem? {
+        return exprElems.popLast()
     }
 
     mutating func eval() {
         // Debug
         ReversePolish.printExpr(exprElems)
 
-        let rpn_expr = ReversePolish.reversePolishExpr(exprElems)
+        let (rpn_expr,_expectingValue) = ReversePolish.reversePolishExpr(exprElems)
 
+        expectingValue = _expectingValue
         // Debug
         ReversePolish.printExpr(rpn_expr)
 
@@ -100,13 +108,24 @@ struct CalculadoraModel {
         // Debug
         print("O resultado é:\(resultado)")
     }
+    
+    public struct ExprElem {
+        var txt: String
+        var type: ElemType
+        
+        func toDouble() -> Double? {
+            // https://stackoverflow.com/questions/24031621/swift-how-to-convert-string-to-double
+            return Double(txt)
+        }
+    }
 
     public enum Associatity {
         case left
         case right
     }
 
-    public enum Ops {
+    public enum ElemType {
+        case value
         case o_par
         case c_par
         case add
@@ -117,6 +136,15 @@ struct CalculadoraModel {
         case exp
         case un_sub
         case un_add
+        
+        public func isOp() -> Bool {
+            switch(self) {
+                case .value: return false
+                case .o_par: return false
+                case .c_par: return false
+                default: return true
+            }
+        }
 
         public func getPrecedence() -> Int {
             switch(self) {
@@ -130,6 +158,7 @@ struct CalculadoraModel {
                 case .mul: return 14
                 case .add: return 13
                 case .sub: return 13
+                case .value : return -1
             }
         }
 
@@ -144,6 +173,7 @@ struct CalculadoraModel {
         
         public func getNumberArgs() -> Int {
             switch(self) {
+                case .value: return 0
                 case .o_par: return 0
                 case .c_par: return 0
                 case .un_add: return 1
@@ -152,7 +182,7 @@ struct CalculadoraModel {
             }
         }
 
-        public static func fromTxt(_ txt:String) -> Ops {
+        public static func fromTxt(_ txt:String) -> ElemType {
             switch(txt) {
                 case "(": return .o_par
                 case ")": return .c_par
@@ -162,39 +192,28 @@ struct CalculadoraModel {
                 case "*": return .mul
                 case "+": return .add
                 case "-": return .sub
-                default: return .add
+                default: return .value
+            }
+        }
+        
+        public func toTxt() -> String {
+            switch(self) {
+            case .value: return "v"
+            case .o_par: return "("
+            case .c_par: return ")"
+            case .add: return "+"
+            case .sub: return "-"
+            case .div: return "/"
+            case .mul: return "*"
+            case .mod: return "%"
+            case .exp: return "^"
+            case .un_sub: return "-"
+            case .un_add: return "+"
             }
         }
 
         public static func getAllStr() -> String {
             return "()^%/*+-"
-        }
-    }
-
-    public struct Operator : ExprElem {
-        public var txt: String
-        public var type: ElemType
-        public var op: Ops
-
-        init(_ _txt:String) {
-            txt = _txt
-            type = .op
-            op = Ops.fromTxt(_txt)
-        }
-    }
-
-    public struct Value : ExprElem {
-        public var txt: String
-        public var type: ElemType
-
-        init(_ _txt:String) {
-            txt = _txt
-            type = .value
-        }
-        
-        func toDouble() -> Double? {
-            // https://stackoverflow.com/questions/24031621/swift-how-to-convert-string-to-double
-            return Double(txt)
         }
     }
 
@@ -208,27 +227,25 @@ struct CalculadoraModel {
             var stack: Array<Double> = []
             for elem in expr {
                 if elem.type == .value {
-                    let v = elem as! Value
-                    let doubleval = v.toDouble()
+                    let doubleval = elem.toDouble()
                     
                     if doubleval == .none {
-                        print("Erro, não é um número \(v.txt)")
+                        print("Erro, não é um número \(elem.txt)")
                         return .none
                     }
                     
                     stack.append(doubleval!)
-                } else if elem.type == .op {
-                    let op = elem as! Operator
-                    if op.op.getNumberArgs() == 2 {
+                } else if elem.type.isOp() {
+                    if elem.type.getNumberArgs() == 2 {
                         let a = stack.popLast()
                         let b = stack.popLast()
                         
                         if a == .none || b == .none {
-                            print("Erro, faltou argumentos em \(op.txt)")
+                            print("Erro, faltou argumentos em \(elem.txt)")
                             return .none
                         }
                         
-                        switch(op.op)
+                        switch(elem.type)
                         {
                         case .add:
                             stack.append(b! + a!)
@@ -246,15 +263,15 @@ struct CalculadoraModel {
                             print("Erro, o que é \(elem.txt)?")
                             return .none
                         }
-                    } else if op.op.getNumberArgs() == 1 {
+                    } else if elem.type.getNumberArgs() == 1 {
                         let a = stack.popLast()
                         
                         if a == .none {
-                            print("Erro, faltou argumentos em \(op.txt)")
+                            print("Erro, faltou argumentos em \(elem.txt)")
                             return .none
                         }
                         
-                        switch(op.op)
+                        switch(elem.type)
                         {
                         case .un_add:
                             stack.append(a!)
@@ -275,7 +292,7 @@ struct CalculadoraModel {
         }
 
         public static func tokenizeExpr(_ str: String) -> Array<ExprElem> {
-            let match_ops: String = Ops.getAllStr()
+            let match_ops: String = ElemType.getAllStr()
             let match_space: String = " \t\r\n"
             var expr: Array<ExprElem> = []
 
@@ -296,18 +313,19 @@ struct CalculadoraModel {
                     lastword = lastword + String(letra)
                 } else {
                     if lastword != "" {
-                        expr.append(Value(lastword))
+                        expr.append(ExprElem(txt:lastword,type:.value))
                     }
                     lastword = ""
                 }
 
                 if addops {
-                    expr.append(Operator(String(letra)))
+                    let txt = String(letra)
+                    expr.append(ExprElem(txt:txt, type: ElemType.fromTxt(txt)))
                 }
             }
 
             if lastword != "" {
-                expr.append(Value(lastword))
+                expr.append(ExprElem(txt:lastword,type:.value))
             }
 
             return expr
@@ -334,61 +352,58 @@ struct CalculadoraModel {
         
         Por último, remove tudo da stack e printa
         */
-        public static func reversePolishExpr(_ expr: Array<ExprElem>) -> Array<ExprElem> {
-            var output = Array<ExprElem>()
-            var stack = Array<Operator>()
+        public static func reversePolishExpr(_ expr: Array<ExprElem>) -> (expr:Array<ExprElem>,expectingValue:Bool) {
+            var output = Array<ExprElem>() // Tudo só que na ordem RPN
+            var stack = Array<ExprElem>() // Só entra operadores, ( e ) na stack
             
             // Para identificar operadores unitários
-            var expecting = ElemType.value
-            for elem in expr {
-                if elem.type == .op {
-                    var elemop = elem as! Operator
-                    if elemop.op == .o_par {
-                        stack.append(elemop)
-                        expecting = ElemType.value
-                    } else if elemop.op == .c_par {
-                        while let stackop = stack.popLast() {
-                            if stackop.op == .o_par {
-                                break
-                            }
-                            output.append(stackop)
+            var expectingValue = true
+            for _elem in expr {
+                var elem = _elem // não é let mais!
+                if elem.type == .o_par {
+                    stack.append(elem)
+                    expectingValue = true
+                } else if elem.type == .c_par {
+                    while let stackop = stack.popLast() {
+                        if stackop.type == .o_par {
+                            break
                         }
-                        
-                        expecting = ElemType.op
-                        // Pop '(' - Precisa mesmo???
-                        //_ = stack.popLast()
-                    } else {
-                        
-                        // Se é um - ou + e esperava um valor significa que é um operador unitário
-                        if elemop.op == .add && expecting == ElemType.value {
-                            elemop.op = .un_add
-                        }
-                        if elemop.op == .sub && expecting == ElemType.value {
-                            elemop.op = .un_sub
-                        }
-                        
-                        let elemop_pre = elemop.op.getPrecedence()
-                        while let stackop = stack.last {
-                            if stackop.op == .c_par || stackop.op == .o_par {
-                                break
-                            }
-                            let stackop_pre = stackop.op.getPrecedence()
-
-                            if (elemop.op.getAssociativity() == .left && elemop_pre <= stackop_pre) ||
-                            (elemop.op.getAssociativity() == .right && elemop_pre < stackop_pre) {
-                                output.append(stack.popLast()!)
-                            } else {
-                                // Se não pare
-                                break
-                            }
-                        }
-
-                        stack.append(elemop)
-                        expecting = ElemType.value
+                        output.append(stackop)
                     }
+                    
+                    expectingValue = false
+                    // Pop '(' - Precisa mesmo???
+                    //_ = stack.popLast()
+                } else if elem.type.isOp() {
+                    // Se é um - ou + e esperava um valor significa que é um operador unitário
+                    if elem.type == .add && expectingValue {
+                        elem.type = .un_add
+                    }
+                    if elem.type == .sub && expectingValue {
+                        elem.type = .un_sub
+                    }
+                    
+                    let elemop_pre = elem.type.getPrecedence()
+                    while let stackop = stack.last {
+                        if stackop.type == .c_par || stackop.type == .o_par {
+                            break
+                        }
+                        let stackop_pre = stackop.type.getPrecedence()
+
+                        if (elem.type.getAssociativity() == .left && elemop_pre <= stackop_pre) ||
+                        (elem.type.getAssociativity() == .right && elemop_pre < stackop_pre) {
+                            output.append(stack.popLast()!)
+                        } else {
+                            // Se não pare
+                            break
+                        }
+                    }
+
+                    stack.append(elem)
+                    expectingValue = true
                 } else if elem.type == .value {
                     output.append(elem)
-                    expecting = ElemType.op
+                    expectingValue = false
                 }
             }
 
@@ -396,7 +411,7 @@ struct CalculadoraModel {
                 output.append(stackop)
             }
             
-            return output
+            return (expr:output,expectingValue:expectingValue)
         }
 
         public static func printExpr(_ expr: Array<ExprElem>) {
