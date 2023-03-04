@@ -106,11 +106,9 @@ class CalculadoraViewModel: ObservableObject {
         } else if btnOp != .none {
             if btnOp! == .un_sub {
                 model.negateIfLastIsValue()
+            } else if btnOp! == .o_par {
+                model.addParentesis()
             } else {
-                if btnOp! == .o_par && !model.expectingValue {
-                    btnOp = .c_par
-                }
-                
                 model.addOp(btnOp!)
             }
         }

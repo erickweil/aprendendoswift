@@ -53,11 +53,70 @@ struct CalculadoraModel {
         exprElems = ReversePolish.tokenizeExpr(tokenTxt)
     }
     
-    mutating func addTxt(_ tokenTxt: String) {
-        exprElems = ReversePolish.tokenizeExpr(exprTxt + tokenTxt)
+    // Só pode ser usado para escrever números letra-a-letra
+    mutating func addTxt(_ character: String) {
+        //exprElems = ReversePolish.tokenizeExpr(exprTxt + tokenTxt)
+        
+        // Tem que ser 1 caractere
+        if character.count != 1 {
+            return
+        }
+        
+        // Símbolo estranho tem que ser [0-9] ou .
+        if !ElemType.getValueChars().contains(character) {
+            return
+        }
+        
+        if let last = exprElems.last, last.type == ElemType.value {
+            let txt = last.txt
+            
+            // Não fazer nada se já tem . e digitou . novamente
+            if txt.contains(".") && character == "." {
+                return
+            }
+            
+            exprElems[exprElems.count-1].txt = txt + character
+        } else {
+            // Se o último não é valor ou não tem nenhum elemento, deve adicioná-lo
+            var txt = character
+            
+            // Quando digitar '.' insere '0.'
+            if txt == "." {
+                txt = "0."
+            }
+            exprElems.append(ExprElem(txt: txt, type: .value))
+        }
+    }
+    
+    mutating func addParentesis() {
+        var tokenOp: ElemType = .o_par
+        var n = 0
+        for elem in exprElems {
+            if elem.type == .o_par { n += 1 }
+            if elem.type == .c_par { n -= 1 }
+        }
+        
+        if !expectingValue && n > 0 {
+            tokenOp = .c_par
+        }
+        
+        if tokenOp == .o_par && !expectingValue {
+            // ()() --> () * (), 1 ( --> 1 * (
+            //if let last = exprElems.last, last.type == .c_par || last.type == .value {
+                addOp(.mul)
+            //}
+        }
+        
+        exprElems.append(ExprElem(txt: tokenOp.toTxt(), type: tokenOp))
     }
     
     mutating func addOp(_ tokenOp: ElemType) {
+        if !tokenOp.isOp() { return }
+        
+        if let last = exprElems.last, last.type.isOp() {
+            _ = popToken()
+        }
+        
         exprElems.append(ExprElem(txt: tokenOp.toTxt(), type: tokenOp))
     }
     
@@ -73,17 +132,27 @@ struct CalculadoraModel {
     }
     
     mutating func negateIfLastIsValue() {
-        if let last = exprElems.last, last.type == .value {
-            _ = exprElems.popLast()
-            if let lastlast = exprElems.last, lastlast.type == .un_sub {
+        if let last = exprElems.last {
+            if last.type == .value {
+                _ = exprElems.popLast()
+                if let lastlast = exprElems.last, lastlast.type == .un_sub {
+                    _ = exprElems.popLast()
+                } else {
+                    addOp(.sub)
+                }
+                
+                exprElems.append(last)
+            }
+            else if last.type == .un_sub {
                 _ = exprElems.popLast()
             } else {
-                exprElems.append(ExprElem(txt: ElemType.un_sub.toTxt(), type: ElemType.un_sub))
+                if last.type != .o_par {
+                    addParentesis()
+                }
+                addOp(.sub)
             }
-            
-            exprElems.append(last)
         } else {
-            exprElems.append(ExprElem(txt: ElemType.sub.toTxt(), type: ElemType.sub))
+            addOp(.sub)
         }
     }
     
@@ -95,8 +164,11 @@ struct CalculadoraModel {
         // Debug
         ReversePolish.printExpr(exprElems)
 
-        let (rpn_expr,_expectingValue) = ReversePolish.reversePolishExpr(exprElems)
-
+        let (updated_expr,rpn_expr,_expectingValue) = ReversePolish.reversePolishExpr(exprElems)
+        
+        // Operador unitário e coisas assim são atualizadas
+        exprElems = updated_expr
+        
         expectingValue = _expectingValue
         // Debug
         ReversePolish.printExpr(rpn_expr)
@@ -212,8 +284,12 @@ struct CalculadoraModel {
             }
         }
 
-        public static func getAllStr() -> String {
+        public static func getOpsChars() -> String {
             return "()^%/*+-"
+        }
+        
+        public static func getValueChars() -> String {
+            return "0123456789."
         }
     }
 
@@ -292,7 +368,7 @@ struct CalculadoraModel {
         }
 
         public static func tokenizeExpr(_ str: String) -> Array<ExprElem> {
-            let match_ops: String = ElemType.getAllStr()
+            let match_ops: String = ElemType.getOpsChars()
             let match_space: String = " \t\r\n"
             var expr: Array<ExprElem> = []
 
@@ -352,13 +428,14 @@ struct CalculadoraModel {
         
         Por último, remove tudo da stack e printa
         */
-        public static func reversePolishExpr(_ expr: Array<ExprElem>) -> (expr:Array<ExprElem>,expectingValue:Bool) {
+        public static func reversePolishExpr(_ _expr: Array<ExprElem>) -> (expr:Array<ExprElem>, rpn_expr:Array<ExprElem>,expectingValue:Bool) {
+            var expr = _expr // VAR
             var output = Array<ExprElem>() // Tudo só que na ordem RPN
             var stack = Array<ExprElem>() // Só entra operadores, ( e ) na stack
             
             // Para identificar operadores unitários
             var expectingValue = true
-            for _elem in expr {
+            for (i,_elem) in expr.enumerated() {
                 var elem = _elem // não é let mais!
                 if elem.type == .o_par {
                     stack.append(elem)
@@ -378,9 +455,11 @@ struct CalculadoraModel {
                     // Se é um - ou + e esperava um valor significa que é um operador unitário
                     if elem.type == .add && expectingValue {
                         elem.type = .un_add
+                        expr[i].type = .un_add
                     }
                     if elem.type == .sub && expectingValue {
                         elem.type = .un_sub
+                        expr[i].type = .un_sub
                     }
                     
                     let elemop_pre = elem.type.getPrecedence()
@@ -411,7 +490,7 @@ struct CalculadoraModel {
                 output.append(stackop)
             }
             
-            return (expr:output,expectingValue:expectingValue)
+            return (expr:expr,rpn_expr:output,expectingValue:expectingValue)
         }
 
         public static func printExpr(_ expr: Array<ExprElem>) {
