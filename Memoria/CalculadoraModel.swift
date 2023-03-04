@@ -9,7 +9,10 @@ import Foundation
 
 struct CalculadoraModel {
     
+    // Tokens na ordem que aparecem no display, normal
     private(set) var exprElems: Array<ExprElem> = []
+    
+    // Converte tokens para uma String formatada da expressão
     var exprTxt: String {
         var retTxt = ""
         var lastOp: ElemType? = .none
@@ -34,7 +37,8 @@ struct CalculadoraModel {
         
         return retTxt
     }
-    private(set) var expectingValue: Bool = true
+    
+    // Último resultado calculado pelo eval, ou NAN se não há resultado a mostrar
     private(set) var resultado: Double = Double.nan
     
     public static func test() {
@@ -53,7 +57,83 @@ struct CalculadoraModel {
         exprElems = ReversePolish.tokenizeExpr(tokenTxt)
     }
     
-    // Só pode ser usado para escrever números letra-a-letra
+    /*
+     OK '5'   ->  '-5'
+     OK '-5'  ->  '5'
+     ! '5 + 3' -> '5 + (-3'
+     ! '5 - 3' -> '5 - (-3'
+     ! '5 + (-3' -> '5 + 3'
+     ! '5 - (-3' -> '5 - 3'
+     // para quando o último não é um valor, veja: addOp(.sub)
+    */
+    mutating func negateIfLastIsValue() {
+        var last: ExprElem? = nil
+        var lastlast: ExprElem? = nil
+        if exprElems.count >= 1 { last = exprElems[exprElems.count-1] }
+        if exprElems.count >= 2 { lastlast = exprElems[exprElems.count-2] }
+        
+        if last == nil || last!.type != .value {
+            addOp(.sub)
+            return
+        }
+        
+        // ... 5 -> ... - 5
+        // ... - 5 -> ... 5
+        var removed = exprElems.popLast()!
+        if lastlast != nil && lastlast!.type == .un_sub {
+            _ = exprElems.popLast()
+        } else {
+            addOp(.sub)
+        }
+        
+        exprElems.append(removed) // put it back
+    }
+    
+    /*
+     ok ''   ->  '('
+     ok '('   ->  '(('
+     ok '1 +'   ->  '1 + ('
+     ok '(1'   ->  '(1)'
+     ok '((1)'   ->  '((1))'
+     ok '(1)'   ->  '(1)*('
+    */
+    mutating func addParentesis() {
+        var tokenOp: ElemType = .o_par
+        var n = 0
+        for elem in exprElems {
+            if elem.type == .o_par { n += 1 }
+            if elem.type == .c_par { n -= 1 }
+        }
+        
+        let (_,_,expectingValue) = ReversePolish.reversePolishExpr(exprElems,stopIndex: -1)
+        
+        
+        if !expectingValue && n > 0 {
+            tokenOp = .c_par
+        }
+        
+        if tokenOp == .o_par && !expectingValue {
+            // ()() --> () * (), 1 ( --> 1 * (
+            //if let last = exprElems.last, last.type == .c_par || last.type == .value {
+                addOp(.mul)
+            //}
+        }
+        
+        exprElems.append(ExprElem(txt: tokenOp.toTxt(), type: tokenOp))
+    }
+    
+    // Só pode ser usado para escrever números letra-a-letra com os caracteres [0-9] ou .
+    /*
+     // 1
+     ok '' -> '1'
+     ok '1' -> '11'
+     
+     // .
+     ok '' -> '0.'
+     ok '0.' -> '0.' // Não escreve ponto denovo
+     ok '3.14' -> '3.14' // Não escreve ponto denovo
+     
+    */
     mutating func addTxt(_ character: String) {
         //exprElems = ReversePolish.tokenizeExpr(exprTxt + tokenTxt)
         
@@ -88,33 +168,27 @@ struct CalculadoraModel {
         }
     }
     
-    mutating func addParentesis() {
-        var tokenOp: ElemType = .o_par
-        var n = 0
-        for elem in exprElems {
-            if elem.type == .o_par { n += 1 }
-            if elem.type == .c_par { n -= 1 }
-        }
-        
-        if !expectingValue && n > 0 {
-            tokenOp = .c_par
-        }
-        
-        if tokenOp == .o_par && !expectingValue {
-            // ()() --> () * (), 1 ( --> 1 * (
-            //if let last = exprElems.last, last.type == .c_par || last.type == .value {
-                addOp(.mul)
-            //}
-        }
-        
-        exprElems.append(ExprElem(txt: tokenOp.toTxt(), type: tokenOp))
-    }
-    
+    /*
+     
+    */
     mutating func addOp(_ tokenOp: ElemType) {
         if !tokenOp.isOp() { return }
         
-        if let last = exprElems.last, last.type.isOp() {
-            _ = popToken()
+        var last: ExprElem? = nil
+        if exprElems.count >= 1 { last = exprElems[exprElems.count-1] }
+        
+        let (_,_,expectingValue) = ReversePolish.reversePolishExpr(exprElems,stopIndex: -1)
+        
+        if expectingValue {
+            if last != nil && last!.type.isOp() {
+                // Remove o operador, assim o que foi clicado substituirá ele
+                _ = popToken()
+            } else {
+                // Se não é + ou -, não aceita como primeiro operador
+                if tokenOp != .add && tokenOp != .sub { // colocar (- quando tiver um operador antes
+                    return
+                }
+            }
         }
         
         exprElems.append(ExprElem(txt: tokenOp.toTxt(), type: tokenOp))
@@ -131,31 +205,6 @@ struct CalculadoraModel {
         }
     }
     
-    mutating func negateIfLastIsValue() {
-        if let last = exprElems.last {
-            if last.type == .value {
-                _ = exprElems.popLast()
-                if let lastlast = exprElems.last, lastlast.type == .un_sub {
-                    _ = exprElems.popLast()
-                } else {
-                    addOp(.sub)
-                }
-                
-                exprElems.append(last)
-            }
-            else if last.type == .un_sub {
-                _ = exprElems.popLast()
-            } else {
-                if last.type != .o_par {
-                    addParentesis()
-                }
-                addOp(.sub)
-            }
-        } else {
-            addOp(.sub)
-        }
-    }
-    
     mutating func popToken() -> ExprElem? {
         return exprElems.popLast()
     }
@@ -164,12 +213,12 @@ struct CalculadoraModel {
         // Debug
         ReversePolish.printExpr(exprElems)
 
-        let (updated_expr,rpn_expr,_expectingValue) = ReversePolish.reversePolishExpr(exprElems)
+        let (updated_expr,rpn_expr,_) = ReversePolish.reversePolishExpr(exprElems)
         
         // Operador unitário e coisas assim são atualizadas
         exprElems = updated_expr
         
-        expectingValue = _expectingValue
+        //expectingValue = _expectingValue
         // Debug
         ReversePolish.printExpr(rpn_expr)
 
@@ -428,7 +477,8 @@ struct CalculadoraModel {
         
         Por último, remove tudo da stack e printa
         */
-        public static func reversePolishExpr(_ _expr: Array<ExprElem>) -> (expr:Array<ExprElem>, rpn_expr:Array<ExprElem>,expectingValue:Bool) {
+        public static func reversePolishExpr(_ _expr: Array<ExprElem>, stopIndex: Int = -1) ->
+        (expr:Array<ExprElem>, rpn_expr:Array<ExprElem>,expectingValue:Bool) {
             var expr = _expr // VAR
             var output = Array<ExprElem>() // Tudo só que na ordem RPN
             var stack = Array<ExprElem>() // Só entra operadores, ( e ) na stack
@@ -436,6 +486,8 @@ struct CalculadoraModel {
             // Para identificar operadores unitários
             var expectingValue = true
             for (i,_elem) in expr.enumerated() {
+                if stopIndex != -1 && i >= stopIndex { break }
+                
                 var elem = _elem // não é let mais!
                 if elem.type == .o_par {
                     stack.append(elem)
