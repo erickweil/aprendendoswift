@@ -38,13 +38,18 @@ class CalculadoraViewModel: ObservableObject {
     private var model: CalculadoraModel = CalculadoraModel()
     
     var exprTxt: String {
-        return "\(model.exprTxt) ="
+        if model.exprElems.isEmpty {
+            return ""
+        } else {
+            return "\(model.exprTxt) ="
+        }
     }
     var resultado: String {
-        if model.resultado.isNaN {
+        if model.resultado == nil {
             return " "
+        } else {
+            return "\(model.resultado!)"
         }
-        return "\(model.resultado)"
     }
     
     // ---------------------- Intent's ----------------------
@@ -58,7 +63,11 @@ class CalculadoraViewModel: ObservableObject {
         }
         
         if btn == .eq {
-            model.setExprFromTxt("\(model.resultado)")
+            if model.resultado == nil || model.resultado!.isNaN || model.resultado!.isInfinite {
+                model.clear()
+            } else {
+                model.setExprFromTxt("\(model.resultado!)")
+            }
             model.eval()
             return
         }

@@ -15,8 +15,8 @@ struct CalculadoraModel {
     // Converte tokens para uma String formatada da expressão
     var exprTxt: String {
         var retTxt = ""
-        var lastOp: ElemType? = .none
-        var lastElem: ExprElem? = .none
+        var lastOp: ElemType? = nil
+        var lastElem: ExprElem? = nil
         for elem in exprElems {
             let op = elem.type
             
@@ -39,14 +39,14 @@ struct CalculadoraModel {
     }
     
     // Último resultado calculado pelo eval, ou NAN se não há resultado a mostrar
-    private(set) var resultado: Double = Double.nan
+    private(set) var resultado: Double? = nil
     
     public static func test() {
         var model = CalculadoraModel()
         model.setExprFromTxt("1 + 2 * 3 / 4")
         model.eval()
         
-        print("\(model.exprTxt) = \(model.resultado)")
+        print("\(model.exprTxt) = \(model.resultado ?? Double.nan)")
     }
     
     mutating func clear() {
@@ -60,17 +60,19 @@ struct CalculadoraModel {
     /*
      OK '5'   ->  '-5'
      OK '-5'  ->  '5'
-     ! '5 + 3' -> '5 + (-3'
-     ! '5 - 3' -> '5 - (-3'
-     ! '5 + (-3' -> '5 + 3'
-     ! '5 - (-3' -> '5 - 3'
+     OK '5 + 3' -> '5 + (-3'
+     OK '5 - 3' -> '5 - (-3'
+     OK '5 + (-3' -> '5 + 3'
+     OK '5 - (-3' -> '5 - 3'
      // para quando o último não é um valor, veja: addOp(.sub)
     */
     mutating func negateIfLastIsValue() {
         var last: ExprElem? = nil
         var lastlast: ExprElem? = nil
+        var lastlastlast: ExprElem? = nil
         if exprElems.count >= 1 { last = exprElems[exprElems.count-1] }
         if exprElems.count >= 2 { lastlast = exprElems[exprElems.count-2] }
+        if exprElems.count >= 3 { lastlastlast = exprElems[exprElems.count-3] }
         
         if last == nil || last!.type != .value {
             addOp(.sub)
@@ -79,9 +81,19 @@ struct CalculadoraModel {
         
         // ... 5 -> ... - 5
         // ... - 5 -> ... 5
-        var removed = exprElems.popLast()!
-        if lastlast != nil && lastlast!.type == .un_sub {
-            _ = exprElems.popLast()
+        let removed = exprElems.popLast()!
+        if lastlast != nil {
+            if lastlast!.type == .un_sub {
+                _ = exprElems.popLast()
+                if lastlastlast != nil && lastlastlast!.type == .o_par {
+                    _ = exprElems.popLast()
+                }
+            } else if lastlast!.type != .o_par {
+                addParentesis()
+                addOp(.sub)
+            } else {
+                addOp(.sub)
+            }
         } else {
             addOp(.sub)
         }
@@ -127,6 +139,7 @@ struct CalculadoraModel {
      // 1
      ok '' -> '1'
      ok '1' -> '11'
+     ! '(1 + 2)' -> '(1 + 2) * 1'
      
      // .
      ok '' -> '0.'
@@ -224,10 +237,10 @@ struct CalculadoraModel {
 
         let res = ReversePolish.eval(rpn_expr)
         
-        resultado = res ?? Double.nan
+        resultado = res
         
         // Debug
-        print("O resultado é:\(resultado)")
+        print("O resultado é:\(resultado ?? Double.nan)")
     }
     
     public struct ExprElem {
@@ -354,9 +367,9 @@ struct CalculadoraModel {
                 if elem.type == .value {
                     let doubleval = elem.toDouble()
                     
-                    if doubleval == .none {
+                    if doubleval == nil {
                         print("Erro, não é um número \(elem.txt)")
-                        return .none
+                        return nil
                     }
                     
                     stack.append(doubleval!)
@@ -365,9 +378,9 @@ struct CalculadoraModel {
                         let a = stack.popLast()
                         let b = stack.popLast()
                         
-                        if a == .none || b == .none {
+                        if a == nil || b == nil {
                             print("Erro, faltou argumentos em \(elem.txt)")
-                            return .none
+                            return nil
                         }
                         
                         switch(elem.type)
@@ -386,14 +399,14 @@ struct CalculadoraModel {
                             stack.append(pow(b!, a!))
                         default:
                             print("Erro, o que é \(elem.txt)?")
-                            return .none
+                            return nil
                         }
                     } else if elem.type.getNumberArgs() == 1 {
                         let a = stack.popLast()
                         
-                        if a == .none {
+                        if a == nil {
                             print("Erro, faltou argumentos em \(elem.txt)")
-                            return .none
+                            return nil
                         }
                         
                         switch(elem.type)
@@ -404,11 +417,11 @@ struct CalculadoraModel {
                             stack.append(-a!)
                         default:
                             print("Erro, o que é \(elem.txt)?")
-                            return .none
+                            return nil
                         }
                     } else {
                         print("Erro, o que é \(elem.txt)?")
-                        return .none
+                        return nil
                     }
                 }
             }
