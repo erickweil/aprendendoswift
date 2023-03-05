@@ -29,7 +29,7 @@ struct MemoryModel<CardContent> {
             return
         }
         
-        if faceUpCardIndex == .none {
+        if faceUpCardIndex == nil {
             // Se não tem nenhuma carta para cima
             // Então esta será a única para cima agora
             for k in 0..<cards.count {
@@ -55,12 +55,9 @@ struct MemoryModel<CardContent> {
             
             flip(index)
             
-            
             // Independente, vai agora desmarcar a carta faceup
             faceUpCardIndex = nil
         }
-            
-        
     }
     
     init(pairs: Int, genCard: (Int) -> CardContent) {
@@ -76,57 +73,39 @@ struct MemoryModel<CardContent> {
             let i = elem%cards.count
             if rand != i {
                 // Trocar o elemento atual pelo "rand"
-                swapCards(cards[rand],cards[i])
+                let temp = cards[i]
+                cards[i] = cards[rand]
+                cards[rand] = temp
             }
         }
     }
     
-    private mutating func swapCards(_ a: Card,_ b: Card){
-        let a_index = findCardIndex(a)
-        let b_index = findCardIndex(b)
-        
-        if a_index == .none || b_index == .none {
-            print("Alerta: Não pode fazer swap de cartas porque não encontrou elas")
-            return
-        }
-        
-        cards[a_index!] = b
-        cards[b_index!] = a
-    }
-    
     private mutating func addPair(_ content: CardContent,_ pairIndex: Int) {
-        let a_id = addCard(content)
-        let b_id = addCard(content)
-        cards[a_id].pair_id = b_id
-        cards[b_id].pair_id = a_id
+        let a_id = pairIndex * 2 + 0
+        let b_id = pairIndex * 2 + 1
+        cards.append(Card(id:a_id,pair_id:b_id,content: content))
+        cards.append(Card(id:b_id,pair_id:a_id,content: content))
     }
     
-    // mutating porque modifica o array
-    private mutating func addCard(_ content:CardContent) -> Int {
-        let index = cards.count
-        cards.append(Card(id:index,pair_id:-1,content: content))
-        return index
-    }
-    
-    func findCardIndex(_ card: Card) -> Int? {
+    private func findCardIndex(_ card: Card) -> Int? {
         for index in 0..<cards.count {
             if cards[index].id == card.id {
                 return index
             }
         }
-        return .none
+        return nil
     }
     
-    mutating func flip(_ card_index: Int) {
+    private mutating func flip(_ card_index: Int) {
         cards[card_index].isFaceUp.toggle()
     }
 
     struct Card : Identifiable{
-        var id: Int // ID da carta no array de cartas
-        var pair_id: Int // ID da outra carta do par ou -1 se não tem par
+        let id: Int // ID da carta no array de cartas
+        let pair_id: Int // ID da outra carta do par ou -1 se não tem par
         
         var isFaceUp: Bool = false
         var isMatched: Bool = false
-        var content: CardContent
+        let content: CardContent
     }
 }

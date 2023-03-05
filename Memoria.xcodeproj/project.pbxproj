@@ -65,17 +65,13 @@
 		A78442142996E79700058939 /* Memoria */ = {
 			isa = PBXGroup;
 			children = (
+				A7E2808929B4BAA60016620F /* Coisas */,
+				A7E2808829B4BA790016620F /* JogoMemoria */,
+				A7E2808729B4BA460016620F /* Calculadora */,
 				A75B58D929AFF3FB0075BC3D /* HomeScreen.swift */,
 				A78442152996E79700058939 /* MemoriaApp.swift */,
-				A78442172996E79700058939 /* HelloWorld.swift */,
-				A7621042299D5D1F00DA6072 /* CardView.swift */,
-				A7A11B6729A95C4E009B7FD4 /* MemoryModel.swift */,
-				A7A11B6929A95EE5009B7FD4 /* MemoryViewModel.swift */,
 				A78442192996E79800058939 /* Assets.xcassets */,
 				A784421B2996E79800058939 /* Preview Content */,
-				A76364DB29B008F60045FBA9 /* CalculadoraView.swift */,
-				A7EB171029B0C5BB0094AF51 /* CalculadoraViewModel.swift */,
-				A7EB171229B0C5CB0094AF51 /* CalculadoraModel.swift */,
 			);
 			path = Memoria;
 			sourceTree = "<group>";
@@ -86,6 +82,34 @@
 				A784421C2996E79800058939 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		A7E2808729B4BA460016620F /* Calculadora */ = {
+			isa = PBXGroup;
+			children = (
+				A76364DB29B008F60045FBA9 /* CalculadoraView.swift */,
+				A7EB171029B0C5BB0094AF51 /* CalculadoraViewModel.swift */,
+				A7EB171229B0C5CB0094AF51 /* CalculadoraModel.swift */,
+			);
+			path = Calculadora;
+			sourceTree = "<group>";
+		};
+		A7E2808829B4BA790016620F /* JogoMemoria */ = {
+			isa = PBXGroup;
+			children = (
+				A7621042299D5D1F00DA6072 /* CardView.swift */,
+				A7A11B6729A95C4E009B7FD4 /* MemoryModel.swift */,
+				A7A11B6929A95EE5009B7FD4 /* MemoryViewModel.swift */,
+			);
+			path = JogoMemoria;
+			sourceTree = "<group>";
+		};
+		A7E2808929B4BAA60016620F /* Coisas */ = {
+			isa = PBXGroup;
+			children = (
+				A78442172996E79700058939 /* HelloWorld.swift */,
+			);
+			path = Coisas;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
