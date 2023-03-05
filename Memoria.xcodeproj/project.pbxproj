@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A75B58DA29AFF3FB0075BC3D /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75B58D929AFF3FB0075BC3D /* HomeScreen.swift */; };
-		A7621043299D5D1F00DA6072 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7621042299D5D1F00DA6072 /* CardView.swift */; };
+		A7621043299D5D1F00DA6072 /* MemoryGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7621042299D5D1F00DA6072 /* MemoryGameView.swift */; };
 		A76364DC29B008F60045FBA9 /* CalculadoraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76364DB29B008F60045FBA9 /* CalculadoraView.swift */; };
 		A78442162996E79700058939 /* MemoriaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78442152996E79700058939 /* MemoriaApp.swift */; };
 		A78442182996E79700058939 /* HelloWorld.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78442172996E79700058939 /* HelloWorld.swift */; };
@@ -22,7 +22,7 @@
 
 /* Begin PBXFileReference section */
 		A75B58D929AFF3FB0075BC3D /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
-		A7621042299D5D1F00DA6072 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		A7621042299D5D1F00DA6072 /* MemoryGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryGameView.swift; sourceTree = "<group>"; };
 		A76364DB29B008F60045FBA9 /* CalculadoraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculadoraView.swift; sourceTree = "<group>"; };
 		A78442122996E79700058939 /* Memoria.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Memoria.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A78442152996E79700058939 /* MemoriaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoriaApp.swift; sourceTree = "<group>"; };
@@ -97,7 +97,7 @@
 		A7E2808829B4BA790016620F /* JogoMemoria */ = {
 			isa = PBXGroup;
 			children = (
-				A7621042299D5D1F00DA6072 /* CardView.swift */,
+				A7621042299D5D1F00DA6072 /* MemoryGameView.swift */,
 				A7A11B6729A95C4E009B7FD4 /* MemoryModel.swift */,
 				A7A11B6929A95EE5009B7FD4 /* MemoryViewModel.swift */,
 			);
@@ -183,7 +183,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A78442182996E79700058939 /* HelloWorld.swift in Sources */,
-				A7621043299D5D1F00DA6072 /* CardView.swift in Sources */,
+				A7621043299D5D1F00DA6072 /* MemoryGameView.swift in Sources */,
 				A7EB171329B0C5CB0094AF51 /* CalculadoraModel.swift in Sources */,
 				A75B58DA29AFF3FB0075BC3D /* HomeScreen.swift in Sources */,
 				A7A11B6829A95C4E009B7FD4 /* MemoryModel.swift in Sources */,

@@ -11,71 +11,65 @@ struct MemoryModel<CardContent> {
     // private(set) impede que seja modificado de fora (readonly)
     private(set) var cards: Array<Card>
     
-    private var faceUpCardIndex: Int?
+    // Em vez de setar o valor, detecta de acordo com o que está na lista
+    private var faceUpCardIndex: Int? {
+        var retIndex: Int? = nil
+        var faceUpCount = 0
+        for k in 0..<cards.count {
+            if !cards[k].isMatched && cards[k].isFaceUp {
+                retIndex = k
+                faceUpCount += 1
+            }
+        }
+        
+        if faceUpCount == 1 {
+            return retIndex
+        } else {
+            return nil
+        }
+    }
+    
+    init(pairs: Int, genCard: (Int) -> CardContent) {
+        cards = []
+        
+        for pair in 0..<pairs {
+            addPair(genCard(pair),pair)
+        }
+        
+        cards.shuffle()
+    }
     
     mutating func choose(_ card: Card) {
         print("Virou id:\(card.id) faceup:\(card.isFaceUp) '\(card.content)'")
         
         // Fazer nada se já está para cima
-        if card.isFaceUp || card.isMatched {
-            print("\t Fazer nada porque carta está para cima")
-            return
-        }
+        if card.isFaceUp || card.isMatched { return }
         
         let index = findCardIndex(card) ?? -1
-        // Fazer nada se o index não foi encontrado
-        if index == -1 {
-            print("\t Fazer nada porque carta não foi encontrada")
-            return
-        }
         
+        // Fazer nada se o index não foi encontrado
+        if index == -1 { return }
+        
+        // Se há nenhuma ou mais que uma carta para cima
         if faceUpCardIndex == nil {
-            // Se não tem nenhuma carta para cima
             // Então esta será a única para cima agora
-            for k in 0..<cards.count {
-                if !cards[k].isMatched {
-                    cards[k].isFaceUp = false
-                }
-            }
-            flip(index)
-            faceUpCardIndex = index
-            
-            print("\t Executou flip na carta, agora essa é a carta virada")
+            makeTheOnlyUp(index)
         } else {
             // Se tem uma carta para cima
-            // Então tem que verificar se elas tem o mesmo conteudo
+            // Então tem que verificar se elas são um par
             if cards[faceUpCardIndex!].id == cards[index].pair_id {
-                // Se tem o mesmo conteúdo então eles estão OK!
                 cards[faceUpCardIndex!].isMatched = true
                 cards[index].isMatched = true
-                print("\t Executou match!")
-            } else {
-                print("\t Não deu match...")
             }
             
-            flip(index)
-            
-            // Independente, vai agora desmarcar a carta faceup
-            faceUpCardIndex = nil
+            cards[index].isFaceUp = true
         }
     }
     
-    init(pairs: Int, genCard: (Int) -> CardContent) {
-        cards = Array<Card>()
-        
-        for pair in 0..<pairs {
-            let content: CardContent = genCard(pair)
-            addPair(content,pair)
-        }
-        
-        for elem in 0..<cards.count*10 {
-            let rand = Int.random(in: 0..<cards.count-1)
-            let i = elem%cards.count
-            if rand != i {
-                // Trocar o elemento atual pelo "rand"
-                let temp = cards[i]
-                cards[i] = cards[rand]
-                cards[rand] = temp
+    private mutating func makeTheOnlyUp(_ index: Int) {
+        for k in 0..<cards.count {
+            if !cards[k].isMatched {
+                cards[k].isFaceUp = (k == index)
             }
         }
     }
@@ -95,17 +89,13 @@ struct MemoryModel<CardContent> {
         }
         return nil
     }
-    
-    private mutating func flip(_ card_index: Int) {
-        cards[card_index].isFaceUp.toggle()
-    }
 
     struct Card : Identifiable{
         let id: Int // ID da carta no array de cartas
         let pair_id: Int // ID da outra carta do par ou -1 se não tem par
+        let content: CardContent
         
         var isFaceUp: Bool = false
         var isMatched: Bool = false
-        let content: CardContent
     }
 }

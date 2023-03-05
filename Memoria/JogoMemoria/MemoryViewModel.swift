@@ -7,12 +7,10 @@
 
 import Foundation
 
-/*func genCard(pair: Int) -> String {
-    return "🚗"
-}*/
-
 class MemoryViewModel: ObservableObject {
-    static let emojis: Array<String> = [
+    typealias Card = MemoryModel<String>.Card
+    
+    private static let emojis = [
         "🚗","🚕","🚙",
         "🚚","🚛","🚜",
         "🛵","🏍️","🛴",
@@ -23,28 +21,23 @@ class MemoryViewModel: ObservableObject {
         "🛳️","🚤","🚢"
     ]
     
-    static func createMemoryModel() -> MemoryModel<String> {
+    private static func createMemoryModel() -> MemoryModel<String> {
         MemoryModel<String>(pairs: 8) {
             pair in
             return emojis[pair]
         }
     }
     
-    /*private var model: MemoryModel<String> = MemoryModel(pairs: 12, genCard: {
-        (pair: Int) -> String in
-        return "🚗"
-    })*/
-    
     @Published
-    private var model: MemoryModel<String> = createMemoryModel()
+    private var model = createMemoryModel()
     
-    var cards: Array<MemoryModel<String>.Card> {
+    var cards: Array<Card> {
         return model.cards
     }
     
     // ---------------------- Intent's ----------------------
     
-    func choose(_ card : MemoryModel<String>.Card) {
+    func choose(_ card : Card) {
         model.choose(card)
     }
 }
