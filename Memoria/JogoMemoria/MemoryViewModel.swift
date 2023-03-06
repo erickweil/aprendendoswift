@@ -18,11 +18,12 @@ class MemoryViewModel: ObservableObject {
         "🛺","🚌","🚎",
         "🚋","🚉","🛸",
         "🚀","🛥️","⛵",
-        "🛳️","🚤","🚢"
+        "🛳️","🚤","🚢",
+        "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"
     ]
     
     private static func createMemoryModel() -> MemoryModel<String> {
-        MemoryModel<String>(pairs: 8) {
+        MemoryModel<String>(pairs: 10) {
             pair in
             return emojis[pair]
         }

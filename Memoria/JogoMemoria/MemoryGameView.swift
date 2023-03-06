@@ -46,19 +46,11 @@ struct MemoryGameView: View {
     // Ao implementar uma view, deve prover uma variável body
     // que se comporta como uma View
     var body: some View {
-        VStack {
-            ScrollView {
-                // Lazy VGrid vai carregar apenas as views que forem necessárias
-                LazyVGrid(columns:[GridItem(.adaptive(minimum: 60.0))]) {
-                    ForEach(viewModel.cards, content: { card in
-                        CardView(card)
-                        .onTapGesture {
-                            viewModel.choose(card)
-                        }
-                    })
-                }
-                .padding()
-                .foregroundColor(.red)
+
+        AspectVGrid(items: viewModel.cards, aspectRatio: 2.0/3.0, padding: 4.0) { card in
+            CardView(card)
+            .onTapGesture {
+                viewModel.choose(card)
             }
         }
         .padding()
@@ -80,36 +72,49 @@ struct CardView: View {
     // Ao implementar uma view, deve prover uma variável body
     // que se comporta como uma View
     var body: some View /* () */{
-        // View que Une várias views uma em cima da outra
-        ZStack {
-            // Define o RoundedRectangle na variável 'shape'
-            // Assim não precisa repetir toda vez
-            let shape = RoundedRectangle(cornerRadius: 23.0)
-            
-            if !card.isMatched {
-                
-                shape.fill()
-                    .foregroundColor(.white)
-                
-                shape.strokeBorder(lineWidth: 5)
-                    .foregroundColor(.blue)
+        GeometryReader { geometry in
+            // View que Une várias views uma em cima da outra
+            ZStack {
+                // Define o RoundedRectangle na variável 'shape'
+                // Assim não precisa repetir toda vez
+                let shape = RoundedRectangle(cornerRadius: 15.0)
                 
                 
-                // View de Texto
-                Text(card.content)
-                    .font(.title)
-                    .foregroundColor(.black)
-                
+                //if card.isMatched {
+                //    shape.opacity(0.0) // Esconder cartas que deram 'Match'
+                //} else
                 if !card.isFaceUp {
-                    shape.fill()
-                        .foregroundColor(.blue)
+                    //ZStack(alignment: .center) {
+                        shape.fill().foregroundColor(.blue)
+                        //FundoCarta().aspectRatio(1.0/1.0, contentMode: .fit)
+                    //}
+                } else {
+                    let cardview = Group {
+                        shape.fill()
+                            .foregroundColor(.white)
+                        
+                        shape.strokeBorder(lineWidth: 5)
+                            .foregroundColor(.blue)
+                        
+                        // View de Texto
+                        Text(card.content)
+                            .font(Memoria.font(geometry.size,mult: 0.6))
+                            .foregroundColor(.black)
+                    }
+                    
+                    if card.isMatched {
+                        cardview.opacity(0.10)
+                    } else {
+                        cardview
+                    }
                 }
-            } else {
-                shape.opacity(0)
             }
         }
-        .aspectRatio(2/3, contentMode: .fit)
     }
+}
+
+private func font(_ size: CGSize,mult: CGFloat = 1.0) -> Font {
+    Font.system(size: min(size.width, size.height) * mult)
 }
 
 // Configura o Preview.
