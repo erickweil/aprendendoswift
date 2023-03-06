@@ -20,7 +20,7 @@ public struct Arrays {
         frutas.append("Pera")
         frutas.remove(at:0)
 
-        print("Depois, Primeiro \(frutas[0]), Último \(frutas[frutas.count-1])")
+        print("Depois, Primeiro \(frutas[0]), Último \(frutas.last!)")
 
         let mapafrutas = [
             "🍎":"Maçã vermelha",
@@ -41,5 +41,13 @@ public struct Arrays {
 
         // Encontrar elemento no array
         let indice = frutas.firstIndex(where: { $0.count == 3 })
-        print("Indice:",indice ?? -1," Valor:", frutas[indice ?? 0]) }
+        print("Indice:",indice ?? -1," Valor:", frutas[indice ?? 0]) 
+
+        // Encontrar todos que começam com a letra M
+        let frutasM = frutas.filter{ $0.starts(with: "M") }
+
+        print("Furtas que começam com M:\(frutasM)")
+
+
+    }
 }

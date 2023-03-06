@@ -86,25 +86,26 @@ struct CardView: View {
             // Assim não precisa repetir toda vez
             let shape = RoundedRectangle(cornerRadius: 23.0)
             
-            shape.fill()
-                .foregroundColor(.white)
-            
             if !card.isMatched {
-                shape.strokeBorder(lineWidth: 5)
-                    .foregroundColor(.blue)
-            } else {
-                shape.strokeBorder(lineWidth: 5)
-                    .foregroundColor(.red)
-            }
-            
-            // View de Texto
-            Text(card.content)
-                .font(.title)
-                .foregroundColor(.black)
-            
-            if !card.isFaceUp {
+                
                 shape.fill()
+                    .foregroundColor(.white)
+                
+                shape.strokeBorder(lineWidth: 5)
                     .foregroundColor(.blue)
+                
+                
+                // View de Texto
+                Text(card.content)
+                    .font(.title)
+                    .foregroundColor(.black)
+                
+                if !card.isFaceUp {
+                    shape.fill()
+                        .foregroundColor(.blue)
+                }
+            } else {
+                shape.opacity(0)
             }
         }
         .aspectRatio(2/3, contentMode: .fit)
