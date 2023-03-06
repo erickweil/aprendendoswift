@@ -35,7 +35,7 @@ class CalculadoraViewModel: ObservableObject {
     }
     
     @Published
-    private var model: CalculadoraModel = CalculadoraModel()
+    private var model = CalculadoraModel()
     
     var exprTxt: String {
         if model.exprElems.isEmpty {
@@ -71,12 +71,6 @@ class CalculadoraViewModel: ObservableObject {
             model.eval()
             return
         }
-        
-        //if btn == .del {
-        //    model.removeToken()
-        //    model.eval()
-        //    return
-        //}
         
         if btn == .del {
             model.removeTxt()
@@ -123,8 +117,4 @@ class CalculadoraViewModel: ObservableObject {
         }
         model.eval()
     }
-    
-    //func eval(_ txtExpr: String) {
-    //    model.eval()
-    //}
 }

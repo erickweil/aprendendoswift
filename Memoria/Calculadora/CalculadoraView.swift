@@ -21,27 +21,27 @@ struct CalculadoraView: View {
         // View que Une várias views uma em cima da outra
         
         VStack {
+            // O resultado funciona como Spacer
             viewResultado
             
             viewTeclado
-            
-            Spacer()
         }
+        .padding()
         
     }
     
     var viewResultado: some View {
-        VStack {
-            Text(viewModel.exprTxt).font(.title).opacity(0.8)
-            Text(viewModel.resultado).font(.largeTitle)
+        ZStack (alignment: .trailing) {
+            VStack (alignment: .trailing) {
+                Text(viewModel.exprTxt).font(.title).opacity(0.8)
+                Text(viewModel.resultado).font(.largeTitle)
+            }
+            .padding()
+            
+            RoundedRectangle(cornerRadius: 15.0)
+                .stroke(lineWidth: 4)
+                .foregroundColor(.primary)
         }
-        .frame(width: 280,height: 80.0)
-        .padding()
-        .overlay(
-            RoundedRectangle(cornerRadius: 10.0)
-                .stroke(lineWidth: 6)
-                .foregroundColor(/*@START_MENU_TOKEN@*/.green/*@END_MENU_TOKEN@*/)
-        )
     }
     
     var viewTeclado: some View {
@@ -49,37 +49,48 @@ struct CalculadoraView: View {
         //  4   5   6
         //  1   2   2
         //  .     0
-        VStack {
-            HStack {
+        LazyVGrid(columns: [
+            GridItem(.flexible(),spacing:0.0),
+            GridItem(.flexible(),spacing:0.0),
+            GridItem(.flexible(),spacing:0.0),
+            GridItem(.flexible(),spacing:0.0)],spacing: 0.0)  {
+            
+            Group {
+                Spacer()
+                Spacer()
                 Spacer()
                 btnNumero(.del)
             }
-            HStack {
+            
+            Group {
                 btnNumero(.c)
                 btnNumero(.par)
                 btnNumero(.mod)
                 btnNumero(.div)
             }
-            HStack {
+
+            Group {
                 btnNumero(.n7)
                 btnNumero(.n8)
                 btnNumero(.n9)
                 btnNumero(.mul)
             }
-            HStack {
+            
+            Group {
                 btnNumero(.n4)
                 btnNumero(.n5)
                 btnNumero(.n6)
                 btnNumero(.sub)
             }
-            HStack {
+
+            Group {
                 btnNumero(.n1)
                 btnNumero(.n2)
                 btnNumero(.n3)
                 btnNumero(.add)
             }
             
-            HStack {
+            Group {
                 btnNumero(.neg)
                 btnNumero(.n0)
                 btnNumero(.dot)
@@ -89,18 +100,23 @@ struct CalculadoraView: View {
     }
     
     private func btnNumero(_ num: CalculadoraViewModel.Botoes) -> some View {
-        Button(action:{
-            viewModel.clickButton(num)
-        },label:{Text("\(num.rawValue)")})
-        .foregroundColor(Color.primary)
-        .font(.title)
-        .frame(width: 40.0,height: 60.0)
-        .padding()
-        .overlay(
-            RoundedRectangle(cornerRadius: 10.0)
-                .stroke(lineWidth: 6)
-                .foregroundColor(.secondary)
-        )
+
+            Button(action:{
+                viewModel.clickButton(num)
+            },label:{
+                ZStack {
+                    Text("\(num.rawValue)")
+                        .font(.title)
+                    
+                    RoundedRectangle(cornerRadius: 5.0)
+                        .stroke(lineWidth: 2)
+                        .foregroundColor(.secondary)
+                }
+                .aspectRatio(1.0/1.0, contentMode: .fit)
+                
+            })
+            .foregroundColor(Color.primary)
+        //
     }
 }
 

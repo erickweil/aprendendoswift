@@ -41,14 +41,6 @@ struct CalculadoraModel {
     // Último resultado calculado pelo eval, ou NAN se não há resultado a mostrar
     private(set) var resultado: Double? = nil
     
-    public static func test() {
-        var model = CalculadoraModel()
-        model.setExprFromTxt("1 + 2 * 3 / 4")
-        model.eval()
-        
-        print("\(model.exprTxt) = \(model.resultado ?? Double.nan)")
-    }
-    
     mutating func clear() {
         exprElems = []
     }
