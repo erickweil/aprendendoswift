@@ -47,13 +47,37 @@ struct MemoryGameView: View {
     // que se comporta como uma View
     var body: some View {
 
-        AspectVGrid(items: viewModel.cards, aspectRatio: 2.0/3.0, padding: 4.0) { card in
-            CardView(card)
-            .onTapGesture {
-                viewModel.choose(card)
+        VStack {
+            AspectVGrid(items: viewModel.cards, aspectRatio: 2.0/2.75, padding: 2.0) { card in
+                CardView(card)
+                    .onTapGesture {
+                        viewModel.choose(card)
+                    }
+            }
+            .padding()
+            
+            HStack{
+                Spacer()
+                StyleBtn(MemoryViewModel.Estilos.Emojis,sfSymbol:"car")
+                StyleBtn(MemoryViewModel.Estilos.Letras,sfSymbol:"abc")
+                StyleBtn(MemoryViewModel.Estilos.Bandeiras,sfSymbol:"flag")
+                Spacer()
             }
         }
-        .padding()
+    }
+    
+    private func StyleBtn(_ estilo: MemoryViewModel.Estilos, sfSymbol: String) -> some View {
+        Button(action:{
+            viewModel.changeStyle(estilo)
+        },label:{
+            VStack {
+                Image(systemName: sfSymbol).resizable().scaledToFit().frame(width: 42.0,height: 42.0)
+                Text("\(estilo.rawValue)")
+                    .font(.system(size: 15.0))
+            }
+            .padding(15)
+        })
+        .foregroundColor(viewModel.estilo == estilo ? Color.accentColor : Color.secondary)
     }
 }
 
