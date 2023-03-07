@@ -9,15 +9,15 @@ import SwiftUI
 
 @main
 struct MemoriaApp: App {
-    //let game = MemoryViewModel()
-    let model = CalculadoraViewModel()
+    let game = MemoryViewModel()
+    //let model = CalculadoraViewModel()
     var body: some Scene {
         WindowGroup {
             //HelloWorld()
             
-            //MemoryGameView(viewModel:game)
+            MemoryGameView(viewModel:game)
             
-            CalculadoraView(viewModel:model)
+            //CalculadoraView(viewModel:model)
         }
     }
 }

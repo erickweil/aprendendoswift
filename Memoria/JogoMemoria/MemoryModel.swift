@@ -11,6 +11,7 @@ struct MemoryModel<CardContent> {
     // private(set) impede que seja modificado de fora (readonly)
     private(set) var cards: Array<Card>
     
+    private(set) var pontos: Int = 0
     // Em vez de setar o valor, detecta de acordo com o que está na lista
     private var faceUpCardIndex: Int? {
         var retIndex: Int? = nil
@@ -53,23 +54,35 @@ struct MemoryModel<CardContent> {
         // Se há nenhuma ou mais que uma carta para cima
         if faceUpCardIndex == nil {
             // Então esta será a única para cima agora
-            makeTheOnlyUp(index)
-        } else {
-            // Se tem uma carta para cima
+            flipAllDown()
+            cards[index].flipUp()
+        } else { // Se já tem uma carta para cima
             // Então tem que verificar se elas são um par
             if cards[faceUpCardIndex!].id == cards[index].pair_id {
                 cards[faceUpCardIndex!].isMatched = true
                 cards[index].isMatched = true
+                
+                // Cada match dá 2 pontos
+                pontos += 2
+            } else {
+                // Cada mismatch tira 1 ponto por carta já vista antes.
+                // Não perde pontos por mismatch de cartas não vistas
+                if cards[faceUpCardIndex!].timesSeen > 1 {
+                    pontos -= 1
+                }
+                if cards[index].timesSeen > 1 {
+                    pontos -= 1
+                }
             }
             
-            cards[index].isFaceUp = true
+            cards[index].flipUp()
         }
     }
     
-    private mutating func makeTheOnlyUp(_ index: Int) {
+    private mutating func flipAllDown() {
         for k in 0..<cards.count {
             if !cards[k].isMatched {
-                cards[k].isFaceUp = (k == index)
+                cards[k].flipDown()
             }
         }
     }
@@ -95,7 +108,17 @@ struct MemoryModel<CardContent> {
         let pair_id: Int // ID da outra carta do par ou -1 se não tem par
         let content: CardContent
         
-        var isFaceUp: Bool = false
+        private(set) var timesSeen: Int = 0
+        private(set) var isFaceUp: Bool = false
         var isMatched: Bool = false
+        
+        public mutating func flipUp() {
+            self.timesSeen += 1
+            self.isFaceUp = true
+        }
+        
+        public mutating func flipDown() {
+            self.isFaceUp = false
+        }
     }
 }

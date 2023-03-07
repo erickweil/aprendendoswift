@@ -47,32 +47,45 @@ struct MemoryGameView: View {
     // que se comporta como uma View
     var body: some View {
 
+        let temaAtual = MemoryViewModel.temas[viewModel.estilo]
+        
         VStack {
             AspectVGrid(items: viewModel.cards, aspectRatio: 2.0/2.75, padding: 2.0) { card in
-                CardView(card)
+                CardView(card,temaAtual.cor)
                     .onTapGesture {
                         viewModel.choose(card)
                     }
             }
             .padding()
             
-            HStack{
-                Spacer()
-                StyleBtn(MemoryViewModel.Estilos.Emojis,sfSymbol:"car")
-                StyleBtn(MemoryViewModel.Estilos.Letras,sfSymbol:"abc")
-                StyleBtn(MemoryViewModel.Estilos.Bandeiras,sfSymbol:"flag")
-                Spacer()
+            
+            Text("Pontos:\(viewModel.pontos)")
+                .font(.system(size: 12.0))
+            
+            ScrollView(.horizontal) {
+                HStack {
+                    StyleBtn(0)
+                    StyleBtn(1)
+                    StyleBtn(2)
+                    StyleBtn(3)
+                    StyleBtn(4)
+                    StyleBtn(5)
+                }
             }
         }
     }
     
-    private func StyleBtn(_ estilo: MemoryViewModel.Estilos, sfSymbol: String) -> some View {
+    private func StyleBtn(_ estilo: Int) -> some View {
         Button(action:{
             viewModel.changeStyle(estilo)
         },label:{
             VStack {
-                Image(systemName: sfSymbol).resizable().scaledToFit().frame(width: 42.0,height: 42.0)
-                Text("\(estilo.rawValue)")
+                let tema = MemoryViewModel.temas[estilo]
+                //Image(systemName: "paw").resizable().scaledToFit().frame(width: 42.0,height: 42.0)
+                Text("\(tema.primeiroSimbolo)")
+                    .font(.system(size: 38.0)).frame(width: 38,height: 38.0)
+                
+                Text("\(tema.descricao)")
                     .font(.system(size: 15.0))
             }
             .padding(15)
@@ -89,8 +102,11 @@ struct CardView: View {
     // Se não especificar o valor produz um erro quando não passar
     private let card: MemoryModel<String>.Card
     
-    init(_ card: MemoryModel<String>.Card) {
+    private let backColor: Color
+    
+    init(_ card: MemoryModel<String>.Card,_ color: Color) {
         self.card = card
+        self.backColor = color
     }
     
     // Ao implementar uma view, deve prover uma variável body
@@ -103,13 +119,12 @@ struct CardView: View {
                 // Assim não precisa repetir toda vez
                 let shape = RoundedRectangle(cornerRadius: 15.0)
                 
-                
                 //if card.isMatched {
                 //    shape.opacity(0.0) // Esconder cartas que deram 'Match'
                 //} else
                 if !card.isFaceUp {
                     //ZStack(alignment: .center) {
-                        shape.fill().foregroundColor(.blue)
+                        shape.fill().foregroundColor(backColor)
                         //FundoCarta().aspectRatio(1.0/1.0, contentMode: .fit)
                     //}
                 } else {
@@ -118,7 +133,7 @@ struct CardView: View {
                             .foregroundColor(.white)
                         
                         shape.strokeBorder(lineWidth: 5)
-                            .foregroundColor(.blue)
+                            .foregroundColor(backColor)
                         
                         // View de Texto
                         Text(card.content)

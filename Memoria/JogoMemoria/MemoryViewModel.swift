@@ -6,38 +6,53 @@
 //
 
 import Foundation
-
+import SwiftUI
 class MemoryViewModel: ObservableObject {
     typealias Card = MemoryModel<String>.Card
     
-    enum Estilos: String {
-        case Emojis = "Emojis"
-        case Letras = "Letras"
-        case Bandeiras = "Bandeiras"
-    }
     
-    
-    private static func createMemoryModel(_ estilo: Estilos) -> MemoryModel<String> {
+    private static func createMemoryModel(_ estilo: Int) -> MemoryModel<String> {
+        var alreadyChoosen = ""
+        // A função retorna o número de símbolos como primeiro argumento
+        var Nsimbolos:Int
+        (Nsimbolos, _) = temas[estilo].proximoSimbolo()
         
-        MemoryModel<String>(pairs: 10) {
+        // Não ter mais cartas do que símbolos disponíveis
+        let pairs: Int = min(15,Nsimbolos)
+        
+        return MemoryModel<String>(pairs: pairs) {
             pair in
-            return emojis[estilo.rawValue]![pair]
+            
+            // Encontra um símbolo que não tenha sido escolhido já
+            var str: Character = "€"
+            var count: Int = 0
+            repeat {
+                (_, str) = temas[estilo].proximoSimbolo()
+                count += 1
+            } while alreadyChoosen.contains(str) && count < 1000
+            
+            alreadyChoosen += String(str)
+            return String(str)
         }
     }
     
-    private(set) var estilo = Estilos.Emojis
+    private(set) var estilo = 0
     
     @Published
-    private var model = createMemoryModel(Estilos.Emojis)
+    private var model = createMemoryModel(0)
     
     
     var cards: Array<Card> {
         return model.cards
     }
     
+    var pontos: Int {
+        return model.pontos
+    }
+    
     // ---------------------- Intent's ----------------------
     
-    func changeStyle(_ estilo: Estilos) {
+    func changeStyle(_ estilo: Int) {
         self.estilo = estilo
         model = MemoryViewModel.createMemoryModel(estilo)
     }
@@ -46,284 +61,55 @@ class MemoryViewModel: ObservableObject {
         model.choose(card)
     }
     
+    private static func randomString(_ str: String) -> (Int,Character) {
+        let randomInt = Int.random(in: 0..<str.count)
+        return (str.count,str[str.index(str.startIndex,offsetBy: randomInt)])
+    }
     
-    private static let emojis = [
-        Estilos.Emojis.rawValue:[
-        "🚗","🚕","🚙",
-        "🚚","🚛","🚜",
-        "🛵","🏍️","🛴",
-        "🚲","🛹","🛼",
-        "🛺","🚌","🚎",
-        "🚋","🚉","🛸",
-        "🚀","🛥️","⛵",
-        "🛳️","🚤","🚢",
-        "🦆","🦈","🐖",
-        "🦢","🙈","🐊"],
-        Estilos.Letras.rawValue:
-            ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","0","1","2","3","4","5","6","7","8","9"],
-        Estilos.Bandeiras.rawValue:
-            [
-                "🇦🇨",// Flag: Ascension Island
-                "🇦🇩",// Flag: Andorra
-                "🇦🇪",// Flag: United Arab Emirates
-                "🇦🇫",// Flag: Afghanistan
-                "🇦🇬",// Flag: Antigua & Barbuda
-                "🇦🇮",// Flag: Anguilla
-                "🇦🇱",// Flag: Albania
-                "🇦🇲",// Flag: Armenia
-                "🇦🇴",// Flag: Angola
-                "🇦🇶",// Flag: Antarctica
-                "🇦🇷",// Flag: Argentina
-                "🇦🇸",// Flag: American Samoa
-                "🇦🇹",// Flag: Austria
-                "🇦🇺",// Flag: Australia
-                "🇦🇼",// Flag: Aruba
-                "🇦🇽",// Flag: Åland Islands
-                "🇦🇿",// Flag: Azerbaijan
-                "🇧🇦",// Flag: Bosnia & Herzegovina
-                "🇧🇧",// Flag: Barbados
-                "🇧🇩",// Flag: Bangladesh
-                "🇧🇪",// Flag: Belgium
-                "🇧🇫",// Flag: Burkina Faso
-                "🇧🇬",// Flag: Bulgaria
-                "🇧🇭",// Flag: Bahrain
-                "🇧🇮",// Flag: Burundi
-                "🇧🇯",// Flag: Benin
-                "🇧🇱",// Flag: St. Barthélemy
-                "🇧🇲",// Flag: Bermuda
-                "🇧🇳",// Flag: Brunei
-                "🇧🇴",// Flag: Bolivia
-                "🇧🇶",// Flag: Caribbean Netherlands
-                "🇧🇷",// Flag: Brazil
-                "🇧🇸",// Flag: Bahamas
-                "🇧🇹",// Flag: Bhutan
-                "🇧🇻",// Flag: Bouvet Island
-                "🇧🇼",// Flag: Botswana
-                "🇧🇾",// Flag: Belarus
-                "🇧🇿",// Flag: Belize
-                "🇨🇦",// Flag: Canada
-                "🇨🇨",// Flag: Cocos (Keeling) Islands
-                "🇨🇩",// Flag: Congo - Kinshasa
-                "🇨🇫",// Flag: Central African Republic
-                "🇨🇬",// Flag: Congo - Brazzaville
-                "🇨🇭",// Flag: Switzerland
-                "🇨🇮",// Flag: Côte d’Ivoire
-                "🇨🇰",// Flag: Cook Islands
-                "🇨🇱",// Flag: Chile
-                "🇨🇲",// Flag: Cameroon
-                "🇨🇳",// Flag: China
-                "🇨🇴",// Flag: Colombia
-                "🇨🇵",// Flag: Clipperton Island
-                "🇨🇷",// Flag: Costa Rica
-                "🇨🇺",// Flag: Cuba
-                "🇨🇻",// Flag: Cape Verde
-                "🇨🇼",// Flag: Curaçao
-                "🇨🇽",// Flag: Christmas Island
-                "🇨🇾",// Flag: Cyprus
-                "🇨🇿",// Flag: Czechia
-                "🇩🇪",// Flag: Germany
-                "🇩🇬",// Flag: Diego Garcia
-                "🇩🇯",// Flag: Djibouti
-                "🇩🇰",// Flag: Denmark
-                "🇩🇲",// Flag: Dominica
-                "🇩🇴",// Flag: Dominican Republic
-                "🇩🇿",// Flag: Algeria
-                "🇪🇦",// Flag: Ceuta & Melilla
-                "🇪🇨",// Flag: Ecuador
-                "🇪🇪",// Flag: Estonia
-                "🇪🇬",// Flag: Egypt
-                "🇪🇭",// Flag: Western Sahara
-                "🇪🇷",// Flag: Eritrea
-                "🇪🇸",// Flag: Spain
-                "🇪🇹",// Flag: Ethiopia
-                "🇪🇺",// Flag: European Union
-                "🇫🇮",// Flag: Finland
-                "🇫🇯",// Flag: Fiji
-                "🇫🇰",// Flag: Falkland Islands
-                "🇫🇲",// Flag: Micronesia
-                "🇫🇴",// Flag: Faroe Islands
-                "🇫🇷",// Flag: France
-                "🇬🇦",// Flag: Gabon
-                "🇬🇧",// Flag: United Kingdom
-                "🇬🇩",// Flag: Grenada
-                "🇬🇪",// Flag: Georgia
-                "🇬🇫",// Flag: French Guiana
-                "🇬🇬",// Flag: Guernsey
-                "🇬🇭",// Flag: Ghana
-                "🇬🇮",// Flag: Gibraltar
-                "🇬🇱",// Flag: Greenland
-                "🇬🇲",// Flag: Gambia
-                "🇬🇳",// Flag: Guinea
-                "🇬🇵",// Flag: Guadeloupe
-                "🇬🇶",// Flag: Equatorial Guinea
-                "🇬🇷",// Flag: Greece
-                "🇬🇸",// Flag: South Georgia & South Sandwich Islands
-                "🇬🇹",// Flag: Guatemala
-                "🇬🇺",// Flag: Guam
-                "🇬🇼",// Flag: Guinea-Bissau
-                "🇬🇾",// Flag: Guyana
-                "🇭🇰",// Flag: Hong Kong SAR China
-                "🇭🇲",// Flag: Heard & McDonald Islands
-                "🇭🇳",// Flag: Honduras
-                "🇭🇷",// Flag: Croatia
-                "🇭🇹",// Flag: Haiti
-                "🇭🇺",// Flag: Hungary
-                "🇮🇨",// Flag: Canary Islands
-                "🇮🇩",// Flag: Indonesia
-                "🇮🇪",// Flag: Ireland
-                "🇮🇱",// Flag: Israel
-                "🇮🇲",// Flag: Isle of Man
-                "🇮🇳",// Flag: India
-                "🇮🇴",// Flag: British Indian Ocean Territory
-                "🇮🇶",// Flag: Iraq
-                "🇮🇷",// Flag: Iran
-                "🇮🇸",// Flag: Iceland
-                "🇮🇹",// Flag: Italy
-                "🇯🇪",// Flag: Jersey
-                "🇯🇲",// Flag: Jamaica
-                "🇯🇴",// Flag: Jordan
-                "🇯🇵",// Flag: Japan
-                "🇰🇪",// Flag: Kenya
-                "🇰🇬",// Flag: Kyrgyzstan
-                "🇰🇭",// Flag: Cambodia
-                "🇰🇮",// Flag: Kiribati
-                "🇰🇲",// Flag: Comoros
-                "🇰🇳",// Flag: St. Kitts & Nevis
-                "🇰🇵",// Flag: North Korea
-                "🇰🇷",// Flag: South Korea
-                "🇰🇼",// Flag: Kuwait
-                "🇰🇾",// Flag: Cayman Islands
-                "🇰🇿",// Flag: Kazakhstan
-                "🇱🇦",// Flag: Laos
-                "🇱🇧",// Flag: Lebanon
-                "🇱🇨",// Flag: St. Lucia
-                "🇱🇮",// Flag: Liechtenstein
-                "🇱🇰",// Flag: Sri Lanka
-                "🇱🇷",// Flag: Liberia
-                "🇱🇸",// Flag: Lesotho
-                "🇱🇹",// Flag: Lithuania
-                "🇱🇺",// Flag: Luxembourg
-                "🇱🇻",// Flag: Latvia
-                "🇱🇾",// Flag: Libya
-                "🇲🇦",// Flag: Morocco
-                "🇲🇨",// Flag: Monaco
-                "🇲🇩",// Flag: Moldova
-                "🇲🇪",// Flag: Montenegro
-                "🇲🇫",// Flag: St. Martin
-                "🇲🇬",// Flag: Madagascar
-                "🇲🇭",// Flag: Marshall Islands
-                "🇲🇰",// Flag: North Macedonia
-                "🇲🇱",// Flag: Mali
-                "🇲🇲",// Flag: Myanmar (Burma)
-                "🇲🇳",// Flag: Mongolia
-                "🇲🇴",// Flag: Macao Sar China
-                "🇲🇵",// Flag: Northern Mariana Islands
-                "🇲🇶",// Flag: Martinique
-                "🇲🇷",// Flag: Mauritania
-                "🇲🇸",// Flag: Montserrat
-                "🇲🇹",// Flag: Malta
-                "🇲🇺",// Flag: Mauritius
-                "🇲🇻",// Flag: Maldives
-                "🇲🇼",// Flag: Malawi
-                "🇲🇽",// Flag: Mexico
-                "🇲🇾",// Flag: Malaysia
-                "🇲🇿",// Flag: Mozambique
-                "🇳🇦",// Flag: Namibia
-                "🇳🇨",// Flag: New Caledonia
-                "🇳🇪",// Flag: Niger
-                "🇳🇫",// Flag: Norfolk Island
-                "🇳🇬",// Flag: Nigeria
-                "🇳🇮",// Flag: Nicaragua
-                "🇳🇱",// Flag: Netherlands
-                "🇳🇴",// Flag: Norway
-                "🇳🇵",// Flag: Nepal
-                "🇳🇷",// Flag: Nauru
-                "🇳🇺",// Flag: Niue
-                "🇳🇿",// Flag: New Zealand
-                "🇴🇲",// Flag: Oman
-                "🇵🇦",// Flag: Panama
-                "🇵🇪",// Flag: Peru
-                "🇵🇫",// Flag: French Polynesia
-                "🇵🇬",// Flag: Papua New Guinea
-                "🇵🇭",// Flag: Philippines
-                "🇵🇰",// Flag: Pakistan
-                "🇵🇱",// Flag: Poland
-                "🇵🇲",// Flag: St. Pierre & Miquelon
-                "🇵🇳",// Flag: Pitcairn Islands
-                "🇵🇷",// Flag: Puerto Rico
-                "🇵🇸",// Flag: Palestinian Territories
-                "🇵🇹",// Flag: Portugal
-                "🇵🇼",// Flag: Palau
-                "🇵🇾",// Flag: Paraguay
-                "🇶🇦",// Flag: Qatar
-                "🇷🇪",// Flag: Réunion
-                "🇷🇴",// Flag: Romania
-                "🇷🇸",// Flag: Serbia
-                "🇷🇺",// Flag: Russia
-                "🇷🇼",// Flag: Rwanda
-                "🇸🇦",// Flag: Saudi Arabia
-                "🇸🇧",// Flag: Solomon Islands
-                "🇸🇨",// Flag: Seychelles
-                "🇸🇩",// Flag: Sudan
-                "🇸🇪",// Flag: Sweden
-                "🇸🇬",// Flag: Singapore
-                "🇸🇭",// Flag: St. Helena
-                "🇸🇮",// Flag: Slovenia
-                "🇸🇯",// Flag: Svalbard & Jan Mayen
-                "🇸🇰",// Flag: Slovakia
-                "🇸🇱",// Flag: Sierra Leone
-                "🇸🇲",// Flag: San Marino
-                "🇸🇳",// Flag: Senegal
-                "🇸🇴",// Flag: Somalia
-                "🇸🇷",// Flag: Suriname
-                "🇸🇸",// Flag: South Sudan
-                "🇸🇹",// Flag: São Tomé & Príncipe
-                "🇸🇻",// Flag: El Salvador
-                "🇸🇽",// Flag: Sint Maarten
-                "🇸🇾",// Flag: Syria
-                "🇸🇿",// Flag: Eswatini
-                "🇹🇦",// Flag: Tristan Da Cunha
-                "🇹🇨",// Flag: Turks & Caicos Islands
-                "🇹🇩",// Flag: Chad
-                "🇹🇫",// Flag: French Southern Territories
-                "🇹🇬",// Flag: Togo
-                "🇹🇭",// Flag: Thailand
-                "🇹🇯",// Flag: Tajikistan
-                "🇹🇰",// Flag: Tokelau
-                "🇹🇱",// Flag: Timor-Leste
-                "🇹🇲",// Flag: Turkmenistan
-                "🇹🇳",// Flag: Tunisia
-                "🇹🇴",// Flag: Tonga
-                "🇹🇷",// Flag: Turkey
-                "🇹🇹",// Flag: Trinidad & Tobago
-                "🇹🇻",// Flag: Tuvalu
-                "🇹🇼",// Flag: Taiwan
-                "🇹🇿",// Flag: Tanzania
-                "🇺🇦",// Flag: Ukraine
-                "🇺🇬",// Flag: Uganda
-                "🇺🇲",// Flag: U.S. Outlying Islands
-                "🇺🇳",// Flag: United Nations
-                "🇺🇸",// Flag: United States
-                "🇺🇾",// Flag: Uruguay
-                "🇺🇿",// Flag: Uzbekistan
-                "🇻🇦",// Flag: Vatican City
-                "🇻🇨",// Flag: St. Vincent & Grenadines
-                "🇻🇪",// Flag: Venezuela
-                "🇻🇬",// Flag: British Virgin Islands
-                "🇻🇮",// Flag: U.S. Virgin Islands
-                "🇻🇳",// Flag: Vietnam
-                "🇻🇺",// Flag: Vanuatu
-                "🇼🇫",// Flag: Wallis & Futuna
-                "🇼🇸",// Flag: Samoa
-                "🇽🇰",// Flag: Kosovo
-                "🇾🇪",// Flag: Yemen
-                "🇾🇹",// Flag: Mayotte
-                "🇿🇦",// Flag: South Africa
-                "🇿🇲",// Flag: Zambia
-                "🇿🇼",// Flag: Zimbabwe
-                "🏴󠁧󠁢󠁥󠁮󠁧󠁿",// Flag: England
-                "🏴󠁧󠁢󠁳󠁣󠁴󠁿",// Flag: Scotland
-                "🏴󠁧󠁢󠁷󠁬󠁳󠁿" // Flag: Wales
-            ]
+    
+    private static func randomBetween(_ charA: String,_ charB: String) -> (Int,Character) {
+        
+        repeat {
+            let uniA = Unicode.Scalar(charA)
+            let uniB = Unicode.Scalar(charB)
+            
+            if uniA == nil || uniB == nil { break }
+            
+            let uniStart = min(uniA!.value,uniB!.value)
+            let uniEnd = max(uniA!.value,uniB!.value)
+            
+            let randomInt: UInt32 = UInt32(Int64.random(in: Int64(uniStart)..<Int64(uniEnd+1)))
+            
+            let scalar = Unicode.Scalar(randomInt)
+            
+            if scalar == nil { break }
+            
+            return (Int(uniEnd - uniStart),Character(scalar!))
+        } while false
+        
+        return (1,"⍰")
+    }
+    
+    public static let temas = [
+        Tema("Veiculos",Color.red,"🚗") {randomString("🚗🚕🚙🚚🚛🚜🛵🏍️🛴🚲🛹🛼🛺🚌🚎🚋🚉🛸🚀🛥️⛵🛳️🚤🚢")},
+        Tema("Letras",Color.init(red: 0.15, green: 0.15, blue: 0.15),"A") {randomBetween("A","Z")},
+        Tema("Animais",Color.orange,"🦆") {randomBetween("🦆","🦔")},
+        Tema("Natureza",Color.green,"🍏") {randomBetween("🍏","🌮")},
+        Tema("Relogios",Color.gray,"🕐") {randomBetween("🕐","🕧")},
+        Tema("Bandeiras",Color.indigo,"🇧🇷") {randomString("🇦🇨🇦🇩🇦🇪🇦🇫🇦🇬🇦🇮🇦🇱🇦🇲🇦🇴🇦🇶🇦🇷🇦🇸🇦🇹🇦🇺🇦🇼🇦🇽🇦🇿🇧🇦🇧🇧🇧🇩🇧🇪🇧🇫🇧🇬🇧🇭🇧🇮🇧🇯🇧🇱🇧🇲🇧🇳🇧🇴🇧🇶🇧🇷🇧🇸🇧🇹🇧🇻🇧🇼🇧🇾🇧🇿🇨🇦🇨🇨🇨🇩🇨🇫🇨🇬🇨🇭🇨🇮🇨🇰🇨🇱🇨🇲🇨🇳🇨🇴🇨🇵🇨🇷🇨🇺🇨🇻🇨🇼🇨🇽🇨🇾🇨🇿🇩🇪🇩🇬🇩🇯🇩🇰🇩🇲🇩🇴🇩🇿🇪🇦🇪🇨🇪🇪🇪🇬🇪🇭🇪🇷🇪🇸🇪🇹🇪🇺🇫🇮🇫🇯🇫🇰🇫🇲🇫🇴🇫🇷🇬🇦🇬🇧🇬🇩🇬🇪🇬🇫🇬🇬🇬🇭🇬🇮🇬🇱🇬🇲🇬🇳🇬🇵🇬🇶🇬🇷🇬🇸🇬🇹🇬🇺🇬🇼🇬🇾🇭🇰🇭🇲🇭🇳🇭🇷🇭🇹🇭🇺🇮🇨🇮🇩🇮🇪🇮🇱🇮🇲🇮🇳🇮🇴🇮🇶🇮🇷🇮🇸🇮🇹🇯🇪🇯🇲🇯🇴🇯🇵🇰🇪🇰🇬🇰🇭🇰🇮🇰🇲🇰🇳🇰🇵🇰🇷🇰🇼🇰🇾🇰🇿🇱🇦🇱🇧🇱🇨🇱🇮🇱🇰🇱🇷🇱🇸🇱🇹🇱🇺🇱🇻🇱🇾🇲🇦🇲🇨🇲🇩🇲🇪🇲🇫🇲🇬🇲🇭🇲🇰🇲🇱🇲🇲🇲🇳🇲🇴🇲🇵🇲🇶🇲🇷🇲🇸🇲🇹🇲🇺🇲🇻🇲🇼🇲🇽🇲🇾🇲🇿🇳🇦🇳🇨🇳🇪🇳🇫🇳🇬🇳🇮🇳🇱🇳🇴🇳🇵🇳🇷🇳🇺🇳🇿🇴🇲🇵🇦🇵🇪🇵🇫🇵🇬🇵🇭🇵🇰🇵🇱🇵🇲🇵🇳🇵🇷🇵🇸🇵🇹🇵🇼🇵🇾🇶🇦🇷🇪🇷🇴🇷🇸🇷🇺🇷🇼🇸🇦🇸🇧🇸🇨🇸🇩🇸🇪🇸🇬🇸🇭🇸🇮🇸🇯🇸🇰🇸🇱🇸🇲🇸🇳🇸🇴🇸🇷🇸🇸🇸🇹🇸🇻🇸🇽🇸🇾🇸🇿🇹🇦🇹🇨🇹🇩🇹🇫🇹🇬🇹🇭🇹🇯🇹🇰🇹🇱🇹🇲🇹🇳🇹🇴🇹🇷🇹🇹🇹🇻🇹🇼🇹🇿🇺🇦🇺🇬🇺🇲🇺🇳🇺🇸🇺🇾🇺🇿🇻🇦🇻🇨🇻🇪🇻🇬🇻🇮🇻🇳🇻🇺🇼🇫🇼🇸🇽🇰🇾🇪🇾🇹🇿🇦🇿🇲🇿🇼🏴󠁧󠁢󠁥󠁮󠁧󠁿🏴󠁧󠁢󠁳󠁣󠁴󠁿🏴󠁧󠁢󠁷󠁬󠁳󠁿")}
     ]
+    
+    public struct Tema {
+        public let descricao: String
+        public let cor: Color
+        public let primeiroSimbolo: String
+        public let proximoSimbolo: () -> (Int,Character)
+        
+        init(_ descricao: String,_ cor: Color,_ primeiroSimbolo: String,_ conteudo:@escaping () -> (Int,Character)) {
+            self.descricao = descricao
+            self.cor = cor
+            self.primeiroSimbolo = primeiroSimbolo
+            self.proximoSimbolo = conteudo
+        }
+    }
 }
