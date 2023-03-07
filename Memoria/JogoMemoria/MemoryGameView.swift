@@ -50,7 +50,7 @@ struct MemoryGameView: View {
         let temaAtual = MemoryViewModel.temas[viewModel.estilo]
         
         VStack {
-            AspectVGrid(items: viewModel.cards, aspectRatio: 2.0/2.75, padding: 2.0) { card in
+            AspectVGrid(items: viewModel.cards, aspectRatio: 2.0/2.69, padding: 2.0) { card in
                 CardView(card,temaAtual.cor)
                     .onTapGesture {
                         viewModel.choose(card)
@@ -60,7 +60,7 @@ struct MemoryGameView: View {
             
             
             Text("Pontos:\(viewModel.pontos)")
-                .font(.system(size: 12.0))
+                .font(.system(size: 18.0))
             
             ScrollView(.horizontal) {
                 HStack {
@@ -83,12 +83,12 @@ struct MemoryGameView: View {
                 let tema = MemoryViewModel.temas[estilo]
                 //Image(systemName: "paw").resizable().scaledToFit().frame(width: 42.0,height: 42.0)
                 Text("\(tema.primeiroSimbolo)")
-                    .font(.system(size: 38.0)).frame(width: 38,height: 38.0)
+                    .font(.system(size: 30.0)).frame(width: 30.0,height: 30.0)
                 
                 Text("\(tema.descricao)")
-                    .font(.system(size: 15.0))
+                    .font(.system(size: 16.0))
             }
-            .padding(15)
+            .padding(10)
         })
         .foregroundColor(viewModel.estilo == estilo ? Color.accentColor : Color.secondary)
     }
@@ -119,14 +119,8 @@ struct CardView: View {
                 // Assim não precisa repetir toda vez
                 let shape = RoundedRectangle(cornerRadius: 15.0)
                 
-                //if card.isMatched {
-                //    shape.opacity(0.0) // Esconder cartas que deram 'Match'
-                //} else
                 if !card.isFaceUp {
-                    //ZStack(alignment: .center) {
                         shape.fill().foregroundColor(backColor)
-                        //FundoCarta().aspectRatio(1.0/1.0, contentMode: .fit)
-                    //}
                 } else {
                     let cardview = Group {
                         shape.fill()
