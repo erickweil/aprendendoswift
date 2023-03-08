@@ -139,7 +139,7 @@ struct CardView: View {
                         
                         // View de Texto
                         Text(card.content)
-                            .font(Memoria.font(geometry.size,mult: 0.6))
+                            .font(UIUtil.font(geometry.size,mult: 0.6))
                             .foregroundColor(.black)
                     }
                     
@@ -152,10 +152,6 @@ struct CardView: View {
             }
         }
     }
-}
-
-private func font(_ size: CGSize,mult: CGFloat = 1.0) -> Font {
-    Font.system(size: min(size.width, size.height) * mult)
 }
 
 // Configura o Preview.
