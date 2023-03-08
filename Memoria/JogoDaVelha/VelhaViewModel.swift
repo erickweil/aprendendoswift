@@ -16,6 +16,8 @@ class VelhaViewModel : ObservableObject {
     @Published
     private var model: VelhaModel
     
+    public var whoWon: VelhaModel.Mark? { model.whoWon }
+    
     public func at(_ x:Int,_ y:Int) -> VelhaModel.Mark { model.at(x, y) }
     
     public init() {
