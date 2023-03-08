@@ -15,6 +15,7 @@ struct MemoryModel<CardContent> {
     
     private(set) var pontos: Int = 0
     // Em vez de setar o valor, detecta de acordo com o que está na lista
+    // Esta função retorna o índice se e apenas se houver uma única carta virada para cima
     private var faceUpCardIndex: Int? {
         var retIndex: Int? = nil
         var faceUpCount = 0
@@ -31,7 +32,7 @@ struct MemoryModel<CardContent> {
             return nil
         }
     }
-    
+    // Ao iniciar o model os pares são adicionados e misturados
     init(pairs: Int, tema: Tema, genCard: (Int) -> CardContent) {
         self.tema = tema
         
@@ -43,9 +44,9 @@ struct MemoryModel<CardContent> {
         
         self.cards.shuffle()
     }
-    
+    // Função ao clicar em uma carta
     mutating func choose(_ card: Card) {
-        print("Virou id:\(card.id) faceup:\(card.isFaceUp) '\(card.content)'")
+        print("Virou id:\(card.id) faceup:\(card.isFaceUp) '\(card.content)'") // DEBUG
         
         // Fazer nada se já está para cima
         if card.isFaceUp || card.isMatched { return }
@@ -55,15 +56,10 @@ struct MemoryModel<CardContent> {
         // Fazer nada se o index não foi encontrado
         if index == -1 { return }
         
-        // Se há nenhuma ou mais que uma carta para cima
-        if faceUpCardIndex == nil {
-            // Então esta será a única para cima agora
-            flipAllDown()
-            cards[index].flipUp()
-        } else { // Se já tem uma carta para cima
+        if let paraCima = faceUpCardIndex { // Se já tem uma carta para cima
             // Então tem que verificar se elas são um par
-            if cards[faceUpCardIndex!].id == cards[index].pair_id {
-                cards[faceUpCardIndex!].isMatched = true
+            if cards[paraCima].id == cards[index].pair_id {
+                cards[paraCima].isMatched = true
                 cards[index].isMatched = true
                 
                 // Cada match dá 2 pontos
@@ -71,23 +67,24 @@ struct MemoryModel<CardContent> {
             } else {
                 // Cada mismatch tira 1 ponto por carta já vista antes.
                 // Não perde pontos por mismatch de cartas não vistas
-                if cards[faceUpCardIndex!].timesSeen > 1 {
+                if cards[paraCima].timesSeen > 1 {
                     pontos -= 1
                 }
                 if cards[index].timesSeen > 1 {
                     pontos -= 1
                 }
             }
-            
-            cards[index].flipUp()
+        } else { // Se não há apenas uma carta para cima (Todas viradas ou mais que uma virada)
+            // Então esta será a única para cima agora
+            flipAllDown()
         }
+        // De qualquer jeito, a carta clicada fica virada para cima agora
+        cards[index].flipUp()
     }
     
     private mutating func flipAllDown() {
         for k in 0..<cards.count {
-            if !cards[k].isMatched {
-                cards[k].flipDown()
-            }
+            if !cards[k].isMatched { cards[k].flipDown() }
         }
     }
     
@@ -107,6 +104,7 @@ struct MemoryModel<CardContent> {
         return nil
     }
 
+    // Struct definindo uma Carta.
     struct Card : Identifiable{
         let id: Int // ID da carta no array de cartas
         let pair_id: Int // ID da outra carta do par ou -1 se não tem par

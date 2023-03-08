@@ -7,14 +7,19 @@
 
 import Foundation
 
+// Aqui estão todos os Temas do Jogo da Memória
+// A ideia é que um tema pode ser definido em um única linha
 public struct Tema {
-    public let descricao: String
-    public let cor: Cor
-    public let simbolos: Array<String>
-    public var primeiroSimbolo: String {
+    private static let MAXIMO_SIMBOLOS = 1000 // Impedir que o genArray trave por escolher intervalos grandes demais
+    
+    public let descricao: String // Exibido no botão de escolha do tema
+    public let cor: Cor // Cor do fundo das cartas
+    public let simbolos: Array<String> // Possíveis símbolos que poderão ser utilizados
+    public var primeiroSimbolo: String { // Para exibir no botão de escolha do tema
         simbolos.first ?? "?"
     }
     
+    // Struct Cor própria para não depender de SwiftUI.Color
     public struct Cor {
         let r: Double
         let g: Double
@@ -40,19 +45,15 @@ public struct Tema {
     init(_ descricao: String,_ cor: Cor,_ conteudo:@escaping (Int) -> String?) {
         self.descricao = descricao
         self.cor = cor
-        self.simbolos = Tema.genArray(conteudo)
+        self.simbolos = Tema.genArray(conteudo,max: Tema.MAXIMO_SIMBOLOS)
     }
     
-    private static func genArray(_ generator: (Int) -> String?) -> Array<String> {
-        var retArr:Array<String> = []
-        var i = 0
-        while let str = generator(i) {
-            retArr.append(str)
-            i += 1
-        }
-        return retArr
-    }
-
+    // ---------------------------------------------------------
+    //                  Funções para geração de Temas
+    // ---------------------------------------------------------
+    
+    // Retorna uma string para o índice desejado na String ou nil se o índice
+    // está fora do intervalo
     private static func stringIter(_ i:Int,_ str: String) -> String? {
         if i < 0 || i >= str.count { return nil }
         
@@ -60,6 +61,9 @@ public struct Tema {
     }
 
     // Retorna uma letra da codificação Unicode entre charA e charB
+    // de acordo com o índice 'i'. ou nil se ocorrer algum problema no processo
+    // (se chamar unicodeIter(2,"A","Z") retorna "C" )
+    // Obs: Nem todos os emojis funcionam
     private static func unicodeIter(_ i:Int,_ charA: String,_ charB: String) -> String? {
         let uniA = Unicode.Scalar(charA)
         let uniB = Unicode.Scalar(charB)
@@ -78,5 +82,21 @@ public struct Tema {
         if scalar == nil { return nil }
         
         return String(Character(scalar!))
+    }
+    
+    // A ideia aqui é a partir de uma das duas funções acima, produzir um array de Strings
+    // Como elas retornam 'nil' ao fim, esta função irá atravessar as funções geradoras
+    // adicionando cada string retornada ao array até chegar no primeiro nil, retornando o array produzido
+    private static func genArray(_ generator: (Int) -> String?,max: Int) -> Array<String> {
+        var retArr:Array<String> = []
+        var i = 0
+        while let str = generator(i), i < max {
+            retArr.append(str)
+            i += 1
+        }
+        if retArr.isEmpty {
+            retArr = ["?"] // nunca deve acontecer.
+        }
+        return retArr
     }
 }

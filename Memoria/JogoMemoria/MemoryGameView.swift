@@ -43,15 +43,25 @@ struct MemoryGameView: View {
      Tipo que quanto maior a prioridade menos flexível ela é
     */
     
+    // Guia sobre melhores práticas em interface da Apple:
+    // -----------------------------------------------------------------------------------------
+    //                             Apple Human interface guidelines:
+    //      https://developer.apple.com/design/human-interface-guidelines/guidelines/overview
+    // -----------------------------------------------------------------------------------------
+    
     // Ao implementar uma view, deve prover uma variável body
     // que se comporta como uma View
     var body: some View {
 
-        let temaAtual = viewModel.tema
+        // Tema contém a cor do fundo das cartas
+        let fundoCor = viewModel.tema.cor
+        
+        // É necessário converter para Color, pois para não depender de SwiftUI é outra struct
+        let fundoColor = Color.init(red: fundoCor.r, green: fundoCor.g, blue: fundoCor.b)
         
         VStack {
             AspectVGrid(items: viewModel.cards, aspectRatio: 2.0/2.69, padding: 2.0) { card in
-                CardView(card,Color.init(red: temaAtual.cor.r, green: temaAtual.cor.g, blue: temaAtual.cor.b))
+                CardView(card,fundoColor)
                     .onTapGesture {
                         viewModel.choose(card)
                     }

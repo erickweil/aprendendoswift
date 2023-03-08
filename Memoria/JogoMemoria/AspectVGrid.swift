@@ -7,6 +7,12 @@
 
 import SwiftUI
 
+// Objetivo desta struct é Permitir que o número de colunas seja dinamicamente
+// Calculado para que todos os elementos na Grid sejam visíveis na tela sem Scroll
+// Isto é feito por calcular o número de colunas a partir do:
+// - tamanho da tela,
+// - da quantidade de items
+// - e o aspect ratio desejado
 struct AspectVGrid<Item,ItemView>: View where ItemView: View, Item: Identifiable {
     var items: [Item]
     var aspectRatio: CGFloat
