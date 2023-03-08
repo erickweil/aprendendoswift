@@ -20,6 +20,7 @@
 		A7A8ADD729B672FB007ADE2A /* FundoCarta.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A8ADD629B672FB007ADE2A /* FundoCarta.swift */; };
 		A7EB171129B0C5BB0094AF51 /* CalculadoraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EB171029B0C5BB0094AF51 /* CalculadoraViewModel.swift */; };
 		A7EB171329B0C5CB0094AF51 /* CalculadoraModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EB171229B0C5CB0094AF51 /* CalculadoraModel.swift */; };
+		A7FF4DF229B837B700CB955C /* MemoryThemes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FF4DF129B837B700CB955C /* MemoryThemes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		A7A8ADD629B672FB007ADE2A /* FundoCarta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundoCarta.swift; sourceTree = "<group>"; };
 		A7EB171029B0C5BB0094AF51 /* CalculadoraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculadoraViewModel.swift; sourceTree = "<group>"; };
 		A7EB171229B0C5CB0094AF51 /* CalculadoraModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculadoraModel.swift; sourceTree = "<group>"; };
+		A7FF4DF129B837B700CB955C /* MemoryThemes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryThemes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				A7A11B6929A95EE5009B7FD4 /* MemoryViewModel.swift */,
 				A7A8ADD429B663BB007ADE2A /* AspectVGrid.swift */,
 				A7A8ADD629B672FB007ADE2A /* FundoCarta.swift */,
+				A7FF4DF129B837B700CB955C /* MemoryThemes.swift */,
 			);
 			path = JogoMemoria;
 			sourceTree = "<group>";
@@ -188,6 +191,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7FF4DF229B837B700CB955C /* MemoryThemes.swift in Sources */,
 				A78442182996E79700058939 /* HelloWorld.swift in Sources */,
 				A7621043299D5D1F00DA6072 /* MemoryGameView.swift in Sources */,
 				A7EB171329B0C5CB0094AF51 /* CalculadoraModel.swift in Sources */,

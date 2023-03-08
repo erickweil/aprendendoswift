@@ -47,40 +47,38 @@ struct MemoryGameView: View {
     // que se comporta como uma View
     var body: some View {
 
-        let temaAtual = MemoryViewModel.temas[viewModel.estilo]
+        let temaAtual = viewModel.tema
         
         VStack {
             AspectVGrid(items: viewModel.cards, aspectRatio: 2.0/2.69, padding: 2.0) { card in
-                CardView(card,temaAtual.cor)
+                CardView(card,Color.init(red: temaAtual.cor.r, green: temaAtual.cor.g, blue: temaAtual.cor.b))
                     .onTapGesture {
                         viewModel.choose(card)
                     }
             }
-            .padding()
-            
+            .padding()            
             
             Text("Pontos:\(viewModel.pontos)")
                 .font(.system(size: 18.0))
             
             ScrollView(.horizontal) {
                 HStack {
-                    StyleBtn(0)
-                    StyleBtn(1)
-                    StyleBtn(2)
-                    StyleBtn(3)
-                    StyleBtn(4)
-                    StyleBtn(5)
+                    StyleBtn(Tema.temas[0])
+                    StyleBtn(Tema.temas[1])
+                    StyleBtn(Tema.temas[2])
+                    StyleBtn(Tema.temas[3])
+                    StyleBtn(Tema.temas[4])
+                    StyleBtn(Tema.temas[5])
                 }
             }
         }
     }
     
-    private func StyleBtn(_ estilo: Int) -> some View {
+    private func StyleBtn(_ tema: Tema) -> some View {
         Button(action:{
-            viewModel.changeStyle(estilo)
+            viewModel.changeTheme(tema)
         },label:{
             VStack {
-                let tema = MemoryViewModel.temas[estilo]
                 //Image(systemName: "paw").resizable().scaledToFit().frame(width: 42.0,height: 42.0)
                 Text("\(tema.primeiroSimbolo)")
                     .font(.system(size: 30.0)).frame(width: 30.0,height: 30.0)
@@ -90,7 +88,7 @@ struct MemoryGameView: View {
             }
             .padding(10)
         })
-        .foregroundColor(viewModel.estilo == estilo ? Color.accentColor : Color.secondary)
+        .foregroundColor(viewModel.tema.primeiroSimbolo == tema.primeiroSimbolo ? Color.accentColor : Color.secondary)
     }
 }
 
@@ -153,7 +151,7 @@ private func font(_ size: CGSize,mult: CGFloat = 1.0) -> Font {
 // Configura o Preview.
 struct CardView_Previews: PreviewProvider {
     static var previews: some View {
-        let vm = MemoryViewModel()
+        let vm = MemoryViewModel(nPares: 10, tema: Tema.temas[0])
         MemoryGameView(viewModel:vm)
             .preferredColorScheme(.light)
     }

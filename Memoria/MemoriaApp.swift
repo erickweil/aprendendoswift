@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct MemoriaApp: App {
-    let game = MemoryViewModel()
+    let game = MemoryViewModel(nPares: 10, tema: Tema.temas[0])
     //let model = CalculadoraViewModel()
     var body: some Scene {
         WindowGroup {

@@ -8,6 +8,8 @@
 import Foundation
 
 struct MemoryModel<CardContent> {
+    
+    private(set) var tema: Tema
     // private(set) impede que seja modificado de fora (readonly)
     private(set) var cards: Array<Card>
     
@@ -30,14 +32,16 @@ struct MemoryModel<CardContent> {
         }
     }
     
-    init(pairs: Int, genCard: (Int) -> CardContent) {
-        cards = []
+    init(pairs: Int, tema: Tema, genCard: (Int) -> CardContent) {
+        self.tema = tema
+        
+        self.cards = []
         
         for pair in 0..<pairs {
             addPair(genCard(pair),pair)
         }
         
-        cards.shuffle()
+        self.cards.shuffle()
     }
     
     mutating func choose(_ card: Card) {
