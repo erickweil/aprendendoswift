@@ -8,22 +8,10 @@
 import SwiftUI
 
 struct VelhaSimbolos {
+    typealias PercentPoint = UIUtil.PercentPoint
     
     static let symbolScale = 0.88
     static let symbolThick = 0.075
-    
-    struct PercentPoint {
-        let x: Double
-        let y: Double
-        
-        func add(_ x:Double,_ y:Double) -> PercentPoint {
-            return PercentPoint(x:self.x + x,y:self.y + y)
-        }
-        
-        func cg(_ w: Double,_ h: Double) -> CGPoint {
-            CGPoint(x: self.x * w, y: self.y * h)
-        }
-    }
     
     struct Xis: Shape {
         func path(in rect: CGRect) -> Path {
@@ -34,14 +22,14 @@ struct VelhaSimbolos {
             let thick = VelhaSimbolos.symbolThick
             let thick45 = thick / sqrt(2.0)
             
-            let center = PercentPoint(x: 0.5, y: 0.5)
+            let center = PercentPoint(0.5, 0.5)
             
             let off = scale - thick45
             let corners = [
-                PercentPoint(x: 1.0-off, y: 1.0-off),
-                PercentPoint(x: off, y: 1.0-off),
-                PercentPoint(x: off, y: off),
-                PercentPoint(x: 1.0-off, y: off),
+                PercentPoint(1.0-off, 1.0-off),
+                PercentPoint(off, 1.0-off),
+                PercentPoint(off, off),
+                PercentPoint(1.0-off, off),
             ]
             
             p.move(to: corners[0].add(-thick45,thick45).cg(w,h))
@@ -71,7 +59,7 @@ struct VelhaSimbolos {
             let thick = VelhaSimbolos.symbolThick
             //let thick45 = thick / sqrt(2.0)
             
-            let center = PercentPoint(x: 0.5, y: 0.5)
+            let center = PercentPoint(0.5, 0.5)
             
             p.addArc(
                 center: center.cg(w,h),
@@ -97,7 +85,7 @@ struct VelhaSimbolos {
 
 struct VelhaSimbolos_Previews: PreviewProvider {
     static var previews: some View {
-        ZStack/*(spacing: 40.0)*/ {
+        VStack(spacing: 0.0) {
             VelhaSimbolos.Xis().fill().foregroundColor(Color.black).overlay {
                 Rectangle().strokeBorder()
             }
@@ -105,7 +93,7 @@ struct VelhaSimbolos_Previews: PreviewProvider {
                 Rectangle().strokeBorder()
             }
         }
-        .aspectRatio(1.0, contentMode: .fit)
+        .aspectRatio(1.0/2.0, contentMode: .fit)
         .padding(40.0)
     }
 }
