@@ -51,15 +51,19 @@ struct MemoryModel<CardContent> {
     mutating func choose(_ card: Card) {
         print("Virou id:\(card.id) faceup:\(card.isFaceUp) '\(card.content)'") // DEBUG
         
-        // Fazer nada se já está para cima
-        if card.isFaceUp || card.isMatched { return }
+        // Fazer nada se já está 'matched'
+        if card.isMatched { return }
         
         let index = findCardIndex(card) ?? -1
         
         // Fazer nada se o index não foi encontrado
         if index == -1 { return }
         
-        if let paraCima = faceUpCardIndex { // Se já tem uma carta para cima
+        if let paraCima = faceUpCardIndex { // Se só tem UMA carta para cima
+            
+            // fazer nada se clicou na única para cima
+            if card.isFaceUp { return }
+            
             // Então tem que verificar se elas são um par
             if cards[paraCima].id == cards[index].pair_id {
                 cards[paraCima].isMatched = true
@@ -76,6 +80,9 @@ struct MemoryModel<CardContent> {
                 if cards[index].timesSeen > 1 {
                     pontos -= 1
                 }
+                
+                cards[paraCima].timesMismatched += 1
+                cards[index].timesMismatched += 1
             }
         } else { // Se não há apenas uma carta para cima (Todas viradas ou mais que uma virada)
             // Então esta será a única para cima agora
@@ -116,6 +123,7 @@ struct MemoryModel<CardContent> {
         private(set) var timesSeen: Int = 0
         private(set) var isFaceUp: Bool = false
         var isMatched: Bool = false
+        var timesMismatched: Int = 0
         
         public mutating func flipUp() {
             self.timesSeen += 1

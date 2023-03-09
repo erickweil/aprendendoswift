@@ -120,6 +120,9 @@ struct CardView: View {
     @State
     var hideVariable = false
     
+    @State
+    var matchAngle = 0.0
+    
     init(_ card: MemoryModel<String>.Card,_ color: Color) {
         self.card = card
         self.backColor = color
@@ -134,17 +137,27 @@ struct CardView: View {
                 .foregroundColor(.black)
                 .cardify(isFaceUp: card.isFaceUp, backColor: backColor)
                 .scaleEffect(hideVariable ? 0.0 : 1.0)
+                .rotationEffect(Angle.degrees(matchAngle))
         }
         .onChange(of: card.isMatched) { newValue in
             // A ideia é animar a carta sumindo 0.5 segundos depois de ter virado
             if newValue ==  true {
+                matchAngle = 0.0
+                withAnimation(Animation.spring(dampingFraction: 0.22)) {
+                    matchAngle = 8.0
+                }
+                matchAngle = 0.0
+                
                 withAnimation(Animation.easeInOut(duration: 0.5).delay(0.75)) {
                     hideVariable = true
                 }
             } else {
                 hideVariable = false
+                matchAngle = 0.0
             }
         }
+        //.onChange(of: card.timesMismatched) { newValue in
+        //}
     }
 }
 
