@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A70E381529BA4F82008C5E73 /* ProgressShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70E381429BA4F82008C5E73 /* ProgressShape.swift */; };
 		A71E676329B8C4AA00B0CB22 /* VelhaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71E676229B8C4AA00B0CB22 /* VelhaView.swift */; };
 		A71E676529B8C4B800B0CB22 /* VelhaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71E676429B8C4B800B0CB22 /* VelhaViewModel.swift */; };
 		A71E676729B8C4C300B0CB22 /* VelhaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71E676629B8C4C300B0CB22 /* VelhaModel.swift */; };
@@ -22,13 +23,14 @@
 		A7A11B6829A95C4E009B7FD4 /* MemoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A11B6729A95C4E009B7FD4 /* MemoryModel.swift */; };
 		A7A11B6A29A95EE5009B7FD4 /* MemoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A11B6929A95EE5009B7FD4 /* MemoryViewModel.swift */; };
 		A7A8ADD529B663BB007ADE2A /* AspectVGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A8ADD429B663BB007ADE2A /* AspectVGrid.swift */; };
-		A7A8ADD729B672FB007ADE2A /* FundoCarta.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A8ADD629B672FB007ADE2A /* FundoCarta.swift */; };
+		A7A8ADD729B672FB007ADE2A /* Cardify.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A8ADD629B672FB007ADE2A /* Cardify.swift */; };
 		A7EB171129B0C5BB0094AF51 /* CalculadoraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EB171029B0C5BB0094AF51 /* CalculadoraViewModel.swift */; };
 		A7EB171329B0C5CB0094AF51 /* CalculadoraModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EB171229B0C5CB0094AF51 /* CalculadoraModel.swift */; };
 		A7FF4DF229B837B700CB955C /* MemoryThemes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FF4DF129B837B700CB955C /* MemoryThemes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A70E381429BA4F82008C5E73 /* ProgressShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressShape.swift; sourceTree = "<group>"; };
 		A71E676229B8C4AA00B0CB22 /* VelhaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VelhaView.swift; sourceTree = "<group>"; };
 		A71E676429B8C4B800B0CB22 /* VelhaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VelhaViewModel.swift; sourceTree = "<group>"; };
 		A71E676629B8C4C300B0CB22 /* VelhaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VelhaModel.swift; sourceTree = "<group>"; };
@@ -45,7 +47,7 @@
 		A7A11B6729A95C4E009B7FD4 /* MemoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryModel.swift; sourceTree = "<group>"; };
 		A7A11B6929A95EE5009B7FD4 /* MemoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryViewModel.swift; sourceTree = "<group>"; };
 		A7A8ADD429B663BB007ADE2A /* AspectVGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspectVGrid.swift; sourceTree = "<group>"; };
-		A7A8ADD629B672FB007ADE2A /* FundoCarta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundoCarta.swift; sourceTree = "<group>"; };
+		A7A8ADD629B672FB007ADE2A /* Cardify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cardify.swift; sourceTree = "<group>"; };
 		A7EB171029B0C5BB0094AF51 /* CalculadoraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculadoraViewModel.swift; sourceTree = "<group>"; };
 		A7EB171229B0C5CB0094AF51 /* CalculadoraModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculadoraModel.swift; sourceTree = "<group>"; };
 		A7FF4DF129B837B700CB955C /* MemoryThemes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryThemes.swift; sourceTree = "<group>"; };
@@ -128,7 +130,7 @@
 				A7621042299D5D1F00DA6072 /* MemoryGameView.swift */,
 				A7A11B6729A95C4E009B7FD4 /* MemoryModel.swift */,
 				A7A11B6929A95EE5009B7FD4 /* MemoryViewModel.swift */,
-				A7A8ADD629B672FB007ADE2A /* FundoCarta.swift */,
+				A7A8ADD629B672FB007ADE2A /* Cardify.swift */,
 				A7FF4DF129B837B700CB955C /* MemoryThemes.swift */,
 			);
 			path = JogoMemoria;
@@ -140,6 +142,7 @@
 				A78442172996E79700058939 /* HelloWorld.swift */,
 				A71E676829B8C88500B0CB22 /* UIUtil.swift */,
 				A7A8ADD429B663BB007ADE2A /* AspectVGrid.swift */,
+				A70E381429BA4F82008C5E73 /* ProgressShape.swift */,
 			);
 			path = Coisas;
 			sourceTree = "<group>";
@@ -221,11 +224,12 @@
 				A7621043299D5D1F00DA6072 /* MemoryGameView.swift in Sources */,
 				A7EB171329B0C5CB0094AF51 /* CalculadoraModel.swift in Sources */,
 				A75B58DA29AFF3FB0075BC3D /* HomeScreen.swift in Sources */,
-				A7A8ADD729B672FB007ADE2A /* FundoCarta.swift in Sources */,
+				A7A8ADD729B672FB007ADE2A /* Cardify.swift in Sources */,
 				A71E676729B8C4C300B0CB22 /* VelhaModel.swift in Sources */,
 				A7A11B6829A95C4E009B7FD4 /* MemoryModel.swift in Sources */,
 				A7EB171129B0C5BB0094AF51 /* CalculadoraViewModel.swift in Sources */,
 				A78442162996E79700058939 /* MemoriaApp.swift in Sources */,
+				A70E381529BA4F82008C5E73 /* ProgressShape.swift in Sources */,
 				A76364DC29B008F60045FBA9 /* CalculadoraView.swift in Sources */,
 				A71E676529B8C4B800B0CB22 /* VelhaViewModel.swift in Sources */,
 				A71E676B29B8D23400B0CB22 /* VelhaSimbolos.swift in Sources */,

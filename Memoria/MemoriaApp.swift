@@ -17,6 +17,9 @@ struct MemoriaApp: App {
             
             MemoryGameView(viewModel:game)
             
+            
+            //Cardify_test(Cardify_test.Flipper())
+            
             //CalculadoraView(viewModel:model)
         }
     }

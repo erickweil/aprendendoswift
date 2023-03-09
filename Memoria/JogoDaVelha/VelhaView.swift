@@ -64,16 +64,19 @@ struct QuadradoView: View {
         .foregroundColor(.black)
         .aspectRatio(1.0, contentMode: .fit)
 
-        if estado == .empty {
-            shape
-        }
-        else {
-            shape.overlay {
-                if estado == .X {
-                    VelhaSimbolos.Xis().fill()
-                } else {
-                    VelhaSimbolos.Bolinha().fill()
+        ZStack {
+            if estado == .empty {
+                shape
+            }
+            else {
+                shape.overlay {
+                    if estado == .X {
+                        VelhaSimbolos.Xis().fill()
+                    } else {
+                        VelhaSimbolos.Bolinha().fill()
+                    }
                 }
+                
             }
         }
     }

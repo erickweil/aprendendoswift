@@ -41,9 +41,12 @@ struct MemoryModel<CardContent> {
         for pair in 0..<pairs {
             addPair(genCard(pair),pair)
         }
-        
+    }
+    
+    mutating func shuffle() {
         self.cards.shuffle()
     }
+    
     // Função ao clicar em uma carta
     mutating func choose(_ card: Card) {
         print("Virou id:\(card.id) faceup:\(card.isFaceUp) '\(card.content)'") // DEBUG

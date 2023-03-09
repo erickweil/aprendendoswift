@@ -36,6 +36,7 @@ class MemoryViewModel: ObservableObject {
     public init(nPares: Int,tema: Tema) {
         self.nParesDefault = nPares
         self.model = MemoryViewModel.createMemoryModel(nPares,tema:tema)
+        self.model.shuffle()
     }
     
     var cards: Array<Card> {
@@ -54,6 +55,10 @@ class MemoryViewModel: ObservableObject {
     
     func changeTheme(_ tema: Tema) {
         model = MemoryViewModel.createMemoryModel(nParesDefault,tema:tema)
+    }
+    
+    func shuffle() {
+        model.shuffle()
     }
     
     func choose(_ card : Card) {

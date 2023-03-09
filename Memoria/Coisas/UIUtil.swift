@@ -33,4 +33,11 @@ struct UIUtil {
             CGPoint(x: self.x * w, y: self.y * h)
         }
     }
+    
+    public static func interpolate(_ a:CGPoint,_ b:CGPoint,_ t: Double) -> CGPoint {
+        return CGPoint(
+            x: a.x * (1.0 - t) + b.x * t,
+            y: a.y * (1.0 - t) + b.y * t
+        )
+    }
 }

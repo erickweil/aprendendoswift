@@ -63,7 +63,9 @@ struct MemoryGameView: View {
             AspectVGrid(items: viewModel.cards, aspectRatio: 2.0/2.69, padding: 2.0) { card in
                 CardView(card,fundoColor)
                     .onTapGesture {
-                        viewModel.choose(card)
+                        withAnimation(.easeInOut(duration: 0.25)) {
+                            viewModel.choose(card)
+                        }
                     }
             }
             .padding()            
@@ -87,6 +89,9 @@ struct MemoryGameView: View {
     private func StyleBtn(_ tema: Tema) -> some View {
         Button(action:{
             viewModel.changeTheme(tema)
+            withAnimation { // Animando a mudança das cartas ao misturar
+                viewModel.shuffle()
+            }
         },label:{
             VStack {
                 //Image(systemName: "paw").resizable().scaledToFit().frame(width: 42.0,height: 42.0)
@@ -112,6 +117,9 @@ struct CardView: View {
     
     private let backColor: Color
     
+    @State
+    var hideVariable = false
+    
     init(_ card: MemoryModel<String>.Card,_ color: Color) {
         self.card = card
         self.backColor = color
@@ -121,34 +129,20 @@ struct CardView: View {
     // que se comporta como uma View
     var body: some View /* () */{
         GeometryReader { geometry in
-            // View que Une várias views uma em cima da outra
-            ZStack {
-                // Define o RoundedRectangle na variável 'shape'
-                // Assim não precisa repetir toda vez
-                let shape = RoundedRectangle(cornerRadius: 15.0)
-                
-                if !card.isFaceUp {
-                        shape.fill().foregroundColor(backColor)
-                } else {
-                    let cardview = Group {
-                        shape.fill()
-                            .foregroundColor(.white)
-                        
-                        shape.strokeBorder(lineWidth: 5)
-                            .foregroundColor(backColor)
-                        
-                        // View de Texto
-                        Text(card.content)
-                            .font(UIUtil.font(geometry.size,mult: 0.6))
-                            .foregroundColor(.black)
-                    }
-                    
-                    if card.isMatched {
-                        cardview.opacity(0.10)
-                    } else {
-                        cardview
-                    }
+            Text(card.content)
+                .font(UIUtil.font(geometry.size,mult: 0.6))
+                .foregroundColor(.black)
+                .cardify(isFaceUp: card.isFaceUp, backColor: backColor)
+                .scaleEffect(hideVariable ? 0.0 : 1.0)
+        }
+        .onChange(of: card.isMatched) { newValue in
+            // A ideia é animar a carta sumindo 0.5 segundos depois de ter virado
+            if newValue ==  true {
+                withAnimation(Animation.easeInOut(duration: 0.5).delay(0.75)) {
+                    hideVariable = true
                 }
+            } else {
+                hideVariable = false
             }
         }
     }
