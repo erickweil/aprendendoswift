@@ -71,9 +71,9 @@ struct QuadradoView: View {
             else {
                 shape.overlay {
                     if estado == .X {
-                        VelhaSimbolos.Xis().fill()
+                        VelhaSimbolos.Xis().fill().foregroundColor(Color.black)
                     } else {
-                        VelhaSimbolos.Bolinha().fill()
+                        VelhaSimbolos.Bolinha().fill().foregroundColor(Color.black)
                     }
                 }
                 

@@ -11,12 +11,14 @@ import SwiftUI
 struct MemoriaApp: App {
     let game = MemoryViewModel(nPares: 10, tema: Tema.temas[0])
     //let model = CalculadoraViewModel()
+    //let model = VelhaViewModel()
     var body: some Scene {
         WindowGroup {
             //HelloWorld()
             
             MemoryGameView(viewModel:game)
             
+            //VelhaView(viewModel: model)
             
             //Cardify_test(Cardify_test.Flipper())
             

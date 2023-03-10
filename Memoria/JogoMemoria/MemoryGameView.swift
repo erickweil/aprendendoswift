@@ -60,19 +60,19 @@ struct MemoryGameView: View {
         let fundoColor = Color.init(red: fundoCor.r, green: fundoCor.g, blue: fundoCor.b)
         
         VStack {
-            AspectVGrid(items: viewModel.cards, aspectRatio: 2.0/2.69, padding: 2.0) { card in
-                CardView(card,fundoColor)
-                    .onTapGesture {
-                        withAnimation(.easeInOut(duration: 0.25)) {
-                            viewModel.choose(card)
+            ZStack(alignment: Alignment.bottom) {
+                AspectVGrid(items: viewModel.cards, aspectRatio: 2.0/2.69, padding: 2.0) { card in
+                    CardView(card,fundoColor)
+                        .onTapGesture {
+                            withAnimation(.easeInOut(duration: 0.25)) {
+                                viewModel.choose(card)
+                            }
                         }
-                    }
+                }
+                .padding()
+                
+                PointsIndicator
             }
-            .padding()            
-            
-            Text("Pontos:\(viewModel.pontos)")
-                .font(.system(size: 18.0))
-            
             ScrollView(.horizontal) {
                 HStack {
                     StyleBtn(Tema.temas[0])
@@ -84,6 +84,37 @@ struct MemoryGameView: View {
                 }
             }
         }
+    }
+    
+    static let pontosEmoji = [
+        "😭","😰","😢","🤧","🥺","😔","😞","☹️","😟",
+        "😐",
+        "🙂","😊","😃","😁","😆","😂","😍","🤩","😜"
+    ]
+    
+    private var PointsIndicator: some View {
+        // A ideia é começar no meio e ir indo para direita ou esquerda conforme
+        // ganhar/perder pontos
+        let pontos = Double(viewModel.pontos)
+        
+        // O máximo de pontos é fazer match em todas as cartas, sem errar nenhuma,
+        // como ganha 2 pontos por match, o máximo de pontos é a quantidade de cartas
+        let maxPontos = Double(viewModel.cards.count)
+        
+        // Agora a ideia é calcular um valor entre 0 e 1, em vez de -maxpontos a maxpontos
+        // onde que 0.5 é 0 pontos.
+        let inter = max(0.0,((pontos / maxPontos) + 1.0) / 2.0)
+        
+        let maxEmoji = Double(MemoryGameView.pontosEmoji.count)
+        var emojiPontos = Int(inter * maxEmoji)
+        if emojiPontos < 0 { emojiPontos = 0 }
+        if emojiPontos >= MemoryGameView.pontosEmoji.count { emojiPontos = MemoryGameView.pontosEmoji.count-1 }
+        
+        return GeometryReader { geo in
+            Text("\(MemoryGameView.pontosEmoji[emojiPontos])")
+            .font(.system(size: 40.0))
+            .offset(x: (geo.size.width-40.0) * inter)
+        }.frame(height: 40.0)
     }
     
     private func StyleBtn(_ tema: Tema) -> some View {
