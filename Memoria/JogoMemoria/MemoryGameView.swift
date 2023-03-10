@@ -7,9 +7,6 @@
 import SwiftUI
 
 struct MemoryGameView: View {
-
-    @ObservedObject
-    var viewModel: MemoryViewModel
     
     /* Como o espaço da tela é atribuído Às views?
     1. O container 'oferece' espaço para as views dentro dele
@@ -49,6 +46,15 @@ struct MemoryGameView: View {
     //      https://developer.apple.com/design/human-interface-guidelines/guidelines/overview
     // -----------------------------------------------------------------------------------------
     
+    
+    @ObservedObject
+    var viewModel: MemoryViewModel
+    
+    var cardsAspectRatio = 2.0/2.69
+    var cardsPadding = 2.0
+    var pointsIndicatorSize = 40.0
+    var themeIconSize = 30.0
+    var themeTxtSize = 16.0
     // Ao implementar uma view, deve prover uma variável body
     // que se comporta como uma View
     var body: some View {
@@ -61,7 +67,7 @@ struct MemoryGameView: View {
         
         VStack {
             ZStack(alignment: Alignment.bottom) {
-                AspectVGrid(items: viewModel.cards, aspectRatio: 2.0/2.69, padding: 2.0) { card in
+                AspectVGrid(items: viewModel.cards, aspectRatio: cardsAspectRatio, padding: cardsPadding) { card in
                     CardView(card,fundoColor)
                         .onTapGesture {
                             withAnimation(.easeInOut(duration: 0.25)) {
@@ -75,26 +81,23 @@ struct MemoryGameView: View {
             }
             ScrollView(.horizontal) {
                 HStack {
-                    StyleBtn(Tema.temas[0])
-                    StyleBtn(Tema.temas[1])
-                    StyleBtn(Tema.temas[2])
-                    StyleBtn(Tema.temas[3])
-                    StyleBtn(Tema.temas[4])
-                    StyleBtn(Tema.temas[5])
+                    ForEach(Tema.temas, id: \.self.primeiroSimbolo) { tema in
+                        StyleBtn(tema)
+                    }
                 }
             }
         }
     }
     
-    static let pontosEmoji = [
+    static let txtEmoji = [
         "😭","😰","😢","🤧","🥺","😔","😞","☹️","😟",
         "😐",
         "🙂","😊","😃","😁","😆","😂","😍","🤩","😜"
     ]
     
+    // A ideia é começar no meio e ir indo para direita ou esquerda conforme
+    // ganhar/perder pontos
     private var PointsIndicator: some View {
-        // A ideia é começar no meio e ir indo para direita ou esquerda conforme
-        // ganhar/perder pontos
         let pontos = Double(viewModel.pontos)
         
         // O máximo de pontos é fazer match em todas as cartas, sem errar nenhuma,
@@ -105,16 +108,15 @@ struct MemoryGameView: View {
         // onde que 0.5 é 0 pontos.
         let inter = max(0.0,((pontos / maxPontos) + 1.0) / 2.0)
         
-        let maxEmoji = Double(MemoryGameView.pontosEmoji.count)
-        var emojiPontos = Int(inter * maxEmoji)
-        if emojiPontos < 0 { emojiPontos = 0 }
-        if emojiPontos >= MemoryGameView.pontosEmoji.count { emojiPontos = MemoryGameView.pontosEmoji.count-1 }
+        let txtEmoji = MemoryGameView.txtEmoji
+        let maxEmoji = Double(txtEmoji.count)
+        var emojiPontos = max(0,min(txtEmoji.count-1,Int(inter * maxEmoji)))
         
         return GeometryReader { geo in
-            Text("\(MemoryGameView.pontosEmoji[emojiPontos])")
-            .font(.system(size: 40.0))
-            .offset(x: (geo.size.width-40.0) * inter)
-        }.frame(height: 40.0)
+            Text("\(txtEmoji[emojiPontos])")
+            .font(.system(size: pointsIndicatorSize))
+            .offset(x: (geo.size.width-pointsIndicatorSize) * inter)
+        }.frame(height: pointsIndicatorSize)
     }
     
     private func StyleBtn(_ tema: Tema) -> some View {
@@ -125,12 +127,11 @@ struct MemoryGameView: View {
             }
         },label:{
             VStack {
-                //Image(systemName: "paw").resizable().scaledToFit().frame(width: 42.0,height: 42.0)
                 Text("\(tema.primeiroSimbolo)")
-                    .font(.system(size: 30.0)).frame(width: 30.0,height: 30.0)
+                    .font(.system(size: themeIconSize)).frame(width: themeIconSize,height: themeIconSize)
                 
                 Text("\(tema.descricao)")
-                    .font(.system(size: 16.0))
+                    .font(.system(size: themeTxtSize))
             }
             .padding(10)
         })
@@ -148,6 +149,10 @@ struct CardView: View {
     
     private let backColor: Color
     
+    
+    // As variáveis 'hideVariable' e 'matchAngle' servem para controlar a animação
+    // quando der 'Match' em duas cartas, hideVariable fica true para a carta sumir
+    // e o match angle dá uma 'chacoalhada'
     @State
     var hideVariable = false
     
@@ -173,22 +178,24 @@ struct CardView: View {
         .onChange(of: card.isMatched) { newValue in
             // A ideia é animar a carta sumindo 0.5 segundos depois de ter virado
             if newValue ==  true {
+                
+                // Gambiarra? Isso faz a animação ir e voltar, começando e terminando em 0
                 matchAngle = 0.0
                 withAnimation(Animation.spring(dampingFraction: 0.22)) {
                     matchAngle = 8.0
                 }
                 matchAngle = 0.0
                 
+                // Depois de 0.75 segundos a carta irá sumir
                 withAnimation(Animation.easeInOut(duration: 0.5).delay(0.75)) {
                     hideVariable = true
                 }
             } else {
+                // Se não deu Match, reseta os valores sem animar
                 hideVariable = false
                 matchAngle = 0.0
             }
         }
-        //.onChange(of: card.timesMismatched) { newValue in
-        //}
     }
 }
 

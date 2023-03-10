@@ -11,6 +11,9 @@ import SwiftUI
 struct Cardify: AnimatableModifier {
     var backColor: Color
     var rotation: Double // 0 - 360
+    var frontColor = Color.white
+    var cornerRadius = 15.0
+    var lineWidth = 5.0
     
     var animatableData: Double {
         get { rotation }
@@ -26,26 +29,24 @@ struct Cardify: AnimatableModifier {
         ZStack {
             // Define o RoundedRectangle na variável 'shape'
             // Assim não precisa repetir toda vez
-            let shape = RoundedRectangle(cornerRadius: 15.0)
+            let shape = RoundedRectangle(cornerRadius: cornerRadius)
             
             if rotation > 90.0 {
                     shape.fill().foregroundColor(backColor)
             } else {
                 shape.fill()
-                    .foregroundColor(.white)
+                    .foregroundColor(frontColor)
                 
-                shape.strokeBorder(lineWidth: 5)
-                    .foregroundColor(backColor)
-                
+                if lineWidth >= 0 {
+                    shape.strokeBorder(lineWidth: lineWidth)
+                        .foregroundColor(backColor)
+                }
             }
             
-            //if rotation < 90.0 {
             content.opacity(rotation < 90 ? 1 : 0)
-            //}
-            
         }.rotation3DEffect(
-            Angle.degrees(rotation)
-            ,axis: (0.0,1.0,0.0))
+        Angle.degrees(rotation)
+        ,axis: (0.0,1.0,0.0))
     }
 }
 
@@ -58,6 +59,10 @@ extension View {
 struct Cardify_test: View {
     
     struct TimedCardFlip {
+        mutating func flip() {
+            self.isFaceUp = !self.isFaceUp
+        }
+        
         var isFaceUp = true {
             didSet {
                 if isFaceUp {
@@ -119,8 +124,16 @@ struct Cardify_test: View {
         @Published
         var model: TimedCardFlip
         
+        var isFaceUp: Bool {
+            model.isFaceUp
+        }
+        
         init() {
             self.model = TimedCardFlip()
+        }
+        
+        func flip() {
+            self.model.flip()
         }
 
     }
@@ -131,12 +144,11 @@ struct Cardify_test: View {
     @State
     var animatedBonusRemaining: Double = 0
     
-    init(_ test: Flipper) {
-        self.test = test
-    }
-    
     var body: some View {
         ZStack {
+            
+            Text("\(test.isFaceUp ? "1" : "0")")
+                .foregroundColor(Color.black)
             
             if test.model.isConsumingBonusTime {
                 ProgressShape(progress: animatedBonusRemaining)
@@ -149,15 +161,13 @@ struct Cardify_test: View {
                         }
                     }
             }
-        
-            Text("OK").foregroundColor(Color.blue).padding().font(Font.system(size: 20.0))
         }
-        .padding(35.0)
-        .cardify(isFaceUp: test.model.isFaceUp, backColor: Color.red)
+        .padding(15.0)
+        .cardify(isFaceUp: true, backColor: Color.red)
         .frame(width: 200,height: 200)
         .onTapGesture {
-            withAnimation(.easeInOut(duration: 0.25)) {
-                test.model.isFaceUp.toggle()
+            withAnimation {
+                test.flip()
             }
         }
     }
@@ -166,7 +176,8 @@ struct Cardify_test: View {
 struct FundoCarta_Previews: PreviewProvider {
 
     static var previews: some View {
+        let model = Cardify_test.Flipper()
+        Cardify_test(test:model)
         
-        Cardify_test(Cardify_test.Flipper())
     }
 }
