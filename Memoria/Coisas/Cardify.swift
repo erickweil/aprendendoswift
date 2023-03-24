@@ -147,7 +147,7 @@ struct Cardify_test: View {
     var body: some View {
         ZStack {
             
-            Text("\(test.isFaceUp ? "1" : "0")")
+            Text("Ok")
                 .foregroundColor(Color.black)
             
             if test.model.isConsumingBonusTime {
@@ -163,7 +163,7 @@ struct Cardify_test: View {
             }
         }
         .padding(15.0)
-        .cardify(isFaceUp: true, backColor: Color.red)
+        .cardify(isFaceUp: test.isFaceUp, backColor: Color.red)
         .frame(width: 200,height: 200)
         .onTapGesture {
             withAnimation {
