@@ -13,6 +13,11 @@ class EmojiArtViewModel: ObservableObject {
     
     init() {
         emojiArt = EmojiArtModel()
+        //let dist = 100
+        //emojiArt.addEmoji("1️⃣", at: (-dist,-dist), size: 80)
+        //emojiArt.addEmoji("2️⃣", at: (-dist,dist), size: 80)
+        //emojiArt.addEmoji("3️⃣", at: (dist,-dist), size: 80)
+        //emojiArt.addEmoji("4️⃣", at: (dist,dist), size: 80)
     }
     
     var emojis: [EmojiArtModel.Emoji] { emojiArt.emojis }

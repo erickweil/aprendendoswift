@@ -28,6 +28,21 @@ struct EmojiArtView: View {
                         .position(position(for: emoji,in: geometry))
                 }
             }
+            .onDrop(of: [.plainText], isTargeted: nil) { providers, location in
+                return onDrop(providers: providers, at: location, in: geometry)
+            }
+        }
+    }
+    
+    private func onDrop(providers: [NSItemProvider], at location: CGPoint, in geometry: GeometryProxy) -> Bool {
+        return providers.loadObjects(ofType: String.self) { string in
+            if let emoji = string.first, emoji.isEmoji {
+                document.addEmoji(
+                    String(emoji),
+                    at: convertToEmojiCoordinates(location, in:geometry),
+                    size: defaultEmojiFontSize
+                )
+            }
         }
     }
     
@@ -41,6 +56,16 @@ struct EmojiArtView: View {
             x: center.x + CGFloat(location.x),
             y: center.y + CGFloat(location.y)
         )
+    }
+    
+    private func convertToEmojiCoordinates(_ location: CGPoint, in geometry: GeometryProxy) -> (x: Int, y: Int) {
+        let center = geometry.frame(in: .local).center
+        let location = CGPoint(
+            x: location.x - center.x,
+            y: location.y - center.y
+        )
+        
+        return (Int(location.x), Int(location.y))
     }
     
     private func fontSize(for emoji: EmojiArtModel.Emoji) -> CGFloat {
@@ -63,6 +88,8 @@ struct ScrollingEmojisView: View {
             HStack {
                 ForEach(emojis.map { String($0) }, id: \.self) { emoji in
                     Text(emoji)
+                        .padding(5)
+                        .onDrag{ NSItemProvider(object: emoji as NSString) }
                 }
             }
         }
