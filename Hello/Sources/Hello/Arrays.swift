@@ -1,6 +1,5 @@
 public struct Arrays {
     public static func test() {
-        print("Teste Arrays\n")
 
         var frutas = [
         "Maçã vermelha",

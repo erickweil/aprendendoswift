@@ -19,7 +19,6 @@ public struct Protocols {
     // Um Protocol é uma classe sem implementações (Interface?)
 
     public static func test() {
-        print("Teste Protocols\n--------------------------")
-
+        
     }
 }

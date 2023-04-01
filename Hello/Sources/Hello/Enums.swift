@@ -38,7 +38,6 @@ public struct Enums {
 	}
 
 	public static func test() {
-		print("Teste Enums\n")
 
 		var dia = Dias.segunda
 		print("Dia: \(dia), indice: \(dia.indice)")

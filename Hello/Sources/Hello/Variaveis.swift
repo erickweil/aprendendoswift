@@ -1,6 +1,5 @@
 public struct Variaveis {
     public static func test() {
-        print("Teste Variaveis\n")
 
         // 'Let' quando não podem mudar de valor
         let nome: String = "Erick"
