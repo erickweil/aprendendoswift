@@ -25,26 +25,41 @@ public struct Threads {
         //testAsync()
         //testGroup()
 
-        testRace()
-  
+        //testRace()
+        //testSerial();
+        testConcurrent();
         if let _ = readLine() {
             print("Ok.")
         }
+    }
+
+    public static func testSemaphore() {
+        let semaphore = DispatchSemaphore(value: 1)
+        semaphore.wait()
+        semaphore.signal()
+    }
+
+    // https://betterprogramming.pub/the-complete-guide-to-concurrency-and-multithreading-in-ios-59c5606795ca
+    public static func testConcurrent() {
+        //let concurrentQueue = DispatchQueue.global();
+        let concurrentQueue = DispatchQueue(label: "com.kraken.concurrent", attributes: .concurrent);
+        executarDormirNoQueue(concurrentQueue,10);
+    }
+
+    public static func testSerial() {
+        let serialQueue = DispatchQueue(label: "com.kraken.serial");
+        executarDormirNoQueue(serialQueue,10);
     }
 
     // Condição de corrida, alterar o mesmo valor em diferentes threads
     // Dá erro aleatoriamente
     public static func testRace() {
         var numeros = [Int](repeating: 0, count: 1000)
-        
-        //let queue = DispatchQueue.global(qos: .background)
-        
+                
         print("Inicio")
         DispatchQueue.concurrentPerform(iterations: 1000) { k in
             for i in 0...numeros.count-1 {
-                //queue.sync {
-                    numeros[i] = k
-                //}
+                numeros[i] = k
             }
         }
         print("Fim")
@@ -60,38 +75,35 @@ public struct Threads {
         
         print("Inicio do teste")
 
-        for _ in 1...10 {
+        for i in 1...10 {
             group.enter()
             queue.async {
-                dormirAleatorio()
+                dormirAleatorio(i)
                 group.leave()
             }
         }
+
+        // group.notify(queue: queue) {}
 
         group.wait()
         print("Terminou todos")
     }
 
-    public static func testAsync() {
-        let queue = DispatchQueue.global(qos: .background)
-        print("Inicio do teste")
-        queue.async {
-            dormirAleatorio()
+    public static func executarDormirNoQueue(_ queue: DispatchQueue,_ qtd: Int) {
+        for i in 1...qtd {
+            queue.async {
+                dormirAleatorio(i)
+            }
         }
-        queue.async {
-            dormirAleatorio()
-        }
-        queue.async {
-            dormirAleatorio()
-        }
-        print("Fim do teste")
     }
 
-    public static func dormirAleatorio() {
+    public static func dormirAleatorio(_ n: Int) {
+        print("Começou a dormir[\(n)]")
+
         let rdn = Int.random(min:0,max: 3000)
         usleep(UInt32(rdn*1000))
 
-        print("Terminou de dormir \(Int(rdn)) ms")
+        print("Terminou de dormir[\(n)] \(Int(rdn)) ms")
     }
 }
 
