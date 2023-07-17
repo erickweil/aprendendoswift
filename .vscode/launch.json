@@ -17,6 +17,78 @@
             "args": [],
             "cwd": "${workspaceFolder:aprendendoswift}/Hello",
             "preLaunchTask": "swift: Build Release Hello (Hello)"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "sourceLanguages": [
+                "swift"
+            ],
+            "name": "Debug Variaveis (Hello)",
+            "program": "${workspaceFolder:aprendendoswift}\\Hello\\.build/debug/Variaveis",
+            "args": [],
+            "cwd": "${workspaceFolder:aprendendoswift}/Hello",
+            "preLaunchTask": "swift: Build Debug Variaveis (Hello)"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "sourceLanguages": [
+                "swift"
+            ],
+            "name": "Release Variaveis (Hello)",
+            "program": "${workspaceFolder:aprendendoswift}\\Hello\\.build/release/Variaveis",
+            "args": [],
+            "cwd": "${workspaceFolder:aprendendoswift}/Hello",
+            "preLaunchTask": "swift: Build Release Variaveis (Hello)"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "sourceLanguages": [
+                "swift"
+            ],
+            "name": "Debug Testes (Hello)",
+            "program": "${workspaceFolder:aprendendoswift}\\Hello\\.build/debug/Testes",
+            "args": [],
+            "cwd": "${workspaceFolder:aprendendoswift}/Hello",
+            "preLaunchTask": "swift: Build Debug Testes (Hello)"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "sourceLanguages": [
+                "swift"
+            ],
+            "name": "Release Testes (Hello)",
+            "program": "${workspaceFolder:aprendendoswift}\\Hello\\.build/release/Testes",
+            "args": [],
+            "cwd": "${workspaceFolder:aprendendoswift}/Hello",
+            "preLaunchTask": "swift: Build Release Testes (Hello)"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "sourceLanguages": [
+                "swift"
+            ],
+            "name": "Debug Print (Hello)",
+            "program": "${workspaceFolder:aprendendoswift}\\Hello\\.build/debug/Print",
+            "args": [],
+            "cwd": "${workspaceFolder:aprendendoswift}/Hello",
+            "preLaunchTask": "swift: Build Debug Print (Hello)"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "sourceLanguages": [
+                "swift"
+            ],
+            "name": "Release Print (Hello)",
+            "program": "${workspaceFolder:aprendendoswift}\\Hello\\.build/release/Print",
+            "args": [],
+            "cwd": "${workspaceFolder:aprendendoswift}/Hello",
+            "preLaunchTask": "swift: Build Release Print (Hello)"
         }
     ]
 }

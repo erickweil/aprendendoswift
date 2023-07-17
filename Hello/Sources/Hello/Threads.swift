@@ -100,13 +100,13 @@ public struct Threads {
     public static func dormirAleatorio(_ n: Int) {
         print("Começou a dormir[\(n)]")
 
-        let rdn = Int.random(min:0,max: 3000)
-        usleep(UInt32(rdn*1000))
+        //let rdn = Int.random(min:0,max: 3000)
+        //usleep(UInt32(rdn*1000))
 
-        print("Terminou de dormir[\(n)] \(Int(rdn)) ms")
+        print("Terminou de dormir[\(n)]  ms")
     }
 }
-
+/*
 public extension Int {
     static var random: Int {
         return Int.random(n: Int.max)
@@ -130,3 +130,4 @@ public extension Double {
         return Double.random * (max - min) + min
     }
 }
+*/

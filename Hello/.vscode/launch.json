@@ -17,6 +17,54 @@
             "args": [],
             "cwd": "${workspaceFolder:Hello}",
             "preLaunchTask": "swift: Build Release Hello"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "sourceLanguages": [
+                "swift"
+            ],
+            "name": "Debug Variaveis",
+            "program": "${workspaceFolder:Hello}\\.build/debug/Variaveis",
+            "args": [],
+            "cwd": "${workspaceFolder:Hello}",
+            "preLaunchTask": "swift: Build Debug Variaveis"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "sourceLanguages": [
+                "swift"
+            ],
+            "name": "Release Variaveis",
+            "program": "${workspaceFolder:Hello}\\.build/release/Variaveis",
+            "args": [],
+            "cwd": "${workspaceFolder:Hello}",
+            "preLaunchTask": "swift: Build Release Variaveis"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "sourceLanguages": [
+                "swift"
+            ],
+            "name": "Debug Print",
+            "program": "${workspaceFolder:Hello}\\.build/debug/Print",
+            "args": [],
+            "cwd": "${workspaceFolder:Hello}",
+            "preLaunchTask": "swift: Build Debug Print"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "sourceLanguages": [
+                "swift"
+            ],
+            "name": "Release Print",
+            "program": "${workspaceFolder:Hello}\\.build/release/Print",
+            "args": [],
+            "cwd": "${workspaceFolder:Hello}",
+            "preLaunchTask": "swift: Build Release Print"
         }
     ]
 }
