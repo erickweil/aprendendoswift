@@ -5,3 +5,5 @@ let a = 1
 let b = 2
 let c = a + b
 print("a + b = \(c)")
+
+print(#"pode colocar \(isso aqui sem problemas)"#)

@@ -1,5 +1,5 @@
 # Hello
-[Sources/Hello/Hello.swift](Sources/Hello/Hello.swift)
+[Hello.swift](./Exemplos/Hello.swift)
 ```swift
 print("Olá Swift!")
 
@@ -27,11 +27,11 @@ Após escolher o caminho onde salvar o arquivo, irá estar em uma janela parecid
 
 ![Playground](Playground.png)
 
-## VSCode no Mac ou Linux
+## VSCode no Mac, Linux ou Windows
 Há uma extensão para Swift no VSCode, porém é necessário uma instalação do compilador swift disponível na máquina, por isso, mesmo que você utilize VSCode para programar em swift, é necessário instalar o swift em si. (No MacOS o compilador swift estará instalado se o Xcode estiver instalado)
 
 **Pré Requisitios**
-- linguagem swift instalada
+- linguagem swift instalada (Veja [Instalacao.md](Instalacao.md))
 - VSCode
 
 No VSCode, instale a extensão Swift de Swift Server Work Group - 
@@ -69,7 +69,3 @@ Para executá-lo:
 swift run
 ```
 E seu código irá executar!
-
-> Estes procedimentos funcionam no Windows, porém é necessário possuir o Visual Studio 2019 instalado e iniciar o VSCode através do terminal `x64 Native Tools Command Prompt for VS 2019` localizado em `C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Visual Studio 2019\Visual Studio Tools\VC`
->
-> Isso é necessário para que sejam iniciadas as variáveis de ambiente necessárias para o swift executar
