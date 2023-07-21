@@ -53,6 +53,11 @@ O texto é representado pelo tipo **String**, que funciona de forma muito pareci
 var tituloPagina: String = "Porquê o texto seria diferente?"
 ```
 
+Além disso, há o tipo **Character** que representa uma única letra:
+```swift
+var letra: Character = "a"
+```
+
 **Lógico**:
 O tipo lógico é o Bool. Aceita valores verdadeiro `true` e falso `false`
 ```swift
@@ -124,7 +129,29 @@ Há dois tipos para números ponto flutuante:
 
 > Quando o tipo for inferido como em `var b = 3.14` a variável será **Double**
 
-**Conversão de tipos**
+**String**
+
+Strings em swift podem ser declaradas tanto utilizando aspas simples quando uma única linha como no formato multilinhas com três aspas `"""`
+
+```swift
+let linha = "Um texto de uma linha"
+let poema = """
+    O mundo é grande e cabe nesta janela sobre o mar.
+    O mar é grande e cabe na cama e no colchão de amar.
+    O amor é grande e cabe no breve espaço de beijar.
+    """
+```
+> No caso do texto multilinhas coloque `\` ao fim da linha quando não quiser que a quebra de linha faça parte do texto.
+
+Caracteres especiais podem ser inserido na string de forma parecida que outras linguagens. Os caracteres de escape são: `\0 (caracter nulo), \\, \t, \n, \r, \", \', \u{####} (Caracter unicode)`
+
+Veja o exemplo abaixo onde alguns desse símbolos são usados e o resultado produzido
+```swift
+let frase = "\"Caneta azul, azul caneta Caneta azul tá marcada com minha letra\" - Manoel Gomes"
+```
+
+
+## **Conversão de tipos**
 
 É possível converter um tipo para outro especificando o nome do tipo como se fosse uma função. Veja no exemplo abaixo uma variável ponto flutuante sendo convertida para inteiro e vice-versa:
 
@@ -145,3 +172,48 @@ print("\(horas) horas e \(minutos) min")
 
 Neste exemplo se observa a utilização da conversão de **Double** para **Int**, de forma que as casas decimais são eliminadas, permitindo assim extrair as horas e os minutos a partir de um único valor fracionário.
 
+**Convertendo Texto para Números**
+
+Deve-se prestar atenção que o retorno da função Int(), Double(), etc... produz um Optional quando se tratando de conversão de String para número.
+
+Veja que o código abaixo produz uma warning:
+```swift
+let texto = "123"
+let numero = Int(texto)
+print(numero)
+```
+```
+Tutorial/Exemplos/BolachaOuMaca.swift:3:7: warning: expression implicitly coerced from 'Int?' to 'Any'
+print(numero)
+      ^~~~~~
+Tutorial/Exemplos/BolachaOuMaca.swift:3:7: note: provide a default value to avoid this warning
+print(numero)
+      ^~~~~~
+      ?? <#default value#>
+```
+Isso acontece devido ao retorno da função ser um tipo **Int?** e não **Int**. Veremos isto com mais detalhes na seção sobre Optionals porém para lidar com isso a solução é uma das três abordagens:
+
+Veja [TextoParaNumero.swift](Tutorial/Exemplos/TextoParaNumero.swift)
+```swift
+// Existem três formas para lidar com o tipo Inteiro Optional 'Int?'
+
+// 1. Utilizando if let
+let texto = "123"
+if let numero = Int(texto) {
+    print("Convertido para número é \(numero)")
+} else {
+    print("Erro na conversão de texto para número")
+}
+
+// 2. Utilizando ! (Produz erro se não for válido)
+let texto2 = "123"
+let numero2 = Int(texto2)!
+print("Convertido para número é \(numero2)")
+
+// 3. Utilizando valor default com ??
+let texto3 = "123"
+let numero3 = Int(texto3) ?? 0
+print("Convertido para número é \(numero3)") // será 0 se inválido
+```
+
+Prefira utilizar o **if let** caso existam comportamentos diferentes em caso de sucesso e em caso de erro da conversão. E utilize **??** especificando valor default em outros casos onde queira ignorar o erro. Evite utilizar **!** pois estará possibilitando seu programa travar por questões que poderiam ser tratadas.

@@ -52,3 +52,46 @@ print("\(segundos) segundos são \(segundos/60.0) minutos")
 >
 > `print(#"pode colocar \(isso aqui sem problemas)"#)`
 
+Para mais exemplos veja 
+Veja [Print.swift](Exemplos/Print.swift)
+## Entrada de dados
+
+É possível receber dados do usuário quando executando um programa via terminal. Para isso se utiliza a função `readLine` que retorna o tipo `String?`, que representa que pode ser uma **String** ou **nil**
+
+> Deve-se notar que como é possível que o valor lido seja **nil**, o retorno da função ReadLine é um **Optional**, sendo necessário o **!** ou **if let** para convertê-lo para um valor.
+
+Veja [Entrada.swift](Exemplos/Entrada.swift)
+- Forma 1
+```swift
+print("Insira um texto e aperte Enter:")
+if let line = readLine() {
+    print("A linha lida foi:\(line)")
+} else {
+    print("Nada foi escrito")
+}
+```
+
+- Forma 2 (Causa erro caso cancele a escrita com ctrl+D ou outro jeito)
+```swift
+print("Insira um texto e aperte Enter:")
+let line = readLine()!
+print("A linha lida foi:\(line)")
+```
+
+- Forma 3 (Com valor default texto vazio)
+```swift
+print("Insira um texto e aperte Enter:")
+let line = readLine() ?? ""
+print("A linha lida foi:\(line)")
+```
+
+Para ler valores numéricos é necessário converter a String para o tipo desejado:
+```swift
+// Lendo Números
+print("Insira um número para A:")
+let A = Int(readLine()!) ?? 0
+print("Insira um número para B:")
+let B = Int(readLine()!) ?? 0
+print("\(A) + \(B) = \(A+B)")
+```
+> Veja a seção convertendo texto para número em [Variáveis.md](Variaveis.md)

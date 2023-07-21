@@ -45,13 +45,13 @@ Veja que se escreve na saída de dados chamando a função **print**, se declara
 Clique no assunto que deseja ler sobre:
 - [Tipos e Variaveis](Variaveis.md)
 - [Entrada e Saída](EntradaESaida.md)
-- Operadores e Expressões
-- Condições
-- Repetição
+- [Operadores e Expressões](Operadores.md)
 - [Arrays](Arrays.md)
+- [Condições](Condicoes.md)
+- [Repetição](Repeticao.md)
+- [Optionals](Optionals.md)
 - Funções
-- Classes e Structs
-- Enums e Opcionais
+- Classes, Structs e Enums
 - Genéricos
 - Protocols e Extensions
 - Threads e Queues
