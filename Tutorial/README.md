@@ -50,7 +50,7 @@ Clique no assunto que deseja ler sobre:
 - [Condições](Condicoes.md)
 - [Repetição](Repeticao.md)
 - [Optionals](Optionals.md)
-- Funções
+- [Funções](Funcoes.md)
 - Classes, Structs e Enums
 - Genéricos
 - Protocols e Extensions
