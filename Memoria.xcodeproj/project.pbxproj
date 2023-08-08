@@ -26,9 +26,9 @@
 		A7A5A0B729CE386D003ACBB4 /* UtilityExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A5A0B629CE386D003ACBB4 /* UtilityExtensions.swift */; };
 		A7A8ADD529B663BB007ADE2A /* AspectVGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A8ADD429B663BB007ADE2A /* AspectVGrid.swift */; };
 		A7A8ADD729B672FB007ADE2A /* Cardify.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A8ADD629B672FB007ADE2A /* Cardify.swift */; };
-		A7E1EE782A82E8F70050EF9A /* VelhaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E1EE752A82E8F70050EF9A /* VelhaView.swift */; };
-		A7E1EE792A82E8F70050EF9A /* VelhaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E1EE762A82E8F70050EF9A /* VelhaViewModel.swift */; };
-		A7E1EE7A2A82E8F70050EF9A /* VelhaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E1EE772A82E8F70050EF9A /* VelhaModel.swift */; };
+		A7E1EE7E2A82EA280050EF9A /* VelhaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E1EE7B2A82EA280050EF9A /* VelhaModel.swift */; };
+		A7E1EE7F2A82EA280050EF9A /* VelhaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E1EE7C2A82EA280050EF9A /* VelhaView.swift */; };
+		A7E1EE802A82EA280050EF9A /* VelhaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E1EE7D2A82EA280050EF9A /* VelhaViewModel.swift */; };
 		A7EB171129B0C5BB0094AF51 /* CalculadoraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EB171029B0C5BB0094AF51 /* CalculadoraViewModel.swift */; };
 		A7EB171329B0C5CB0094AF51 /* CalculadoraModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EB171229B0C5CB0094AF51 /* CalculadoraModel.swift */; };
 		A7EEB85429CE20C60076AA68 /* EmojiArtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EEB85329CE20C60076AA68 /* EmojiArtView.swift */; };
@@ -57,9 +57,9 @@
 		A7A5A0B629CE386D003ACBB4 /* UtilityExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityExtensions.swift; sourceTree = "<group>"; };
 		A7A8ADD429B663BB007ADE2A /* AspectVGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspectVGrid.swift; sourceTree = "<group>"; };
 		A7A8ADD629B672FB007ADE2A /* Cardify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cardify.swift; sourceTree = "<group>"; };
-		A7E1EE752A82E8F70050EF9A /* VelhaView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VelhaView.swift; path = ../../../Teste/Teste/JogoDaVelha/VelhaView.swift; sourceTree = "<group>"; };
-		A7E1EE762A82E8F70050EF9A /* VelhaViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VelhaViewModel.swift; path = ../../../Teste/Teste/JogoDaVelha/VelhaViewModel.swift; sourceTree = "<group>"; };
-		A7E1EE772A82E8F70050EF9A /* VelhaModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VelhaModel.swift; path = ../../../Teste/Teste/JogoDaVelha/VelhaModel.swift; sourceTree = "<group>"; };
+		A7E1EE7B2A82EA280050EF9A /* VelhaModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VelhaModel.swift; sourceTree = "<group>"; };
+		A7E1EE7C2A82EA280050EF9A /* VelhaView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VelhaView.swift; sourceTree = "<group>"; };
+		A7E1EE7D2A82EA280050EF9A /* VelhaViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VelhaViewModel.swift; sourceTree = "<group>"; };
 		A7EB171029B0C5BB0094AF51 /* CalculadoraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculadoraViewModel.swift; sourceTree = "<group>"; };
 		A7EB171229B0C5CB0094AF51 /* CalculadoraModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculadoraModel.swift; sourceTree = "<group>"; };
 		A7EEB85329CE20C60076AA68 /* EmojiArtView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiArtView.swift; sourceTree = "<group>"; };
@@ -133,9 +133,9 @@
 		A7E1EE742A82E8D10050EF9A /* JogoDaVelha */ = {
 			isa = PBXGroup;
 			children = (
-				A7E1EE772A82E8F70050EF9A /* VelhaModel.swift */,
-				A7E1EE752A82E8F70050EF9A /* VelhaView.swift */,
-				A7E1EE762A82E8F70050EF9A /* VelhaViewModel.swift */,
+				A7E1EE7B2A82EA280050EF9A /* VelhaModel.swift */,
+				A7E1EE7C2A82EA280050EF9A /* VelhaView.swift */,
+				A7E1EE7D2A82EA280050EF9A /* VelhaViewModel.swift */,
 			);
 			path = JogoDaVelha;
 			sourceTree = "<group>";
@@ -259,26 +259,26 @@
 				A78442182996E79700058939 /* HelloWorld.swift in Sources */,
 				A7823D772A827FAD001282BB /* Interacao.swift in Sources */,
 				A7A5A0B529CE3741003ACBB4 /* EmojiArtViewModel.swift in Sources */,
-				A7E1EE782A82E8F70050EF9A /* VelhaView.swift in Sources */,
 				A71E676929B8C88500B0CB22 /* UIUtil.swift in Sources */,
 				A7621043299D5D1F00DA6072 /* MemoryGameView.swift in Sources */,
 				A7823D752A827A89001282BB /* MacaMordida.swift in Sources */,
 				A7EEB85429CE20C60076AA68 /* EmojiArtView.swift in Sources */,
-				A7E1EE792A82E8F70050EF9A /* VelhaViewModel.swift in Sources */,
 				A7EB171329B0C5CB0094AF51 /* CalculadoraModel.swift in Sources */,
 				A7823D742A827A89001282BB /* Perfil.swift in Sources */,
 				A75B58DA29AFF3FB0075BC3D /* HomeScreen.swift in Sources */,
 				A7A8ADD729B672FB007ADE2A /* Cardify.swift in Sources */,
 				A7823D732A827A89001282BB /* Clima.swift in Sources */,
 				A7A11B6829A95C4E009B7FD4 /* MemoryModel.swift in Sources */,
+				A7E1EE7E2A82EA280050EF9A /* VelhaModel.swift in Sources */,
 				A7EB171129B0C5BB0094AF51 /* CalculadoraViewModel.swift in Sources */,
 				A78442162996E79700058939 /* MemoriaApp.swift in Sources */,
 				A70E381529BA4F82008C5E73 /* ProgressShape.swift in Sources */,
 				A76364DC29B008F60045FBA9 /* CalculadoraView.swift in Sources */,
 				A7EEB85629CE21310076AA68 /* EmojiArtModel.swift in Sources */,
+				A7E1EE7F2A82EA280050EF9A /* VelhaView.swift in Sources */,
 				A7A8ADD529B663BB007ADE2A /* AspectVGrid.swift in Sources */,
-				A7E1EE7A2A82E8F70050EF9A /* VelhaModel.swift in Sources */,
 				A7A11B6A29A95EE5009B7FD4 /* MemoryViewModel.swift in Sources */,
+				A7E1EE802A82EA280050EF9A /* VelhaViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
