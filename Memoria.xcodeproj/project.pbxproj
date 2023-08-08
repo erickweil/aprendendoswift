@@ -8,11 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A70E381529BA4F82008C5E73 /* ProgressShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70E381429BA4F82008C5E73 /* ProgressShape.swift */; };
-		A71E676329B8C4AA00B0CB22 /* VelhaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71E676229B8C4AA00B0CB22 /* VelhaView.swift */; };
-		A71E676529B8C4B800B0CB22 /* VelhaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71E676429B8C4B800B0CB22 /* VelhaViewModel.swift */; };
-		A71E676729B8C4C300B0CB22 /* VelhaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71E676629B8C4C300B0CB22 /* VelhaModel.swift */; };
 		A71E676929B8C88500B0CB22 /* UIUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71E676829B8C88500B0CB22 /* UIUtil.swift */; };
-		A71E676B29B8D23400B0CB22 /* VelhaSimbolos.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71E676A29B8D23400B0CB22 /* VelhaSimbolos.swift */; };
 		A75B58DA29AFF3FB0075BC3D /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75B58D929AFF3FB0075BC3D /* HomeScreen.swift */; };
 		A7621043299D5D1F00DA6072 /* MemoryGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7621042299D5D1F00DA6072 /* MemoryGameView.swift */; };
 		A76364DC29B008F60045FBA9 /* CalculadoraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76364DB29B008F60045FBA9 /* CalculadoraView.swift */; };
@@ -30,6 +26,9 @@
 		A7A5A0B729CE386D003ACBB4 /* UtilityExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A5A0B629CE386D003ACBB4 /* UtilityExtensions.swift */; };
 		A7A8ADD529B663BB007ADE2A /* AspectVGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A8ADD429B663BB007ADE2A /* AspectVGrid.swift */; };
 		A7A8ADD729B672FB007ADE2A /* Cardify.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A8ADD629B672FB007ADE2A /* Cardify.swift */; };
+		A7E1EE782A82E8F70050EF9A /* VelhaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E1EE752A82E8F70050EF9A /* VelhaView.swift */; };
+		A7E1EE792A82E8F70050EF9A /* VelhaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E1EE762A82E8F70050EF9A /* VelhaViewModel.swift */; };
+		A7E1EE7A2A82E8F70050EF9A /* VelhaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E1EE772A82E8F70050EF9A /* VelhaModel.swift */; };
 		A7EB171129B0C5BB0094AF51 /* CalculadoraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EB171029B0C5BB0094AF51 /* CalculadoraViewModel.swift */; };
 		A7EB171329B0C5CB0094AF51 /* CalculadoraModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EB171229B0C5CB0094AF51 /* CalculadoraModel.swift */; };
 		A7EEB85429CE20C60076AA68 /* EmojiArtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EEB85329CE20C60076AA68 /* EmojiArtView.swift */; };
@@ -39,11 +38,7 @@
 
 /* Begin PBXFileReference section */
 		A70E381429BA4F82008C5E73 /* ProgressShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressShape.swift; sourceTree = "<group>"; };
-		A71E676229B8C4AA00B0CB22 /* VelhaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VelhaView.swift; sourceTree = "<group>"; };
-		A71E676429B8C4B800B0CB22 /* VelhaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VelhaViewModel.swift; sourceTree = "<group>"; };
-		A71E676629B8C4C300B0CB22 /* VelhaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VelhaModel.swift; sourceTree = "<group>"; };
 		A71E676829B8C88500B0CB22 /* UIUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIUtil.swift; sourceTree = "<group>"; };
-		A71E676A29B8D23400B0CB22 /* VelhaSimbolos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VelhaSimbolos.swift; sourceTree = "<group>"; };
 		A75B58D929AFF3FB0075BC3D /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
 		A7621042299D5D1F00DA6072 /* MemoryGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryGameView.swift; sourceTree = "<group>"; };
 		A76364DB29B008F60045FBA9 /* CalculadoraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculadoraView.swift; sourceTree = "<group>"; };
@@ -62,6 +57,9 @@
 		A7A5A0B629CE386D003ACBB4 /* UtilityExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityExtensions.swift; sourceTree = "<group>"; };
 		A7A8ADD429B663BB007ADE2A /* AspectVGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspectVGrid.swift; sourceTree = "<group>"; };
 		A7A8ADD629B672FB007ADE2A /* Cardify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cardify.swift; sourceTree = "<group>"; };
+		A7E1EE752A82E8F70050EF9A /* VelhaView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VelhaView.swift; path = ../../../Teste/Teste/JogoDaVelha/VelhaView.swift; sourceTree = "<group>"; };
+		A7E1EE762A82E8F70050EF9A /* VelhaViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VelhaViewModel.swift; path = ../../../Teste/Teste/JogoDaVelha/VelhaViewModel.swift; sourceTree = "<group>"; };
+		A7E1EE772A82E8F70050EF9A /* VelhaModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VelhaModel.swift; path = ../../../Teste/Teste/JogoDaVelha/VelhaModel.swift; sourceTree = "<group>"; };
 		A7EB171029B0C5BB0094AF51 /* CalculadoraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculadoraViewModel.swift; sourceTree = "<group>"; };
 		A7EB171229B0C5CB0094AF51 /* CalculadoraModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculadoraModel.swift; sourceTree = "<group>"; };
 		A7EEB85329CE20C60076AA68 /* EmojiArtView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiArtView.swift; sourceTree = "<group>"; };
@@ -80,17 +78,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A71E676129B8C44800B0CB22 /* JogoDaVelha */ = {
-			isa = PBXGroup;
-			children = (
-				A71E676229B8C4AA00B0CB22 /* VelhaView.swift */,
-				A71E676429B8C4B800B0CB22 /* VelhaViewModel.swift */,
-				A71E676629B8C4C300B0CB22 /* VelhaModel.swift */,
-				A71E676A29B8D23400B0CB22 /* VelhaSimbolos.swift */,
-			);
-			path = JogoDaVelha;
-			sourceTree = "<group>";
-		};
 		A7823D6F2A827A32001282BB /* Testes */ = {
 			isa = PBXGroup;
 			children = (
@@ -121,9 +108,9 @@
 		A78442142996E79700058939 /* Memoria */ = {
 			isa = PBXGroup;
 			children = (
+				A7E1EE742A82E8D10050EF9A /* JogoDaVelha */,
 				A7823D6F2A827A32001282BB /* Testes */,
 				A7EEB85029CE209B0076AA68 /* EmojiArt */,
-				A71E676129B8C44800B0CB22 /* JogoDaVelha */,
 				A7E2808929B4BAA60016620F /* Coisas */,
 				A7E2808829B4BA790016620F /* JogoMemoria */,
 				A7E2808729B4BA460016620F /* Calculadora */,
@@ -141,6 +128,16 @@
 				A784421C2996E79800058939 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		A7E1EE742A82E8D10050EF9A /* JogoDaVelha */ = {
+			isa = PBXGroup;
+			children = (
+				A7E1EE772A82E8F70050EF9A /* VelhaModel.swift */,
+				A7E1EE752A82E8F70050EF9A /* VelhaView.swift */,
+				A7E1EE762A82E8F70050EF9A /* VelhaViewModel.swift */,
+			);
+			path = JogoDaVelha;
 			sourceTree = "<group>";
 		};
 		A7E2808729B4BA460016620F /* Calculadora */ = {
@@ -259,29 +256,28 @@
 			files = (
 				A7FF4DF229B837B700CB955C /* MemoryThemes.swift in Sources */,
 				A7A5A0B729CE386D003ACBB4 /* UtilityExtensions.swift in Sources */,
-				A71E676329B8C4AA00B0CB22 /* VelhaView.swift in Sources */,
 				A78442182996E79700058939 /* HelloWorld.swift in Sources */,
 				A7823D772A827FAD001282BB /* Interacao.swift in Sources */,
 				A7A5A0B529CE3741003ACBB4 /* EmojiArtViewModel.swift in Sources */,
+				A7E1EE782A82E8F70050EF9A /* VelhaView.swift in Sources */,
 				A71E676929B8C88500B0CB22 /* UIUtil.swift in Sources */,
 				A7621043299D5D1F00DA6072 /* MemoryGameView.swift in Sources */,
 				A7823D752A827A89001282BB /* MacaMordida.swift in Sources */,
 				A7EEB85429CE20C60076AA68 /* EmojiArtView.swift in Sources */,
+				A7E1EE792A82E8F70050EF9A /* VelhaViewModel.swift in Sources */,
 				A7EB171329B0C5CB0094AF51 /* CalculadoraModel.swift in Sources */,
 				A7823D742A827A89001282BB /* Perfil.swift in Sources */,
 				A75B58DA29AFF3FB0075BC3D /* HomeScreen.swift in Sources */,
 				A7A8ADD729B672FB007ADE2A /* Cardify.swift in Sources */,
 				A7823D732A827A89001282BB /* Clima.swift in Sources */,
-				A71E676729B8C4C300B0CB22 /* VelhaModel.swift in Sources */,
 				A7A11B6829A95C4E009B7FD4 /* MemoryModel.swift in Sources */,
 				A7EB171129B0C5BB0094AF51 /* CalculadoraViewModel.swift in Sources */,
 				A78442162996E79700058939 /* MemoriaApp.swift in Sources */,
 				A70E381529BA4F82008C5E73 /* ProgressShape.swift in Sources */,
 				A76364DC29B008F60045FBA9 /* CalculadoraView.swift in Sources */,
-				A71E676529B8C4B800B0CB22 /* VelhaViewModel.swift in Sources */,
 				A7EEB85629CE21310076AA68 /* EmojiArtModel.swift in Sources */,
-				A71E676B29B8D23400B0CB22 /* VelhaSimbolos.swift in Sources */,
 				A7A8ADD529B663BB007ADE2A /* AspectVGrid.swift in Sources */,
+				A7E1EE7A2A82E8F70050EF9A /* VelhaModel.swift in Sources */,
 				A7A11B6A29A95EE5009B7FD4 /* MemoryViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

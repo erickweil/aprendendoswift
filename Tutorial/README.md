@@ -53,7 +53,7 @@ Clique no assunto que deseja ler sobre:
 - [Repetição](Repeticao.md)
 - [Optionals](Optionals.md)
 - [Funções](Funcoes.md)
-- Classes, Structs e Enums
+- [Structs, Classes e Enums](Structs.md)
 - Genéricos
 - Protocols e Extensions
 - Threads e Queues
