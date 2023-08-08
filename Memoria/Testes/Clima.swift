@@ -13,7 +13,7 @@ struct Clima: View {
     var body: some View {
             ZStack {
                 BackgroundView(
-                    corInicial: estaNoite ? Color.black : Color("fundoAzul"),
+                    corInicial: estaNoite ? Color.black : .blue,
                     corFinal: Color(red:0.6,green:0.8,blue:0.9)
                 )
                 

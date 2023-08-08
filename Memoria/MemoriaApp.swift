@@ -8,26 +8,10 @@
 import SwiftUI
 
 @main
-struct MemoriaApp: App {
-    //let game = MemoryViewModel(nPares: 10, tema: Tema.temas[0])
-    //let model = CalculadoraViewModel()
-    //let model = VelhaViewModel()
-    let model = EmojiArtViewModel()
-    
+struct MemoriaApp: App {    
     var body: some Scene {
         WindowGroup {
-            //HelloWorld()
-            
-            //MemoryGameView(viewModel:game)
-            
-            //VelhaView(viewModel: model)
-            
-            //Cardify_test(test:Cardify_test.Flipper())
-            
-            //CalculadoraView(viewModel:model)
-            
-            
-            EmojiArtView(document: model)
+            HomeScreen()
         }
     }
 }

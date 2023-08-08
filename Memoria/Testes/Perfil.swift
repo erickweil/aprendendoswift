@@ -32,7 +32,7 @@ struct PerfilUsuario: View {
     var body: some View {
         ZStack(alignment: .top) {
             // Fundo
-            FundoView(cor1: Color("Gradiente1"), cor2: Color("Gradiente2"))
+            FundoView(cor1: Color(red: 0.3, green: 0.5, blue: 1.0), cor2: .cyan)
             
             // Informações
             VStack {
@@ -64,7 +64,7 @@ struct FundoView: View {
 struct InformacoesPerfil: View {
     var body: some View {
         VStack(spacing:16) {
-            Text("Wanilk Caldas")
+            Text("Wanessa Wostrik")
                 .font(.largeTitle)
             Text("CEO")
             HStack {
@@ -126,7 +126,7 @@ struct DetalhesPerfil: View {
             VStack(alignment: .leading, spacing:16) {
                 HStack {
                     Image(systemName: "envelope")
-                    Text("wanilk_caldas@exemplo.com")
+                    Text("wwostrik00@exemplo.com")
                 }
                 HStack {
                     Image(systemName: "birthday.cake")
