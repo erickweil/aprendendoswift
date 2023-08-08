@@ -15,8 +15,11 @@ class VelhaViewModel: ObservableObject {
         self.model = VelhaModel()
     }
     
-    func getMarcacao(x: Int, y: Int) -> String {
-        let marcacao: VelhaModel.Marcacao = model.quadro[x][y]
+    func reiniciar() {
+        self.model = VelhaModel()
+    }
+    
+    func marcacaoParaTexto(_ marcacao: VelhaModel.Marcacao) -> String {
         if marcacao == .bolinha {
             return "○"
         }
@@ -26,6 +29,18 @@ class VelhaViewModel: ObservableObject {
         else {
             return " "
         }
+    }
+    
+    func getQuemGanhou() -> String? {
+        if let quemGanhou = model.quemGanhou() {
+            return marcacaoParaTexto(quemGanhou)
+        } else {
+            return nil
+        }
+    }
+    
+    func getMarcacao(x: Int, y: Int) -> String {
+        return marcacaoParaTexto(model.getValor(x,y))
     }
     
     func clicou(x: Int, y: Int) {
