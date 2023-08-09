@@ -34,9 +34,9 @@ struct HomeScreen: View {
                             )
                         })
                         
-                        OptionAppButton(title: "Jogo da Velha", destination: {
-                            VelhaView(viewModel: VelhaViewModel())
-                        })
+                        //OptionAppButton(title: "Jogo da Velha", destination: //{
+                            //VelhaView(viewModel: VelhaViewModel())
+                        //})
                         
                     }.padding()
                     

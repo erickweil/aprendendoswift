@@ -1,6 +1,6 @@
 //
 //  VelhaViewModel.swift
-//  Teste
+//  Memoria
 //
 //  Created by Erick Leonardo Weil on 08/08/23.
 //
@@ -15,35 +15,24 @@ class VelhaViewModel: ObservableObject {
         self.model = VelhaModel()
     }
     
+    func getValor(_ x:Int, _ y: Int) -> String {
+        return model.getValor(x, y).rawValue
+    }
+    
+    func jaGanhou() -> Bool {
+        return model.checarGanhou() != .vazio
+    }
+    
+    func getQuemGanhou() -> String {
+        return model.checarGanhou().rawValue
+    }
+    
+    func clicou(_ x:Int,_ y:Int) {
+        print("Clicou em \(x),\(y)")
+        model.clicou(x, y)
+    }
+    
     func reiniciar() {
         self.model = VelhaModel()
-    }
-    
-    func marcacaoParaTexto(_ marcacao: VelhaModel.Marcacao) -> String {
-        if marcacao == .bolinha {
-            return "○"
-        }
-        else if marcacao == .xis {
-            return "𝕏"
-        }
-        else {
-            return " "
-        }
-    }
-    
-    func getQuemGanhou() -> String? {
-        if let quemGanhou = model.quemGanhou() {
-            return marcacaoParaTexto(quemGanhou)
-        } else {
-            return nil
-        }
-    }
-    
-    func getMarcacao(x: Int, y: Int) -> String {
-        return marcacaoParaTexto(model.getValor(x,y))
-    }
-    
-    func clicou(x: Int, y: Int) {
-        model.clicou(x: x, y: y)
     }
 }

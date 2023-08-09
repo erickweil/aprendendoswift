@@ -1,6 +1,6 @@
 //
 //  VelhaModel.swift
-//  Teste
+//  Memoria
 //
 //  Created by Erick Leonardo Weil on 08/08/23.
 //
@@ -8,66 +8,81 @@
 import Foundation
 
 struct VelhaModel {
-    enum Marcacao {
-        case nada
-        case bolinha
-        case xis
+    enum Marcação: String {
+        case vazio = " "
+        case bolinha = "O"
+        case xis = "X"
     }
     
-    var quadro: [Marcacao] = [
-        .nada,.nada,.nada,
-        .nada,.nada,.nada,
-        .nada,.nada,.nada,
+    var quadro: [Marcação] = [
+        .vazio, .vazio, .vazio,
+        .vazio, .vazio, .vazio,
+        .vazio, .vazio, .vazio
     ]
     
-    var jogador: Marcacao = .bolinha
+    var jogador: Marcação = .bolinha
     
-    public func getValor(_ x:Int,_ y:Int) -> Marcacao {
+    func getValor(_ x: Int,_ y: Int) -> Marcação {
         return quadro[y * 3 + x]
     }
     
-    public mutating func setValor(_ x:Int,_ y:Int,_ marcacao: Marcacao) {
+    mutating func setValor(_ x: Int,_ y: Int,_ marcacao: Marcação) {
         quadro[y * 3 + x] = marcacao
     }
     
-    public mutating func clicou(x: Int, y: Int) {
-        if getValor(x,y) == .nada {
-            setValor(x,y,jogador)
-            jogador = jogador == .xis ? .bolinha : .xis
+    mutating func clicou(_ x: Int, _ y: Int) {
+        if getValor(x, y) != .vazio {
+            return
+        }
+        
+        if checarGanhou() != .vazio {
+            return
+        }
+        
+        setValor(x, y, jogador)
+        
+        if jogador == .xis {
+            jogador = .bolinha
+        } else {
+            jogador = .xis
         }
     }
     
+    // 0 1 2
+    // 3 4 5
+    // 6 7 8
     
-    private static let condicoesGanhou = [
-        // Horizontal
+    let condicoesVitoria = [
+        // linhas
         [0,1,2],
         [3,4,5],
         [6,7,8],
         
-        // Vertical
+        // colunas
         [0,3,6],
         [1,4,7],
         [2,5,8],
         
-        // Diagonais
+        // diagonais
         [0,4,8],
         [2,4,6]
     ]
     
-    public func quemGanhou() -> Marcacao? {
-        for c in VelhaModel.condicoesGanhou {
-            if let ganhou = verificar(quadro[c[0]],quadro[c[1]],quadro[c[2]]) {
-                return ganhou
+    func checarGanhou() -> Marcação {
+        for condicao in condicoesVitoria {
+            let a = quadro[condicao[0]]
+            let b = quadro[condicao[1]]
+            let c = quadro[condicao[2]]
+            
+            if a == b && a == c {
+                if a == .xis {
+                    return .xis
+                }
+                if a == .bolinha {
+                    return .bolinha
+                }
             }
         }
-        return nil
-    }
-    
-    private func verificar(_ a:Marcacao,_ b:Marcacao,_ c:Marcacao) -> Marcacao? {
-        if a == b && a == c && a != .nada {
-            return a
-        } else {
-            return nil
-        }
+        return .vazio
     }
 }

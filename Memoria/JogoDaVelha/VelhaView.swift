@@ -1,8 +1,8 @@
 //
-//  JogoDaVelha.swift
-//  Teste
+//  VelhaView.swift
+//  Memoria
 //
-//  Created by Erick Leonardo Weil on 25/07/23.
+//  Created by Erick Leonardo Weil on 08/08/23.
 //
 
 import SwiftUI
@@ -13,64 +13,59 @@ struct VelhaView: View {
     
     var body: some View {
         ZStack {
+            if viewModel.jaGanhou() {
+                VStack {
+                    Spacer()
+                    Text("\(viewModel.getQuemGanhou()) Ganhou!")
+                        .font(.largeTitle)
+                    
+                    Button(action: {
+                        viewModel.reiniciar()
+                    }, label: {
+                        Text("Reiniciar Jogo")
+                            .font(.largeTitle)
+                    })
+                }
+            }
+            
             VStack {
                 HStack {
                     quad(0,0)
-                    quad(0,1)
-                    quad(0,2)
+                    quad(1, 0)
+                    quad(2, 0)
                 }
                 HStack {
-                    quad(1,0)
-                    quad(1,1)
-                    quad(1,2)
+                    quad(0, 1)
+                    quad(1, 1)
+                    quad(2, 1)
                 }
                 HStack {
-                    quad(2,0)
-                    quad(2,1)
-                    quad(2,2)
+                    quad(0, 2)
+                    quad(1, 2)
+                    quad(2, 2)
                 }
-            }
-            .background(.primary)
+            }.background(.black)
             
-            if let quemGanhou = viewModel.getQuemGanhou(){
-                Color(red: 0.4, green: 0.4, blue: 0.4, opacity: 0.85)
-                    .ignoresSafeArea(.all)
-                VStack {
-                    Spacer()
-                    Text("\(quemGanhou) Ganhou!")
-                        .font(.system(size: 72.0))
-                        .bold()
-                        .foregroundColor(.white)
-                    
-                    Button {
-                        viewModel.reiniciar()
-                    } label: {
-                        Text("Recomeçar")
-                            .font(.system(size: 28.0))
-                            .foregroundColor(.white)
-                            .padding()
-                            .background {
-                                RoundedRectangle(cornerRadius: 10.0)
-                            }
-                    }
-                }
+        }
+    }
+    
+    func quad(_ x:Int,_ y:Int) -> some View {
+        Quadrado(texto: viewModel.getValor(x, y))
+            .padding()
+            .background(.white)
+            .onTapGesture {
+                viewModel.clicou(x, y)
             }
-        }
     }
     
-    func quad(_ x: Int, _ y: Int) -> some View {
-        Quadrado(marcação: viewModel.getMarcacao(x: x, y: y))
-            .onTapGesture { viewModel.clicou(x: x, y: y)}
-    }
-    
-    struct Quadrado: View {
-        let marcação: String
-        var body: some View {
-            return Text(marcação)
-                .font(.system(size: 72))
-                .frame(width: 80,height: 80)
-                .background(Color(.systemBackground))
-        }
+}
+
+struct Quadrado: View {
+    var texto: String
+    var body: some View {
+        Text(texto)
+            .font(.system(size: 72.0))
+            .frame(width: 80,height: 80)
     }
 }
 

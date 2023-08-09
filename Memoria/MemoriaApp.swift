@@ -12,6 +12,7 @@ struct MemoriaApp: App {
     var body: some Scene {
         WindowGroup {
             HomeScreen()
+            //VelhaView(viewModel: VelhaViewModel())
         }
     }
 }
