@@ -18,6 +18,7 @@
 		A75B58DA29AFF3FB0075BC3D /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75B58D929AFF3FB0075BC3D /* HomeScreen.swift */; };
 		A7621043299D5D1F00DA6072 /* MemoryGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7621042299D5D1F00DA6072 /* MemoryGameView.swift */; };
 		A76364DC29B008F60045FBA9 /* CalculadoraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76364DB29B008F60045FBA9 /* CalculadoraView.swift */; };
+		A773522F2A93A1F200DAF612 /* Animacao.swift in Sources */ = {isa = PBXBuildFile; fileRef = A773522E2A93A1F200DAF612 /* Animacao.swift */; };
 		A7823D732A827A89001282BB /* Clima.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7823D702A827A89001282BB /* Clima.swift */; };
 		A7823D742A827A89001282BB /* Perfil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7823D712A827A89001282BB /* Perfil.swift */; };
 		A7823D752A827A89001282BB /* MacaMordida.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7823D722A827A89001282BB /* MacaMordida.swift */; };
@@ -51,6 +52,7 @@
 		A75B58D929AFF3FB0075BC3D /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
 		A7621042299D5D1F00DA6072 /* MemoryGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryGameView.swift; sourceTree = "<group>"; };
 		A76364DB29B008F60045FBA9 /* CalculadoraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculadoraView.swift; sourceTree = "<group>"; };
+		A773522E2A93A1F200DAF612 /* Animacao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animacao.swift; sourceTree = "<group>"; };
 		A7823D702A827A89001282BB /* Clima.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Clima.swift; path = Memoria/Testes/Clima.swift; sourceTree = SOURCE_ROOT; };
 		A7823D712A827A89001282BB /* Perfil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Perfil.swift; path = Memoria/Testes/Perfil.swift; sourceTree = SOURCE_ROOT; };
 		A7823D722A827A89001282BB /* MacaMordida.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MacaMordida.swift; path = Memoria/Testes/MacaMordida.swift; sourceTree = SOURCE_ROOT; };
@@ -111,6 +113,7 @@
 				A7823D722A827A89001282BB /* MacaMordida.swift */,
 				A7823D712A827A89001282BB /* Perfil.swift */,
 				A7823D762A827FAD001282BB /* Interacao.swift */,
+				A773522E2A93A1F200DAF612 /* Animacao.swift */,
 			);
 			path = Testes;
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 			files = (
 				A708261D2A831D3F00DC3C6D /* RadioButtonGroup.swift in Sources */,
 				A7FF4DF229B837B700CB955C /* MemoryThemes.swift in Sources */,
+				A773522F2A93A1F200DAF612 /* Animacao.swift in Sources */,
 				A7A5A0B729CE386D003ACBB4 /* UtilityExtensions.swift in Sources */,
 				A78442182996E79700058939 /* HelloWorld.swift in Sources */,
 				A7823D772A827FAD001282BB /* Interacao.swift in Sources */,
