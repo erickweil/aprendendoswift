@@ -8,37 +8,43 @@
 import SwiftUI
 
 struct Animacao: View {
-    @State private var numeroFrutas = 0
-    private var frutas = ["Amora","Jabuticaba","Ameixa","Caqui","Caju","Maçã","Jaca","Laranja"]
+    
+    @Namespace private var animation
+    @State private var opçãoEscolhida = 0
+    private var opções = ["Página Inicial","Carrinho","Preferências","Sobre"]
     var body: some View {
-        VStack {
-            Text("Frutas:")
-            ForEach(frutas[0..<numeroFrutas], id: \.self) { f in
-                Text(f)
-                    .foregroundColor(.white)
-                    .padding(10)
-                    .background {
-                        RoundedRectangle(cornerRadius: 25.0)
-                            .foregroundColor(.blue)
+        VStack(alignment: .leading) {
+            ForEach(0..<opções.count, id: \.self) { qual in
+                if qual > 0 { Divider() }
+                HStack {
+                    if qual == opçãoEscolhida {
+                        Image(systemName: "triangle.fill")
+                            .renderingMode(.template)
+                            .rotationEffect(Angle(degrees: 180.0 + 30.0))
+                            .foregroundColor(.accentColor)
+                            .frame(width: 32.0,height: 32.0)
+                            .matchedGeometryEffect(id: "ESCOLHIDO", in: animation)
+                    } else {
+                        Text("")
+                            .frame(width: 32.0,height: 32.0)
                     }
-                    .transition(.slide)
+                    
+                    Text(opções[qual])
+                        .padding()
+                        .onTapGesture {
+                            opçãoEscolhida = qual
+                        }
+                }
+                .animation(.easeIn(duration: 0.25), value: opçãoEscolhida)
             }
-            
-            Spacer()
-            
-            Button("Adicionar Fruta") {
-                numeroFrutas = (numeroFrutas + 1) % (frutas.count+1)
-            }
-            .bold()
-            .foregroundColor(.white)
-            .padding(20)
-            .background {
-                RoundedRectangle(cornerRadius: 20.0)
-                    .foregroundColor(.accentColor)
-            }
+            .frame(maxWidth: .infinity, alignment: .leading)
         }
-        .font(.system(size: 36.0))
-        .animation(.default, value: numeroFrutas)
+        .background {
+            RoundedRectangle(cornerRadius: 20)
+                .stroke()
+                .foregroundColor(.blue)
+        }
+        .padding(40)
     }
 }
 
