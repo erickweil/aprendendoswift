@@ -11,7 +11,8 @@ import SwiftUI
 struct MemoriaApp: App {    
     var body: some Scene {
         WindowGroup {
-            HomeScreen()
+            Animacao()
+            //HomeScreen()
             //VelhaView(viewModel: VelhaViewModel())
         }
     }

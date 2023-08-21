@@ -17,41 +17,28 @@ struct HomeScreen: View {
     var body: some View /* () */{
         // View que Une várias views uma em cima da outra
         NavigationView {
-            ScrollView {
-                VStack {
-                    VStack {
-                        Text("Apps Completos:")
-                            .font(.title)
-                        OptionAppButton(title: "Jogo da Memoria", destination: {
-                            MemoryGameView(
-                                viewModel:MemoryViewModel(nPares: 10, tema: Tema.temas[0])
-                            )
-                        })
-                        
-                        OptionAppButton(title: "Calculadora", destination: {
-                            CalculadoraView(
-                                viewModel:CalculadoraViewModel()
-                            )
-                        })
-                        
-                        //OptionAppButton(title: "Jogo da Velha", destination: //{
-                            //VelhaView(viewModel: VelhaViewModel())
-                        //})
-                        
-                    }.padding()
-                    
-                    VStack {
-                        
-                        Text("Exemplos de Telas:")
-                            .font(.title)
-                        OptionAppButton(title: "Clima", destination: { Clima() })
-                        OptionAppButton(title: "MacaMordida", destination: { MacaMordida() })
-                        OptionAppButton(title: "Perfil", destination: { PerfilUsuario() })
-                        
-                        Spacer()
-                        
-                    }.padding()
-                }
+            List {
+                OptionAppButton(title: "Jogo da Memoria", destination: {
+                    MemoryGameView(
+                        viewModel:MemoryViewModel(nPares: 10, tema: Tema.temas[0])
+                    )
+                })
+                
+                OptionAppButton(title: "Calculadora", destination: {
+                    CalculadoraView(
+                        viewModel:CalculadoraViewModel()
+                    )
+                })
+                
+                OptionAppButton(title: "Jogo da Velha", destination: {
+                    VelhaView(viewModel: VelhaViewModel())
+                })
+            
+                OptionAppButton(title: "Clima", destination: { Clima() })
+                OptionAppButton(title: "MacaMordida", destination: { MacaMordida() })
+                OptionAppButton(title: "Perfil", destination: { PerfilUsuario() })
+                
+                
             }
         }
         
