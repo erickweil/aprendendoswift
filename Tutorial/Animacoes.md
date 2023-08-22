@@ -3,8 +3,10 @@
 Referências
 - https://www.youtube.com/watch?v=K00oSg1gm_0 (CodeWithChris)
 - https://www.youtube.com/watch?v=PoeaUMGAx6c (Stanford)
+- https://www.youtube.com/watch?v=xGNR7tvDE0Q (Stewart Lynch)
 - https://medium.com/simform-engineering/basics-of-swift-ui-animations-d1aa2485a5d9
 - https://sarunw.com/posts/animation-delay-and-repeatforever-in-swiftui/
+- https://sakunlabs.com/blog/swiftui-identity-transitions/
 
 ![Parts of an Animation](https://miro.medium.com/v2/resize:fit:1400/1*JO7VpW38Gdiyt0U-lUPB5A.png)
 
@@ -119,52 +121,15 @@ Outro exemplo, uma animação repete para sempre, esperando 2 segundos de delay 
 
 Além de controlar quase qualquer propriedade, Há vários efeitos de animação que podem ser aplicados para facilitar a criação de certos efeitos (Rotação, Escala, Opacidade, etc...)
 
-### Matched Geometry Effect
+o SwiftUI, os modificadores de efeito são utilizados para aplicar transformações visuais ou animações aos elementos da interface do usuário, como Views e Controls. Esses modificadores permitem que você altere a aparência e o comportamento dos elementos de forma dinâmica, criando uma experiência interativa e agradável para o usuário.
 
+Aqui estão alguns dos modificadores de efeito mais comuns:
 
-```swift
-struct Animacao: View {
-    
-    @Namespace private var animation
-    @State private var opçãoEscolhida = 0
-    private var opções = ["Página Inicial","Carrinho","Preferências","Sobre"]
-    var body: some View {
-        VStack(alignment: .leading) {
-            ForEach(0..<opções.count, id: \.self) { qual in
-                if qual > 0 { Divider() }
-                HStack {
-                    if qual == opçãoEscolhida {
-                        Image(systemName: "triangle.fill")
-                            .renderingMode(.template)
-                            .rotationEffect(Angle(degrees: 180.0 + 30.0))
-                            .foregroundColor(.accentColor)
-                            .frame(width: 32.0,height: 32.0)
-                            .matchedGeometryEffect(id: "ESCOLHIDO", in: animation)
-                    } else {
-                        Text("")
-                            .frame(width: 32.0,height: 32.0)
-                    }
-                    
-                    Text(opções[qual])
-                        .padding()
-                        .onTapGesture {
-                            opçãoEscolhida = qual
-                        }
-                }
-                .animation(.easeIn(duration: 0.25), value: opçãoEscolhida)
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-        }
-        .background {
-            RoundedRectangle(cornerRadius: 20)
-                .stroke()
-                .foregroundColor(.blue)
-        }
-        .padding(40)
-    }
-}
-```
-![Animação Matched Geometry](ezgif-3-9bedc94b89.gif)
+- scaleEffect: Este modificador permite escalar uma View aumentando ou diminuindo seu tamanho. Você pode usar um fator de escala para controlar o grau de aumento ou redução.
+- rotationEffect: aplica uma rotação a uma View. A rotação é definida em graus e pode ser animada para criar efeitos de giro suaves.
+- offset: O modificador offset permite mover uma View em relação à sua posição original. Isso é útil para criar animações de deslocamento ou transições.
+- opacity: Com o modificador opacity, você pode controlar a opacidade de uma View, tornando-a gradualmente invisível (opacidade zero) ou visível (opacidade total).
+- blur: O modificador blur aplica um efeito de desfoque a uma View, tornando-a embaçada. Isso é útil para criar sobreposições ou destacar conteúdo focado.
 
 ## Transições
 
@@ -218,6 +183,80 @@ struct Animacao: View {
 As transições podem ser escolhidas de forma parecida com o tipo das animações. Inclusive é possível escolher uma transição de entrada diferente da transição de saída com a opção .assymetric()
 
 > Observação: Animações de transição podem não ser exibidas corretamente no Preview do XCode, prefira sempre visualizá-las no Simulator ou aparelho real.
+
+
+### Matched Geometry Effect
+
+As vezes você quer que uma View se mova de um lugar da tela para outro, Se essa View estiver se movendo dentro do mesmo **Container**, não há problema algum, basta utilizar o .position ou .offset e animar o valor numérico correspondente para a View ser animada.
+
+Agora se você quer que uma View seja transferida para outro **container**, isto não é possível, não com a **mesma View**.
+
+O que é feito é colocar uma View em cada posição e então é aplicada uma transição entre as duas Views, onde que uma irá se mover desaparecendo e a outra se mover aparecendo de forma sincronizada, parecendo ser a mesma View que se deslocou. (Mas na verdade é só uma transição sincronizada)
+
+O exemplo abaixo utiliza o Matched Geometry Effect para que conforme a opção é escolhida um triângulo se desloca para a posição selecionada, destacando-a.
+
+```swift
+struct Animacao: View {
+    
+    @Namespace private var animation
+    @State private var opçãoEscolhida = 0
+    private var opções = ["Página Inicial","Carrinho","Preferências","Sobre"]
+    var body: some View {
+        VStack(alignment: .leading) {
+            ForEach(0..<opções.count, id: \.self) { qual in
+                if qual > 0 { Divider() }
+                HStack {
+                    if qual == opçãoEscolhida {
+                        Image(systemName: "triangle.fill")
+                            .renderingMode(.template)
+                            .rotationEffect(Angle(degrees: 180.0 + 30.0))
+                            .foregroundColor(.accentColor)
+                            .frame(width: 32.0,height: 32.0)
+                            .matchedGeometryEffect(id: "ESCOLHIDO", in: animation)
+                    } else {
+                        Text("")
+                            .frame(width: 32.0,height: 32.0)
+                    }
+                    
+                    Text(opções[qual])
+                        .padding()
+                        .onTapGesture {
+                            opçãoEscolhida = qual
+                        }
+                }
+                .animation(.easeIn(duration: 0.25), value: opçãoEscolhida)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+        }
+        .background {
+            RoundedRectangle(cornerRadius: 20)
+                .stroke()
+                .foregroundColor(.blue)
+        }
+        .padding(40)
+    }
+}
+```
+![Animação Matched Geometry](ezgif-3-9bedc94b89.gif)
+Para que a Animação de Transição utilizando este feito funcione é necesário basicamente:
+
+- Que a View seja afetada por uma animação, implícita ou explícita.
+```swift
+  .animation(.easeIn(duration: 0.25), value: opçãoEscolhida)
+```
+- Criar um Namespace na View onde ocorrerá a transição.
+```swift
+struct Animacao: View {
+    @Namespace private var animation
+    ...
+    var body: some View {
+        ...
+```
+- Especificar em cada View que irá ser **Transicionada** o modificador .matchedGeometryEffect(), utilizando o mesmo id e namespace nos dois casos.
+```swift
+.matchedGeometryEffect(id: "ESCOLHIDO", in: animation)
+```
+- Por último, deve garantir que em nenhum momento as duas Views com o mesmo id existam ao mesmo tempo. Pois a ideia é que a transição ocorrerá entre elas ao uma desaparecer e a outra aparecer.
 
 
 
