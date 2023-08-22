@@ -15,6 +15,8 @@
 		A708261F2A831D6800DC3C6D /* ExemploRadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A708261E2A831D6800DC3C6D /* ExemploRadioButton.swift */; };
 		A70E381529BA4F82008C5E73 /* ProgressShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70E381429BA4F82008C5E73 /* ProgressShape.swift */; };
 		A71E676929B8C88500B0CB22 /* UIUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71E676829B8C88500B0CB22 /* UIUtil.swift */; };
+		A731054D2A8C3C2900DC32DB /* ExemploForEach.swift in Sources */ = {isa = PBXBuildFile; fileRef = A731054C2A8C3C2900DC32DB /* ExemploForEach.swift */; };
+		A731054F2A8C660100DC32DB /* BottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A731054E2A8C660100DC32DB /* BottomBar.swift */; };
 		A75B58DA29AFF3FB0075BC3D /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75B58D929AFF3FB0075BC3D /* HomeScreen.swift */; };
 		A7621043299D5D1F00DA6072 /* MemoryGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7621042299D5D1F00DA6072 /* MemoryGameView.swift */; };
 		A76364DC29B008F60045FBA9 /* CalculadoraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76364DB29B008F60045FBA9 /* CalculadoraView.swift */; };
@@ -48,6 +50,8 @@
 		A708261E2A831D6800DC3C6D /* ExemploRadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExemploRadioButton.swift; sourceTree = "<group>"; };
 		A70E381429BA4F82008C5E73 /* ProgressShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressShape.swift; sourceTree = "<group>"; };
 		A71E676829B8C88500B0CB22 /* UIUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIUtil.swift; sourceTree = "<group>"; };
+		A731054C2A8C3C2900DC32DB /* ExemploForEach.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExemploForEach.swift; sourceTree = "<group>"; };
+		A731054E2A8C660100DC32DB /* BottomBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBar.swift; sourceTree = "<group>"; };
 		A75B58D929AFF3FB0075BC3D /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
 		A7621042299D5D1F00DA6072 /* MemoryGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryGameView.swift; sourceTree = "<group>"; };
 		A76364DB29B008F60045FBA9 /* CalculadoraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculadoraView.swift; sourceTree = "<group>"; };
@@ -111,6 +115,8 @@
 				A7823D722A827A89001282BB /* MacaMordida.swift */,
 				A7823D712A827A89001282BB /* Perfil.swift */,
 				A7823D762A827FAD001282BB /* Interacao.swift */,
+				A731054C2A8C3C2900DC32DB /* ExemploForEach.swift */,
+				A731054E2A8C660100DC32DB /* BottomBar.swift */,
 			);
 			path = Testes;
 			sourceTree = "<group>";
@@ -292,10 +298,12 @@
 				A70826142A830B8A00DC3C6D /* VelhaModel.swift in Sources */,
 				A7EB171129B0C5BB0094AF51 /* CalculadoraViewModel.swift in Sources */,
 				A78442162996E79700058939 /* MemoriaApp.swift in Sources */,
+				A731054D2A8C3C2900DC32DB /* ExemploForEach.swift in Sources */,
 				A70E381529BA4F82008C5E73 /* ProgressShape.swift in Sources */,
 				A76364DC29B008F60045FBA9 /* CalculadoraView.swift in Sources */,
 				A70826182A83153C00DC3C6D /* VelhaView.swift in Sources */,
 				A708261F2A831D6800DC3C6D /* ExemploRadioButton.swift in Sources */,
+				A731054F2A8C660100DC32DB /* BottomBar.swift in Sources */,
 				A7EEB85629CE21310076AA68 /* EmojiArtModel.swift in Sources */,
 				A7A8ADD529B663BB007ADE2A /* AspectVGrid.swift in Sources */,
 				A7A11B6A29A95EE5009B7FD4 /* MemoryViewModel.swift in Sources */,
