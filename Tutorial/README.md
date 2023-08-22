@@ -60,6 +60,7 @@ Clique no assunto que deseja ler sobre:
 
 ## Tutorial específico ambiente App iOS
 - [Introdução SwiftUI](SwiftUI.md)
+- [Animações](Animacoes.md)
 
 Referências:
 - https://docs.swift.org/swift-book/documentation/the-swift-programming-language/thebasics/

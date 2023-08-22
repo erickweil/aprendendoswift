@@ -11,7 +11,10 @@ import SwiftUI
 struct MemoriaApp: App {    
     var body: some Scene {
         WindowGroup {
-            HomeScreen()
+            //ExemploMenu()
+            //TesteMatchedGeometry()
+            Galeria()
+            //HomeScreen()
             //VelhaView(viewModel: VelhaViewModel())
         }
     }
