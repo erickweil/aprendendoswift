@@ -14,6 +14,7 @@
 		A708261D2A831D3F00DC3C6D /* RadioButtonGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A708261C2A831D3F00DC3C6D /* RadioButtonGroup.swift */; };
 		A708261F2A831D6800DC3C6D /* ExemploRadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A708261E2A831D6800DC3C6D /* ExemploRadioButton.swift */; };
 		A70E381529BA4F82008C5E73 /* ProgressShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70E381429BA4F82008C5E73 /* ProgressShape.swift */; };
+		A7158AE72A95330F005D07FA /* ExemploEfeitos.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7158AE62A95330F005D07FA /* ExemploEfeitos.swift */; };
 		A71E676929B8C88500B0CB22 /* UIUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71E676829B8C88500B0CB22 /* UIUtil.swift */; };
 		A75B58DA29AFF3FB0075BC3D /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75B58D929AFF3FB0075BC3D /* HomeScreen.swift */; };
 		A7621043299D5D1F00DA6072 /* MemoryGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7621042299D5D1F00DA6072 /* MemoryGameView.swift */; };
@@ -50,6 +51,7 @@
 		A708261C2A831D3F00DC3C6D /* RadioButtonGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButtonGroup.swift; sourceTree = "<group>"; };
 		A708261E2A831D6800DC3C6D /* ExemploRadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExemploRadioButton.swift; sourceTree = "<group>"; };
 		A70E381429BA4F82008C5E73 /* ProgressShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressShape.swift; sourceTree = "<group>"; };
+		A7158AE62A95330F005D07FA /* ExemploEfeitos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExemploEfeitos.swift; sourceTree = "<group>"; };
 		A71E676829B8C88500B0CB22 /* UIUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIUtil.swift; sourceTree = "<group>"; };
 		A75B58D929AFF3FB0075BC3D /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
 		A7621042299D5D1F00DA6072 /* MemoryGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryGameView.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				A773522E2A93A1F200DAF612 /* ExemploMenu.swift */,
 				A7B2611B2A94E905007C57AF /* TesteMatchedGeometry.swift */,
 				A7B2611D2A95022B007C57AF /* Galeria.swift */,
+				A7158AE62A95330F005D07FA /* ExemploEfeitos.swift */,
 			);
 			path = Testes;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 				A70826142A830B8A00DC3C6D /* VelhaModel.swift in Sources */,
 				A7EB171129B0C5BB0094AF51 /* CalculadoraViewModel.swift in Sources */,
 				A78442162996E79700058939 /* MemoriaApp.swift in Sources */,
+				A7158AE72A95330F005D07FA /* ExemploEfeitos.swift in Sources */,
 				A70E381529BA4F82008C5E73 /* ProgressShape.swift in Sources */,
 				A76364DC29B008F60045FBA9 /* CalculadoraView.swift in Sources */,
 				A70826182A83153C00DC3C6D /* VelhaView.swift in Sources */,
