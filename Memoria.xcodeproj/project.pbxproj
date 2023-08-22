@@ -18,7 +18,7 @@
 		A75B58DA29AFF3FB0075BC3D /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75B58D929AFF3FB0075BC3D /* HomeScreen.swift */; };
 		A7621043299D5D1F00DA6072 /* MemoryGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7621042299D5D1F00DA6072 /* MemoryGameView.swift */; };
 		A76364DC29B008F60045FBA9 /* CalculadoraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76364DB29B008F60045FBA9 /* CalculadoraView.swift */; };
-		A773522F2A93A1F200DAF612 /* Animacao.swift in Sources */ = {isa = PBXBuildFile; fileRef = A773522E2A93A1F200DAF612 /* Animacao.swift */; };
+		A773522F2A93A1F200DAF612 /* ExemploMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A773522E2A93A1F200DAF612 /* ExemploMenu.swift */; };
 		A7823D732A827A89001282BB /* Clima.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7823D702A827A89001282BB /* Clima.swift */; };
 		A7823D742A827A89001282BB /* Perfil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7823D712A827A89001282BB /* Perfil.swift */; };
 		A7823D752A827A89001282BB /* MacaMordida.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7823D722A827A89001282BB /* MacaMordida.swift */; };
@@ -33,6 +33,8 @@
 		A7A5A0B729CE386D003ACBB4 /* UtilityExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A5A0B629CE386D003ACBB4 /* UtilityExtensions.swift */; };
 		A7A8ADD529B663BB007ADE2A /* AspectVGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A8ADD429B663BB007ADE2A /* AspectVGrid.swift */; };
 		A7A8ADD729B672FB007ADE2A /* Cardify.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A8ADD629B672FB007ADE2A /* Cardify.swift */; };
+		A7B2611C2A94E905007C57AF /* TesteMatchedGeometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B2611B2A94E905007C57AF /* TesteMatchedGeometry.swift */; };
+		A7B2611E2A95022B007C57AF /* Galeria.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B2611D2A95022B007C57AF /* Galeria.swift */; };
 		A7EB171129B0C5BB0094AF51 /* CalculadoraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EB171029B0C5BB0094AF51 /* CalculadoraViewModel.swift */; };
 		A7EB171329B0C5CB0094AF51 /* CalculadoraModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EB171229B0C5CB0094AF51 /* CalculadoraModel.swift */; };
 		A7EEB85429CE20C60076AA68 /* EmojiArtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EEB85329CE20C60076AA68 /* EmojiArtView.swift */; };
@@ -52,7 +54,7 @@
 		A75B58D929AFF3FB0075BC3D /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
 		A7621042299D5D1F00DA6072 /* MemoryGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryGameView.swift; sourceTree = "<group>"; };
 		A76364DB29B008F60045FBA9 /* CalculadoraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculadoraView.swift; sourceTree = "<group>"; };
-		A773522E2A93A1F200DAF612 /* Animacao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animacao.swift; sourceTree = "<group>"; };
+		A773522E2A93A1F200DAF612 /* ExemploMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExemploMenu.swift; sourceTree = "<group>"; };
 		A7823D702A827A89001282BB /* Clima.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Clima.swift; path = Memoria/Testes/Clima.swift; sourceTree = SOURCE_ROOT; };
 		A7823D712A827A89001282BB /* Perfil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Perfil.swift; path = Memoria/Testes/Perfil.swift; sourceTree = SOURCE_ROOT; };
 		A7823D722A827A89001282BB /* MacaMordida.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MacaMordida.swift; path = Memoria/Testes/MacaMordida.swift; sourceTree = SOURCE_ROOT; };
@@ -68,6 +70,8 @@
 		A7A5A0B629CE386D003ACBB4 /* UtilityExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityExtensions.swift; sourceTree = "<group>"; };
 		A7A8ADD429B663BB007ADE2A /* AspectVGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspectVGrid.swift; sourceTree = "<group>"; };
 		A7A8ADD629B672FB007ADE2A /* Cardify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cardify.swift; sourceTree = "<group>"; };
+		A7B2611B2A94E905007C57AF /* TesteMatchedGeometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TesteMatchedGeometry.swift; sourceTree = "<group>"; };
+		A7B2611D2A95022B007C57AF /* Galeria.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Galeria.swift; sourceTree = "<group>"; };
 		A7EB171029B0C5BB0094AF51 /* CalculadoraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculadoraViewModel.swift; sourceTree = "<group>"; };
 		A7EB171229B0C5CB0094AF51 /* CalculadoraModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculadoraModel.swift; sourceTree = "<group>"; };
 		A7EEB85329CE20C60076AA68 /* EmojiArtView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiArtView.swift; sourceTree = "<group>"; };
@@ -113,7 +117,9 @@
 				A7823D722A827A89001282BB /* MacaMordida.swift */,
 				A7823D712A827A89001282BB /* Perfil.swift */,
 				A7823D762A827FAD001282BB /* Interacao.swift */,
-				A773522E2A93A1F200DAF612 /* Animacao.swift */,
+				A773522E2A93A1F200DAF612 /* ExemploMenu.swift */,
+				A7B2611B2A94E905007C57AF /* TesteMatchedGeometry.swift */,
+				A7B2611D2A95022B007C57AF /* Galeria.swift */,
 			);
 			path = Testes;
 			sourceTree = "<group>";
@@ -276,7 +282,8 @@
 			files = (
 				A708261D2A831D3F00DC3C6D /* RadioButtonGroup.swift in Sources */,
 				A7FF4DF229B837B700CB955C /* MemoryThemes.swift in Sources */,
-				A773522F2A93A1F200DAF612 /* Animacao.swift in Sources */,
+				A7B2611C2A94E905007C57AF /* TesteMatchedGeometry.swift in Sources */,
+				A773522F2A93A1F200DAF612 /* ExemploMenu.swift in Sources */,
 				A7A5A0B729CE386D003ACBB4 /* UtilityExtensions.swift in Sources */,
 				A78442182996E79700058939 /* HelloWorld.swift in Sources */,
 				A7823D772A827FAD001282BB /* Interacao.swift in Sources */,
@@ -285,6 +292,7 @@
 				A71E676929B8C88500B0CB22 /* UIUtil.swift in Sources */,
 				A7621043299D5D1F00DA6072 /* MemoryGameView.swift in Sources */,
 				A7823D752A827A89001282BB /* MacaMordida.swift in Sources */,
+				A7B2611E2A95022B007C57AF /* Galeria.swift in Sources */,
 				A7EEB85429CE20C60076AA68 /* EmojiArtView.swift in Sources */,
 				A7EB171329B0C5CB0094AF51 /* CalculadoraModel.swift in Sources */,
 				A7823D742A827A89001282BB /* Perfil.swift in Sources */,

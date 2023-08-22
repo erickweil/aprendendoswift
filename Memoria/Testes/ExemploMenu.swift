@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Animacao: View {
+struct ExemploMenu: View {
     
     @Namespace private var animation
     @State private var opçãoEscolhida = 0
@@ -48,8 +48,8 @@ struct Animacao: View {
     }
 }
 
-struct Animacao_Previews: PreviewProvider {
+struct ExemploMenu_Previews: PreviewProvider {
     static var previews: some View {
-        Animacao()
+        ExemploMenu()
     }
 }
