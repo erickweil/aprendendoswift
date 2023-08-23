@@ -13,7 +13,9 @@ struct MemoriaApp: App {
         WindowGroup {
             //ExemploMenu()
             //TesteMatchedGeometry()
-            Galeria()
+            //Galeria()
+            //ExemploEfeitos()
+            TesteAnimacao()
             //HomeScreen()
             //VelhaView(viewModel: VelhaViewModel())
         }

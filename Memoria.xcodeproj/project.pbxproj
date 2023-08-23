@@ -36,6 +36,7 @@
 		A7A8ADD729B672FB007ADE2A /* Cardify.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A8ADD629B672FB007ADE2A /* Cardify.swift */; };
 		A7B2611C2A94E905007C57AF /* TesteMatchedGeometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B2611B2A94E905007C57AF /* TesteMatchedGeometry.swift */; };
 		A7B2611E2A95022B007C57AF /* Galeria.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B2611D2A95022B007C57AF /* Galeria.swift */; };
+		A7B676082A957BDD008CC992 /* TesteAnimacao.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B676072A957BDD008CC992 /* TesteAnimacao.swift */; };
 		A7EB171129B0C5BB0094AF51 /* CalculadoraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EB171029B0C5BB0094AF51 /* CalculadoraViewModel.swift */; };
 		A7EB171329B0C5CB0094AF51 /* CalculadoraModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EB171229B0C5CB0094AF51 /* CalculadoraModel.swift */; };
 		A7EEB85429CE20C60076AA68 /* EmojiArtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EEB85329CE20C60076AA68 /* EmojiArtView.swift */; };
@@ -74,6 +75,7 @@
 		A7A8ADD629B672FB007ADE2A /* Cardify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cardify.swift; sourceTree = "<group>"; };
 		A7B2611B2A94E905007C57AF /* TesteMatchedGeometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TesteMatchedGeometry.swift; sourceTree = "<group>"; };
 		A7B2611D2A95022B007C57AF /* Galeria.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Galeria.swift; sourceTree = "<group>"; };
+		A7B676072A957BDD008CC992 /* TesteAnimacao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TesteAnimacao.swift; sourceTree = "<group>"; };
 		A7EB171029B0C5BB0094AF51 /* CalculadoraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculadoraViewModel.swift; sourceTree = "<group>"; };
 		A7EB171229B0C5CB0094AF51 /* CalculadoraModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculadoraModel.swift; sourceTree = "<group>"; };
 		A7EEB85329CE20C60076AA68 /* EmojiArtView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiArtView.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 				A7B2611B2A94E905007C57AF /* TesteMatchedGeometry.swift */,
 				A7B2611D2A95022B007C57AF /* Galeria.swift */,
 				A7158AE62A95330F005D07FA /* ExemploEfeitos.swift */,
+				A7B676072A957BDD008CC992 /* TesteAnimacao.swift */,
 			);
 			path = Testes;
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 				A7A5A0B529CE3741003ACBB4 /* EmojiArtViewModel.swift in Sources */,
 				A71E676929B8C88500B0CB22 /* UIUtil.swift in Sources */,
 				A7621043299D5D1F00DA6072 /* MemoryGameView.swift in Sources */,
+				A7B676082A957BDD008CC992 /* TesteAnimacao.swift in Sources */,
 				A7823D752A827A89001282BB /* MacaMordida.swift in Sources */,
 				A7B2611E2A95022B007C57AF /* Galeria.swift in Sources */,
 				A7EEB85429CE20C60076AA68 /* EmojiArtView.swift in Sources */,
