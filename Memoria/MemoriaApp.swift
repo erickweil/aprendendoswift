@@ -19,7 +19,8 @@ struct MemoriaApp: App {
             //HomeScreen()
             //VelhaView(viewModel: VelhaViewModel())
             
-            PokemonListScreen(httpCLient: HTTPClient())
+            PokemonListScreen()
+                .environmentObject(PokemonModel(httpClient: HTTPClient()))
         }
     }
 }

@@ -24,6 +24,7 @@
 		A77DFCC52A98D20E0091E08A /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77DFCC42A98D20E0091E08A /* HTTPClient.swift */; };
 		A77DFCC72A98D69D0091E08A /* Pokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77DFCC62A98D69D0091E08A /* Pokemon.swift */; };
 		A77DFCC92A98D6EB0091E08A /* APIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77DFCC82A98D6EB0091E08A /* APIs.swift */; };
+		A77DFCCB2A98E2140091E08A /* PokemonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77DFCCA2A98E2140091E08A /* PokemonModel.swift */; };
 		A7823D732A827A89001282BB /* Clima.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7823D702A827A89001282BB /* Clima.swift */; };
 		A7823D742A827A89001282BB /* Perfil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7823D712A827A89001282BB /* Perfil.swift */; };
 		A7823D752A827A89001282BB /* MacaMordida.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7823D722A827A89001282BB /* MacaMordida.swift */; };
@@ -66,6 +67,7 @@
 		A77DFCC42A98D20E0091E08A /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		A77DFCC62A98D69D0091E08A /* Pokemon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pokemon.swift; sourceTree = "<group>"; };
 		A77DFCC82A98D6EB0091E08A /* APIs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIs.swift; sourceTree = "<group>"; };
+		A77DFCCA2A98E2140091E08A /* PokemonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonModel.swift; sourceTree = "<group>"; };
 		A7823D702A827A89001282BB /* Clima.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Clima.swift; path = Memoria/Testes/Clima.swift; sourceTree = SOURCE_ROOT; };
 		A7823D712A827A89001282BB /* Perfil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Perfil.swift; path = Memoria/Testes/Perfil.swift; sourceTree = SOURCE_ROOT; };
 		A7823D722A827A89001282BB /* MacaMordida.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MacaMordida.swift; path = Memoria/Testes/MacaMordida.swift; sourceTree = SOURCE_ROOT; };
@@ -122,15 +124,16 @@
 			path = RadioGroup;
 			sourceTree = "<group>";
 		};
-		A77DFCC12A98D1460091E08A /* StoreApp */ = {
+		A77DFCC12A98D1460091E08A /* PokemonApp */ = {
 			isa = PBXGroup;
 			children = (
 				A77DFCC22A98D1730091E08A /* PokemonListScreen.swift */,
 				A77DFCC42A98D20E0091E08A /* HTTPClient.swift */,
 				A77DFCC62A98D69D0091E08A /* Pokemon.swift */,
 				A77DFCC82A98D6EB0091E08A /* APIs.swift */,
+				A77DFCCA2A98E2140091E08A /* PokemonModel.swift */,
 			);
-			path = StoreApp;
+			path = PokemonApp;
 			sourceTree = "<group>";
 		};
 		A7823D6F2A827A32001282BB /* Testes */ = {
@@ -168,7 +171,7 @@
 		A78442142996E79700058939 /* Memoria */ = {
 			isa = PBXGroup;
 			children = (
-				A77DFCC12A98D1460091E08A /* StoreApp */,
+				A77DFCC12A98D1460091E08A /* PokemonApp */,
 				A70826192A831D0100DC3C6D /* RadioGroup */,
 				A70826122A830B4700DC3C6D /* JogoDaVelha */,
 				A7823D6F2A827A32001282BB /* Testes */,
@@ -343,6 +346,7 @@
 				A7EEB85629CE21310076AA68 /* EmojiArtModel.swift in Sources */,
 				A7A8ADD529B663BB007ADE2A /* AspectVGrid.swift in Sources */,
 				A7A11B6A29A95EE5009B7FD4 /* MemoryViewModel.swift in Sources */,
+				A77DFCCB2A98E2140091E08A /* PokemonModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
