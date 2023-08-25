@@ -20,6 +20,10 @@
 		A7621043299D5D1F00DA6072 /* MemoryGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7621042299D5D1F00DA6072 /* MemoryGameView.swift */; };
 		A76364DC29B008F60045FBA9 /* CalculadoraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76364DB29B008F60045FBA9 /* CalculadoraView.swift */; };
 		A773522F2A93A1F200DAF612 /* ExemploMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A773522E2A93A1F200DAF612 /* ExemploMenu.swift */; };
+		A77DFCC32A98D1730091E08A /* PokemonListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77DFCC22A98D1730091E08A /* PokemonListScreen.swift */; };
+		A77DFCC52A98D20E0091E08A /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77DFCC42A98D20E0091E08A /* HTTPClient.swift */; };
+		A77DFCC72A98D69D0091E08A /* Pokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77DFCC62A98D69D0091E08A /* Pokemon.swift */; };
+		A77DFCC92A98D6EB0091E08A /* APIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77DFCC82A98D6EB0091E08A /* APIs.swift */; };
 		A7823D732A827A89001282BB /* Clima.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7823D702A827A89001282BB /* Clima.swift */; };
 		A7823D742A827A89001282BB /* Perfil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7823D712A827A89001282BB /* Perfil.swift */; };
 		A7823D752A827A89001282BB /* MacaMordida.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7823D722A827A89001282BB /* MacaMordida.swift */; };
@@ -58,6 +62,10 @@
 		A7621042299D5D1F00DA6072 /* MemoryGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryGameView.swift; sourceTree = "<group>"; };
 		A76364DB29B008F60045FBA9 /* CalculadoraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculadoraView.swift; sourceTree = "<group>"; };
 		A773522E2A93A1F200DAF612 /* ExemploMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExemploMenu.swift; sourceTree = "<group>"; };
+		A77DFCC22A98D1730091E08A /* PokemonListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonListScreen.swift; sourceTree = "<group>"; };
+		A77DFCC42A98D20E0091E08A /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
+		A77DFCC62A98D69D0091E08A /* Pokemon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pokemon.swift; sourceTree = "<group>"; };
+		A77DFCC82A98D6EB0091E08A /* APIs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIs.swift; sourceTree = "<group>"; };
 		A7823D702A827A89001282BB /* Clima.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Clima.swift; path = Memoria/Testes/Clima.swift; sourceTree = SOURCE_ROOT; };
 		A7823D712A827A89001282BB /* Perfil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Perfil.swift; path = Memoria/Testes/Perfil.swift; sourceTree = SOURCE_ROOT; };
 		A7823D722A827A89001282BB /* MacaMordida.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MacaMordida.swift; path = Memoria/Testes/MacaMordida.swift; sourceTree = SOURCE_ROOT; };
@@ -114,6 +122,17 @@
 			path = RadioGroup;
 			sourceTree = "<group>";
 		};
+		A77DFCC12A98D1460091E08A /* StoreApp */ = {
+			isa = PBXGroup;
+			children = (
+				A77DFCC22A98D1730091E08A /* PokemonListScreen.swift */,
+				A77DFCC42A98D20E0091E08A /* HTTPClient.swift */,
+				A77DFCC62A98D69D0091E08A /* Pokemon.swift */,
+				A77DFCC82A98D6EB0091E08A /* APIs.swift */,
+			);
+			path = StoreApp;
+			sourceTree = "<group>";
+		};
 		A7823D6F2A827A32001282BB /* Testes */ = {
 			isa = PBXGroup;
 			children = (
@@ -149,6 +168,7 @@
 		A78442142996E79700058939 /* Memoria */ = {
 			isa = PBXGroup;
 			children = (
+				A77DFCC12A98D1460091E08A /* StoreApp */,
 				A70826192A831D0100DC3C6D /* RadioGroup */,
 				A70826122A830B4700DC3C6D /* JogoDaVelha */,
 				A7823D6F2A827A32001282BB /* Testes */,
@@ -297,17 +317,20 @@
 				A7A5A0B529CE3741003ACBB4 /* EmojiArtViewModel.swift in Sources */,
 				A71E676929B8C88500B0CB22 /* UIUtil.swift in Sources */,
 				A7621043299D5D1F00DA6072 /* MemoryGameView.swift in Sources */,
+				A77DFCC92A98D6EB0091E08A /* APIs.swift in Sources */,
 				A7B676082A957BDD008CC992 /* TesteAnimacao.swift in Sources */,
 				A7823D752A827A89001282BB /* MacaMordida.swift in Sources */,
 				A7B2611E2A95022B007C57AF /* Galeria.swift in Sources */,
 				A7EEB85429CE20C60076AA68 /* EmojiArtView.swift in Sources */,
 				A7EB171329B0C5CB0094AF51 /* CalculadoraModel.swift in Sources */,
 				A7823D742A827A89001282BB /* Perfil.swift in Sources */,
+				A77DFCC32A98D1730091E08A /* PokemonListScreen.swift in Sources */,
 				A70826162A8310C500DC3C6D /* VelhaViewModel.swift in Sources */,
 				A75B58DA29AFF3FB0075BC3D /* HomeScreen.swift in Sources */,
 				A7A8ADD729B672FB007ADE2A /* Cardify.swift in Sources */,
 				A7823D732A827A89001282BB /* Clima.swift in Sources */,
 				A7A11B6829A95C4E009B7FD4 /* MemoryModel.swift in Sources */,
+				A77DFCC72A98D69D0091E08A /* Pokemon.swift in Sources */,
 				A70826142A830B8A00DC3C6D /* VelhaModel.swift in Sources */,
 				A7EB171129B0C5BB0094AF51 /* CalculadoraViewModel.swift in Sources */,
 				A78442162996E79700058939 /* MemoriaApp.swift in Sources */,
@@ -316,6 +339,7 @@
 				A76364DC29B008F60045FBA9 /* CalculadoraView.swift in Sources */,
 				A70826182A83153C00DC3C6D /* VelhaView.swift in Sources */,
 				A708261F2A831D6800DC3C6D /* ExemploRadioButton.swift in Sources */,
+				A77DFCC52A98D20E0091E08A /* HTTPClient.swift in Sources */,
 				A7EEB85629CE21310076AA68 /* EmojiArtModel.swift in Sources */,
 				A7A8ADD529B663BB007ADE2A /* AspectVGrid.swift in Sources */,
 				A7A11B6A29A95EE5009B7FD4 /* MemoryViewModel.swift in Sources */,

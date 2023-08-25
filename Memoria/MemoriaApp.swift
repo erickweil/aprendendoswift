@@ -15,9 +15,11 @@ struct MemoriaApp: App {
             //TesteMatchedGeometry()
             //Galeria()
             //ExemploEfeitos()
-            TesteAnimacao()
+            //TesteAnimacao()
             //HomeScreen()
             //VelhaView(viewModel: VelhaViewModel())
+            
+            PokemonListScreen(httpCLient: HTTPClient())
         }
     }
 }
