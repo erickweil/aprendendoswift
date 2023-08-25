@@ -10,15 +10,22 @@ import Foundation
 @MainActor
 class PokemonModel: ObservableObject {
     let httpClient: HTTPClient
-    @Published var pokemons: [Pokemon] = []
+    @Published var pokemonTypes: [NameUrlItem] = []
+    @Published var typeDetail: PokemonType = PokemonType(id: -1, name: "", pokemon: [])
     
     init(httpClient: HTTPClient) {
         self.httpClient = httpClient
     }
     
-    func loadPokemons() async throws {
-        let resource = Resource(url: APIs.pokemon.url, modelType: PokemonResponse.self)
+    func loadPokemonTypes() async throws {
+        let resource = Resource(url: APIs.type.url, modelType: RESTResponse<NameUrlItem>.self)
         let resp = try await httpClient.load(resource)
-        pokemons = resp.results
+        pokemonTypes = resp.results
+    }
+    
+    func loadTypeDetailURL(url: String) async throws {
+        let resource = Resource(url: URL(string:url)!, modelType: PokemonType.self)
+        let resp = try await httpClient.load(resource)
+        typeDetail = resp
     }
 }

@@ -7,10 +7,21 @@
 
 import Foundation
 
-struct APIs {
-    struct EndPoint {
-        let url: URL
+enum APIs {
+    case pokemon
+    case type
+    
+    private var baseURL: URL {
+        URL(string: "https://pokeapi.co")!
     }
     
-    public static let pokemon = EndPoint(url: URL(string: "https://pokeapi.co/api/v2/pokemon")!)
+    
+    var url: URL {
+        switch self {
+        case .pokemon:
+            return baseURL.appendingPathComponent("/api/v2/pokemon")
+        case .type:
+            return baseURL.appendingPathComponent("/api/v2/type")
+        }
+    }
 }

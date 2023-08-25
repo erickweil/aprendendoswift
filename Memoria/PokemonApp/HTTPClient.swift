@@ -58,6 +58,7 @@ struct Resource<T: Codable> {
 // Seria interessante ter um protocol HttpClient e um MockHttpClient para testes...
 struct HTTPClient {
     func load<T: Codable>(_ resource: Resource<T>) async throws -> T {
+        print(resource.url.absoluteString)
         var request = URLRequest(url: resource.url)
         
         // Constrói a requisição

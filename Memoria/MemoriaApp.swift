@@ -18,9 +18,9 @@ struct MemoriaApp: App {
             //TesteAnimacao()
             //HomeScreen()
             //VelhaView(viewModel: VelhaViewModel())
-            
-            PokemonListScreen()
-                .environmentObject(PokemonModel(httpClient: HTTPClient()))
+            NavigationStack {
+                PokemonTypeListScreen()
+            }.environmentObject(PokemonModel(httpClient: HTTPClient()))
         }
     }
 }
