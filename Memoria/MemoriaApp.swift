@@ -13,14 +13,14 @@ struct MemoriaApp: App {
         WindowGroup {
             //ExemploMenu()
             //TesteMatchedGeometry()
-            //Galeria()
+            Galeria()
             //ExemploEfeitos()
             //TesteAnimacao()
             //HomeScreen()
             //VelhaView(viewModel: VelhaViewModel())
-            NavigationStack {
-                PokemonTypeListScreen()
-            }.environmentObject(PokemonModel(httpClient: HTTPClient()))
+            //NavigationStack {
+             //   PokemonTypeListScreen()
+            //}.environmentObject(PokemonModel(httpClient: HTTPClient()))
         }
     }
 }
