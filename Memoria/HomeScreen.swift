@@ -33,6 +33,8 @@ struct HomeScreen: View {
                 OptionAppButton(title: "Jogo da Velha", destination: {
                     VelhaView(viewModel: VelhaViewModel())
                 })
+                
+                OptionAppButton(title: "Pokemon", destination: { PokemonView(viewModel:  PokemonViewModel(id:1, pokemon: nil)) })
             
                 OptionAppButton(title: "Clima", destination: { Clima() })
                 OptionAppButton(title: "MacaMordida", destination: { MacaMordida() })

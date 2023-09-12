@@ -11,9 +11,13 @@ import SwiftUI
 struct MemoriaApp: App {    
     var body: some Scene {
         WindowGroup {
+            NavigationView {
+                LojaView(vm: LojaViewModel(httpClient: HTTPClient()))
+            }
+            
             //ExemploMenu()
             //TesteMatchedGeometry()
-            Galeria()
+            //Galeria()
             //ExemploEfeitos()
             //TesteAnimacao()
             //HomeScreen()
