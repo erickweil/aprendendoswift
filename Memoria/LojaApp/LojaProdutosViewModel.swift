@@ -20,15 +20,7 @@ class LojaProdutosViewModel: ObservableObject {
     }
     
     func carregarProdutos() async throws {
-        let resp = try await httpClient.fetch(LojaAPI.getProductByCategory(categoria.id))
-        
-        guard resp.success else {
-            throw NetworkError.errorResponse("Não conseguiu listar produtos")
-        }
-        
-        guard let respModel = try? resp.json([LojaModels.Product].self) else {
-            throw NetworkError.errorResponse("Não conseguiu decodificar resposta dos produtos")
-        }
+        let respModel = try await LojaAPI.load(httpClient, LojaAPI.getProductByCategory(categoria.id), model: [LojaModels.Product].self)
 
         DispatchQueue.main.async {
             self.produtos = respModel

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct LojaProdutosView: View {
     @ObservedObject var vm: LojaProdutosViewModel
+    @State private var modalAddProduto: Bool = false
     
     var body: some View {
         List(vm.produtos, id: \.id) { produto in
@@ -51,6 +52,19 @@ struct LojaProdutosView: View {
             } catch {
                 print("Erro: \(error.localizedDescription)")
             }
-        }.navigationTitle(vm.categoria.name)
+        }
+        .navigationTitle(vm.categoria.name)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button("Adicionar Produto") {
+                    modalAddProduto = true
+                }
+            }
+        }
+        .sheet(isPresented: $modalAddProduto) {
+            NavigationView {
+                LojaAdicionarProdutoView(httpClient: vm.httpClient, selectedCategory: vm.categoria)
+            }
+        }
     }
 }

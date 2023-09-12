@@ -48,6 +48,7 @@
 		A7B2611C2A94E905007C57AF /* TesteMatchedGeometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B2611B2A94E905007C57AF /* TesteMatchedGeometry.swift */; };
 		A7B2611E2A95022B007C57AF /* Galeria.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B2611D2A95022B007C57AF /* Galeria.swift */; };
 		A7B676082A957BDD008CC992 /* TesteAnimacao.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B676072A957BDD008CC992 /* TesteAnimacao.swift */; };
+		A7DD440A2AB0DF020031DD41 /* LojaAdicionarProdutoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7DD44092AB0DF020031DD41 /* LojaAdicionarProdutoView.swift */; };
 		A7EB171129B0C5BB0094AF51 /* CalculadoraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EB171029B0C5BB0094AF51 /* CalculadoraViewModel.swift */; };
 		A7EB171329B0C5CB0094AF51 /* CalculadoraModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EB171229B0C5CB0094AF51 /* CalculadoraModel.swift */; };
 		A7EEB85429CE20C60076AA68 /* EmojiArtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EEB85329CE20C60076AA68 /* EmojiArtView.swift */; };
@@ -98,6 +99,7 @@
 		A7B2611B2A94E905007C57AF /* TesteMatchedGeometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TesteMatchedGeometry.swift; sourceTree = "<group>"; };
 		A7B2611D2A95022B007C57AF /* Galeria.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Galeria.swift; sourceTree = "<group>"; };
 		A7B676072A957BDD008CC992 /* TesteAnimacao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TesteAnimacao.swift; sourceTree = "<group>"; };
+		A7DD44092AB0DF020031DD41 /* LojaAdicionarProdutoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LojaAdicionarProdutoView.swift; sourceTree = "<group>"; };
 		A7EB171029B0C5BB0094AF51 /* CalculadoraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculadoraViewModel.swift; sourceTree = "<group>"; };
 		A7EB171229B0C5CB0094AF51 /* CalculadoraModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculadoraModel.swift; sourceTree = "<group>"; };
 		A7EEB85329CE20C60076AA68 /* EmojiArtView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiArtView.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 				A79B694F2AB0A13A0000FA1F /* LojaViewModel.swift */,
 				A79B69512AB0B10C0000FA1F /* LojaProdutosView.swift */,
 				A79B69532AB0B11E0000FA1F /* LojaProdutosViewModel.swift */,
+				A7DD44092AB0DF020031DD41 /* LojaAdicionarProdutoView.swift */,
 			);
 			path = LojaApp;
 			sourceTree = "<group>";
@@ -373,6 +376,7 @@
 				A7158AE72A95330F005D07FA /* ExemploEfeitos.swift in Sources */,
 				A7A055912A9E9048008FD8ED /* PokemonView.swift in Sources */,
 				A70E381529BA4F82008C5E73 /* ProgressShape.swift in Sources */,
+				A7DD440A2AB0DF020031DD41 /* LojaAdicionarProdutoView.swift in Sources */,
 				A76364DC29B008F60045FBA9 /* CalculadoraView.swift in Sources */,
 				A70826182A83153C00DC3C6D /* VelhaView.swift in Sources */,
 				A708261F2A831D6800DC3C6D /* ExemploRadioButton.swift in Sources */,
