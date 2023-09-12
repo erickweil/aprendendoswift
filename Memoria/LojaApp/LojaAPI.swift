@@ -16,4 +16,8 @@ class LojaAPI {
     public static var getCategories: URL {
         URL(string: "/api/v1/categories", relativeTo: Self.baseURL)!
     }
+    
+    public static func getProductByCategory(_ categoryId: Int) -> URL {
+        URL(string: "/api/v1/categories/\(categoryId)/products", relativeTo: Self.baseURL)!
+    }
 }

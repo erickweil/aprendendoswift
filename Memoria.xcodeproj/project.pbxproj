@@ -34,6 +34,8 @@
 		A79B694C2AB09F7E0000FA1F /* LojaAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79B694B2AB09F7E0000FA1F /* LojaAPI.swift */; };
 		A79B694E2AB0A0B80000FA1F /* LojaModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79B694D2AB0A0B80000FA1F /* LojaModels.swift */; };
 		A79B69502AB0A13A0000FA1F /* LojaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79B694F2AB0A13A0000FA1F /* LojaViewModel.swift */; };
+		A79B69522AB0B10C0000FA1F /* LojaProdutosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79B69512AB0B10C0000FA1F /* LojaProdutosView.swift */; };
+		A79B69542AB0B11E0000FA1F /* LojaProdutosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79B69532AB0B11E0000FA1F /* LojaProdutosViewModel.swift */; };
 		A7A055912A9E9048008FD8ED /* PokemonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A055902A9E9048008FD8ED /* PokemonView.swift */; };
 		A7A055932A9E915C008FD8ED /* PokemonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A055922A9E915C008FD8ED /* PokemonModel.swift */; };
 		A7A055952A9E9335008FD8ED /* PokemonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A055942A9E9335008FD8ED /* PokemonViewModel.swift */; };
@@ -82,6 +84,8 @@
 		A79B694B2AB09F7E0000FA1F /* LojaAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LojaAPI.swift; sourceTree = "<group>"; };
 		A79B694D2AB0A0B80000FA1F /* LojaModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LojaModels.swift; sourceTree = "<group>"; };
 		A79B694F2AB0A13A0000FA1F /* LojaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LojaViewModel.swift; sourceTree = "<group>"; };
+		A79B69512AB0B10C0000FA1F /* LojaProdutosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LojaProdutosView.swift; sourceTree = "<group>"; };
+		A79B69532AB0B11E0000FA1F /* LojaProdutosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LojaProdutosViewModel.swift; sourceTree = "<group>"; };
 		A7A055902A9E9048008FD8ED /* PokemonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonView.swift; sourceTree = "<group>"; };
 		A7A055922A9E915C008FD8ED /* PokemonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonModel.swift; sourceTree = "<group>"; };
 		A7A055942A9E9335008FD8ED /* PokemonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonViewModel.swift; sourceTree = "<group>"; };
@@ -210,6 +214,8 @@
 				A79B694B2AB09F7E0000FA1F /* LojaAPI.swift */,
 				A79B694D2AB0A0B80000FA1F /* LojaModels.swift */,
 				A79B694F2AB0A13A0000FA1F /* LojaViewModel.swift */,
+				A79B69512AB0B10C0000FA1F /* LojaProdutosView.swift */,
+				A79B69532AB0B11E0000FA1F /* LojaProdutosViewModel.swift */,
 			);
 			path = LojaApp;
 			sourceTree = "<group>";
@@ -329,7 +335,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A79B69522AB0B10C0000FA1F /* LojaProdutosView.swift in Sources */,
 				A708261D2A831D3F00DC3C6D /* RadioButtonGroup.swift in Sources */,
+				A79B69542AB0B11E0000FA1F /* LojaProdutosViewModel.swift in Sources */,
 				A7FF4DF229B837B700CB955C /* MemoryThemes.swift in Sources */,
 				A7B2611C2A94E905007C57AF /* TesteMatchedGeometry.swift in Sources */,
 				A773522F2A93A1F200DAF612 /* ExemploMenu.swift in Sources */,

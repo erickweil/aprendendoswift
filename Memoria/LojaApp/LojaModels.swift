@@ -14,4 +14,13 @@ struct LojaModels {
         let name: String
         let image: URL
     }
+    
+    struct Product: Codable, Hashable {
+        var id: Int? // para poder criar um produto sem ID
+        let title: String
+        let price: Double
+        let description: String
+        let images: [URL]?
+        let category: Category
+    }
 }
